@@ -1,0 +1,95 @@
+intranet_login:
+    path:     /{_locale}/login
+    defaults: { _controller: intranetBundle:Default:login, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
+intranet_homepage:
+    path:     /{_locale}/
+    defaults: { _controller: intranetBundle:Default:index, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
+intranet_formHours:
+    path:     /{_locale}/formHours
+    defaults: { _controller: intranetBundle:Default:formHours, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
+intranet_formVacations:
+    path:     /{_locale}/formVacations
+    defaults: { _controller: intranetBundle:Default:formVacation, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
+intranet_formExpenses:
+    path:     /{_locale}/formExpenses
+    defaults: { _controller: intranetBundle:Default:formExpenses, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
+intranet_formRequest:
+    path:     /{_locale}/formRequest
+    defaults: { _controller: intranetBundle:Default:formRequest, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
+intranet_bookRoom:
+    path:     /{_locale}/bookRoom
+    defaults: { _controller: intranetBundle:Default:bookRoom, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
+intranet_book:
+    path:     /{_locale}/book/{ date }
+    defaults: { _controller: intranetBundle:Default:book, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
+intranet_news:
+    path:     /{_locale}/news
+    defaults: { _controller: intranetBundle:Default:news, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
+intranet_incomingForms:
+    path:     /{_locale}/incomingForms
+    defaults: { _controller: intranetBundle:Default:incomingForms, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
+intranet_oldForms:
+    path:     /{_locale}/oldForms
+    defaults: { _controller: intranetBundle:Default:oldForms, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
+intranet_tasks:
+    path:     /{_locale}/tasks
+    defaults: { _controller: intranetBundle:Default:tasks, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
+intranet_userManagement:
+    path:     /{_locale}/userManagement
+    defaults: { _controller: intranetBundle:Default:userManagement, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
+intranet_settings:
+    path:     /{_locale}/settings
+    defaults: { _controller: intranetBundle:Default:settings, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
+intranet_logout:
+    path:     /{_locale}/intranet_logout
+    defaults: { _controller: intranetBundle:Default:logout, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
+intranet_translation:
+    path:     /{_locale}/translation
+    defaults: { _controller: intranetBundle:Default:translation, _locale:en }
+    requirements:
+        _locale: en|fr|es

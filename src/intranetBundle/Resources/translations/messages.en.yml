@@ -1,0 +1,30 @@
+#TESTING
+Symfony2 is great: "I love you Symfony2"
+New User: "New User"
+Welcome: "Welcome to the intranet"
+lang: "ENGLISH"
+Hello: "Hi!"
+
+#MENU
+Settings: "Settings"
+Forms: Forms
+Overtime Hours: Overtime Hours
+Vacation: Vacation
+Expenses: Expenses
+Request Business Trip: Request Business Trip
+Book a room: Book a Room
+Task: Task
+User Management: User Management
+News Feed: News Feed
+Form Management: Form Management
+Incoming Forms: Incoming Forms
+Old Forms: Old Forms
+
+#SETTINGS
+Name: Name
+Surname: Surname
+Language: Language
+Telephone: Telephone
+Notifications: Activate Notifications
+Photo: Profile Picture
+Modify: Update

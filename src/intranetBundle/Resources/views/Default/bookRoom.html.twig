@@ -1,0 +1,47 @@
+{% extends 'intranetBundle::layout.html.twig' %}
+
+ {% block contenido %}
+<h3>Aquí las habitaciones para hacer click y redirigir como formulario </h3>
+
+{% for r in listrooms %}
+  <h1><b>Habitación número: {{ r.number }} </b></h1>
+
+  {% for d in r.data %}
+    {{ d.user }}, ha reservado el día {{ d.date }} a las   {% for h in d.hours %} "{{h}}", {% endfor %}horas.<br>
+  {% endfor %}
+
+<br>
+ {% endfor %}
+
+ <hr><hr>
+{% for r in listrooms %}
+  {% for d in r.data %}
+      <h1><b>Día {{ d.date }}</b></h1><br>
+      La habitación {{ r.number }} está reservada por {{ d.user }} a las   {% for h in d.hours %} "{{h}}", {% endfor %}horas.<br>
+  {% endfor %}
+{% endfor %}<br><br>
+
+<!-- NO HAY QUE PERDER DE VISTA QUE SE RECIBE UNA FECHA; CUANDO ÉSTA SEA IGUAL A LA QUE RECORREMOS, SE MUESTRA LA INFO -->
+Aqui empieza el último bloque:
+<hr><hr>{% set flag = 0 %}
+{% for r in listrooms %}
+  {% for d in r.data %}
+    {% if d.date=="01/05/2016" %}
+    {% if flag==0 %}
+      <h1><b>Día {{ d.date }}</b></h1><br>
+    {% endif %}{% set flag = 1 %}
+      La habitación {{ r.number }} está reservada por {{ d.user }} a las{% for h in d.hours %} "{{h}}", {% endfor %} horas.<br>
+    {% endif %}
+  {% endfor %}
+{% endfor %}
+
+<div style="height: 200px;border: 2px solid red;">
+    <form action="{{ path('intranet_book')}}" method="get">
+        <input type="number" name="fecha" id="fecha">
+        <input type="submit" value="Elegir Room y Hora">
+    </form>
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends '::base.html.twig' %}
+{% block stylesheets %}
+<!-- ESTA CARPETA NO ESTÁ CREADA AÚN -->
+ <link href="{{ asset('bundles/alimentos/estilo.css') }}" type="text/css" rel="stylesheet" />
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<meta charset="UTF-8">
+{% endblock %}
+
+
+{% block cabecera %}
+    <div id="cabecera">
+      <!--<h1>Aquí irá la imagen de la cabecera</h1>-->
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div id="contenido">
+        {% block contenido %}
+        {% endblock %}
+    </div>
+
+    <div id="pie">
+        <div align="center"><!-- Aquí el pie de página --></div>
+    </div>
+{% endblock %}
