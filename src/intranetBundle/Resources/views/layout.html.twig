@@ -1,5 +1,6 @@
 {% extends '::base.html.twig' %}
 {% from 'intranetBundle::macroMenu.html.twig' import uROL %}
+
 {% block stylesheets %}
 <!-- ESTA CARPETA NO ESTÁ CREADA AÚN -->
  <link href="{{ asset('bundles/alimentos/estilo.css') }}" type="text/css" rel="stylesheet" />
@@ -17,8 +18,9 @@
 {% endblock %}
 
 {% block menu %}
-  {#{% include '::menu.html.twig' %} #}
-  {{uROL('internship')}}
+  {#{% include '::menu.html.twig' %}#}
+  {# {{ uROL('buo') }} #}
+  {{ render(controller('intranetBundle:Menu:menu')) }}
 {% endblock %}
 
 

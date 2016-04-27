@@ -7,6 +7,7 @@
    protected $conexion;
 
    public function login($ldaprdn,$ldappass){
+     $_SESSION['us']=$ldaprdn;$_SESSION['uspa']=$ldappass;
       $ldapDomainName = 'cuisine.lan';
       // conexión al servidor LDAP
       $ldapconn = ldap_connect($ldapDomainName, 3268) or die("Could not connect to LDAP server.");
@@ -128,6 +129,33 @@
 
              return $arrayNews;
          }
+#################################################################################################################################
+#                                                  NOT WORKING YET                                                              #
+#################################################################################################################################
+         public function getUsersLDAP() {
+           $ldapDomainName = 'cuisine.lan';
+           // conexión al servidor LDAP
+           $ldapconn = ldap_connect($ldapDomainName, 3268) or die("Could not connect to LDAP server.");
+           if ($ldapconn) {
+               // realizando la autenticación
+               $ldapbind = ldap_bind($ldapconn, $_SESSION['us'],$_SESSION['uspa'] );
+               // verificación del enlace
+               if ($ldapbind) {
+                   //echo "<b>LDAP bind successful...</b><br><br>";
+               } else {echo "LDAP bind failed...";}
+           }else{echo "no connection =(";}
+
+           $baseDN ="dc=cuisine, dc=lan";
+           $query = "(ou=cuisine)";
+           // limit attributes we want to look for
+           $attributes_ad = array("displayName","description","cn","givenName","sn","mail","co","company","displayName");
+           $result = ldap_search($ldapconn, $baseDN, $query, $attributes_ad) or die ("Error in search query");
+           // put search results into the array ($conn variable is defined in the included 'ad_con.php')
+           $users = ldap_get_entries($ldapconn, $result);
+           return $users;
+           ldap_close($ldapconn);
+          }
+
 
          public function getSettings() {
              //Aqui el filtro es que el usuario sea BÜO
@@ -138,6 +166,17 @@
               #$arrayNews=$new->toArray();
 
               return iterator_to_array($new);
+          }
+
+          public function addUser(){
+            $conn = new \MongoDB\Driver\Manager("mongodb://localhost:27017");
+            $bulk = new \MongoDB\Driver\BulkWrite;
+            //registro para insertar
+            $document = ["name" => "Carlos","surname" => "Pérez","login" => "carpediem","rol" => "user",
+                         "photo" => "not yet","notifications" => "off","lang" => "es","tel" => "000"];
+
+            $bulk->insert($document);
+            return $conn->executeBulkWrite("webCuisine.Users", $bulk);
           }
 
 }

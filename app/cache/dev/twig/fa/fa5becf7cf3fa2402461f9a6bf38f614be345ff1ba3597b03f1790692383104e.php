@@ -21,20 +21,20 @@ class __TwigTemplate_4cfb2aa281f3ab8391dc5b95722da8188e422dbbb1d05c6d942d9ded466
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_d1d2c3f79740f60e047e6205b214225fabb539658648313db9add00bf76a0a18 = $this->env->getExtension("native_profiler");
-        $__internal_d1d2c3f79740f60e047e6205b214225fabb539658648313db9add00bf76a0a18->enter($__internal_d1d2c3f79740f60e047e6205b214225fabb539658648313db9add00bf76a0a18_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "intranetBundle:Default:settings.html.twig"));
+        $__internal_599504b7794bd4a16bb2cabd18676518a3ad286fe497fcf5bba3d8396af2ce83 = $this->env->getExtension("native_profiler");
+        $__internal_599504b7794bd4a16bb2cabd18676518a3ad286fe497fcf5bba3d8396af2ce83->enter($__internal_599504b7794bd4a16bb2cabd18676518a3ad286fe497fcf5bba3d8396af2ce83_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "intranetBundle:Default:settings.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_d1d2c3f79740f60e047e6205b214225fabb539658648313db9add00bf76a0a18->leave($__internal_d1d2c3f79740f60e047e6205b214225fabb539658648313db9add00bf76a0a18_prof);
+        $__internal_599504b7794bd4a16bb2cabd18676518a3ad286fe497fcf5bba3d8396af2ce83->leave($__internal_599504b7794bd4a16bb2cabd18676518a3ad286fe497fcf5bba3d8396af2ce83_prof);
 
     }
 
     // line 3
     public function block_contenido($context, array $blocks = array())
     {
-        $__internal_f325c5c3e3400b15432045acd5fd39d90b39ea10ae2e43093e78cb176d25bd6b = $this->env->getExtension("native_profiler");
-        $__internal_f325c5c3e3400b15432045acd5fd39d90b39ea10ae2e43093e78cb176d25bd6b->enter($__internal_f325c5c3e3400b15432045acd5fd39d90b39ea10ae2e43093e78cb176d25bd6b_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "contenido"));
+        $__internal_aa6fca3de2e1eda8a9630e706dbf290ef667ba9a7880a983701e13a758348e45 = $this->env->getExtension("native_profiler");
+        $__internal_aa6fca3de2e1eda8a9630e706dbf290ef667ba9a7880a983701e13a758348e45->enter($__internal_aa6fca3de2e1eda8a9630e706dbf290ef667ba9a7880a983701e13a758348e45_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "contenido"));
 
         // line 4
         echo "
@@ -96,17 +96,16 @@ class __TwigTemplate_4cfb2aa281f3ab8391dc5b95722da8188e422dbbb1d05c6d942d9ded466
             echo "\">
                                    <input type=\"hidden\" id=\"oldPhoto\" name=\"oldPhoto\" value=\"<?php echo \$field->photo; ?>\">
  </form>
-
  ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['me'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 20
+        // line 19
         echo "
 ";
         
-        $__internal_f325c5c3e3400b15432045acd5fd39d90b39ea10ae2e43093e78cb176d25bd6b->leave($__internal_f325c5c3e3400b15432045acd5fd39d90b39ea10ae2e43093e78cb176d25bd6b_prof);
+        $__internal_aa6fca3de2e1eda8a9630e706dbf290ef667ba9a7880a983701e13a758348e45->leave($__internal_aa6fca3de2e1eda8a9630e706dbf290ef667ba9a7880a983701e13a758348e45_prof);
 
     }
 
@@ -122,7 +121,7 @@ class __TwigTemplate_4cfb2aa281f3ab8391dc5b95722da8188e422dbbb1d05c6d942d9ded466
 
     public function getDebugInfo()
     {
-        return array (  106 => 20,  95 => 15,  89 => 14,  83 => 13,  75 => 12,  69 => 11,  63 => 10,  57 => 9,  51 => 8,  47 => 6,  43 => 5,  40 => 4,  34 => 3,  11 => 1,);
+        return array (  105 => 19,  95 => 15,  89 => 14,  83 => 13,  75 => 12,  69 => 11,  63 => 10,  57 => 9,  51 => 8,  47 => 6,  43 => 5,  40 => 4,  34 => 3,  11 => 1,);
     }
 }
 /* {% extends 'intranetBundle::layout.html.twig' %}*/
@@ -142,7 +141,6 @@ class __TwigTemplate_4cfb2aa281f3ab8391dc5b95722da8188e422dbbb1d05c6d942d9ded466
 /*                                    <input type="submit" value="{% trans %}Modify{% endtrans %}">*/
 /*                                    <input type="hidden" id="oldPhoto" name="oldPhoto" value="<?php echo $field->photo; ?>">*/
 /*  </form>*/
-/* */
 /*  {% endfor %}*/
 /* */
 /* {% endblock %}*/

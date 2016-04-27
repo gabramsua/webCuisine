@@ -11,6 +11,8 @@ class DefaultController extends Controller
     $ldaprdn  = $_POST['login'];     // ldap rdn or dn
     $ldappass =$_POST['pass'];
 
+    //$GLOBALS['saludo']="hola";
+
     $m = new Model();
     $params = array('user' => $m->login($ldaprdn,$ldappass),);
     /*
@@ -19,19 +21,21 @@ class DefaultController extends Controller
     */
     //$session = $this->getRequest()->getSession();
 
-    $me = new Model();
-    $user = array('user' => $me->getSettings(),);
-    $userWeb=json_decode(json_encode($user), true)['user'][0];
+    $user = array('user' => $m->getSettings(),);
+    #$userWeb=json_decode(json_encode($user), true)['user'][0];
     //echo $userWeb['lang'];
 
+    #$userRole=json_decode(json_encode($user), true)['user'][0];
+    /*$this->get('session')->set('_locale', $userWeb['lang']);*/
 
+    #$this->render('::menu.html.twig',$user);
     return $this->render('intranetBundle:Default:landinga.html.twig', $user);
    }
 
   public function indexAction(){
-    $me = new Model();
+  /*  $me = new Model();
     $user = array('user' => $me->getSettings(),);
-    $userWeb=json_decode(json_encode($user), true)['user'][0];
+    $userWeb=json_decode(json_encode($user), true)['user'][0];*/
     /*$this->get('session')->set('_locale', $userWeb['lang']);*/
 
     return $this->render('intranetBundle:Default:landing.html.twig'
@@ -129,10 +133,12 @@ class DefaultController extends Controller
     }
 
     public function userManagementAction(){
-           $m = new Model();
-           $params = array(
-           'listUsers' => $m->getUsers(),
-         );
+        $m = new Model();
+        $params = array('listUsers' => $m->getUsers(),'listLDAP' => $m->getUsersLDAP());
+        $params2 = array('listLDAP' => $m->getUsersLDAP());
+        #$userWeb=json_decode(json_encode($params2), true)[0];
+        var_dump($params2);
+        #echo "TIENE ".sizeof($userWeb)." elementos.";
         return $this->render(
            'intranetBundle:Default:userManagement.html.twig',
            $params
@@ -163,6 +169,16 @@ class DefaultController extends Controller
             );
        }
 
+       public function addUserAction(){
+        $m = new Model();
+      $params0 = array('add' => $m->addUser(),);
+
+      $params = array('listUsers' => $m->getUsers(),);
+      return $this->render(
+         'intranetBundle:Default:userManagement.html.twig',
+         $params
+        );
+       }
 
 
 }

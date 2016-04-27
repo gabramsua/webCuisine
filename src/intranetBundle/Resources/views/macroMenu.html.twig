@@ -50,6 +50,7 @@
             </ul>
           </li>
       {% endif %}
+      {% if is_granted('ROLE_BUO') %} rolerole {% endif %}
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="{{ path('intranet_translation')}}"><b>{% trans %}Lang{% endtrans %}</b></a></li>

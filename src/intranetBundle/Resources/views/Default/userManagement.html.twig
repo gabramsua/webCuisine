@@ -2,17 +2,6 @@
 
  {% block contenido %}
 
- <!-- <form action="vHours.php" method="post" style="border: 1px solid;width: 500px;">
-        <label>Number of hours: </label><input type='number' name="numhours" id="numhours" min="1" max="50"><i>min:1, max:20</i><BR>
-        <label>Between: </label><input type='date' id="betw"name="betw" min="<?php echo date("Y-m-d");?>" value="<?php echo date("Y-m-d");?>"><i>default: TODAY</i><BR>
-        <label>and: </label><input type='date' id="and"name="and" max="<?php echo date("Y-m-d", strtotime("+3 month")); ?>" value="<?php echo date("Y-m-d", strtotime("+1 week")); ?>">
-        <i>default: 1 WEEK, max 3 months</i><BR>
-                                     <input type="submit" value="Modify">
-                                     <input type="hidden" name="typeF" value="hours">
-                                     <input type="hidden" name="actualDate" value="<?php echo date("Y-m-d H:i:s");?>">
-   </form>
--->
-
 <table border=1>
 <tr >
     <th>name</th>
@@ -21,16 +10,33 @@
     <th>tel</th>
     <th>photo</th>
 </tr>
-{% for new in listUsers %}
+{% for intrauser in listUsers %}
 <tr>
-    <td style="padding-left: 10px;padding-right: 10px;">{{ new.name }}</td>
-    <td style="padding-left: 10px;padding-right: 10px;">{{ new.surname }}</td>
-    <td style="padding-left: 10px;padding-right: 10px;">{{ new.login }}</td>
-    <td style="padding-left: 10px;padding-right: 10px;">{{ new.tel }}</td>
-    <td style="padding-left: 10px;padding-right: 10px;"><img src="{{ new.photo }}"></td>
+    <td style="padding-left: 10px;padding-right: 10px;">{{ intrauser.name }}</td>
+    <td style="padding-left: 10px;padding-right: 10px;">{{ intrauser.surname }}</td>
+    <td style="padding-left: 10px;padding-right: 10px;">{{ intrauser.login }}</td>
+    <td style="padding-left: 10px;padding-right: 10px;">{{ intrauser.tel }}</td>
+    <td style="padding-left: 10px;padding-right: 10px;"><img src="{{ intrauser.photo }}"></td>
 </tr>
 {% endfor %}
-
 </table>
-
+<br><hr><br>
+<form action="{{ path('intranet_newuser')}}" method="post" style="border: 1px solid;width: 500px;">
+    <input type="submit" name="newUser" value="NEW USER">
+  </form>
+  <br><hr><br>
+  <table border=1>
+  <tr >
+      <th>Common Name</th>
+      <th>Display Name</th>
+      <th>Mail</th>
+  </tr>
+  {% for intrauser in listLDAP %}{% for user in intrauser %}{% for field in user %}
+  <tr>
+      <td style="padding-left: 10px;padding-right: 10px;">{{ field.cn }}</td>
+      <td style="padding-left: 10px;padding-right: 10px;">{{ field.displayName }}</td>
+      <td style="padding-left: 10px;padding-right: 10px;">{{ field.mail }}</td>
+  </tr>
+  {% endfor %}{% endfor %}{% endfor %}
+  </table>
 {% endblock %}
