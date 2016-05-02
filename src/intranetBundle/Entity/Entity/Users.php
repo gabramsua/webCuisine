@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Users
  */
-class Users 
+class Users
 {
     /**
      * @var int
@@ -48,6 +48,11 @@ class Users
      * @var bool
      */
     private $onboard;
+
+    /**
+     * @var bool
+     */
+    private $notifications;
 
 
     /**
@@ -219,5 +224,32 @@ class Users
     public function getOnboard()
     {
         return $this->onboard;
+    }
+
+    /**
+     * Set notifications
+     *
+     * @param boolean $notifications
+     * @return Users
+     */
+    public function setNotifications($notifications)
+    {
+        $this->notifications = $notifications;
+
+        return $this;
+    }
+
+    /**
+     * Get notifications
+     *
+     * @return boolean
+     */
+    public function getNotifications()
+    {
+        return $this->notifications;
+    }
+
+    public function getNombreCompleto(){
+      return $this->nameU.$this->surnameU;
     }
 }

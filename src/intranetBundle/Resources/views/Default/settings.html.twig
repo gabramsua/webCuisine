@@ -2,19 +2,15 @@
 
  {% block contenido %}
 
-{% for me in listSettings %}
-
 <form action="updateme.php" method="post" style="border: 1px solid;width: 500px;">
-      <label>{% trans %}Name{% endtrans %}</label><input type='text' name="myName" id="myName" value="{{ me.name }}"><BR>
-      <label>{% trans %}Surname{% endtrans %}</label><input type='text' id="mySurname"name="mySurname" value="{{ me.surname }}"><BR>
+      <label>{% trans %}Name{% endtrans %}</label><input type='text' name="myName" id="myName" value="{{ me.nameU }}"><BR>
+      <label>{% trans %}Surname{% endtrans %}</label><input type='text' id="mySurname"name="mySurname" value="{{ me.surnameU }}"><BR>
       <label>{% trans %}Language{% endtrans %}</label><input type='text' id="myLanguage"name="myLanguage" value="{{ me.lang }}"><BR>
-      <label>{% trans %}Telephone{% endtrans %}</label><input type='text' id="myTelephone"name="myTelephone" value="{{ me.tel }}"><BR>
-      <label>{% trans %}Notifications{% endtrans %}</label><input type='radio' id="myNotification" name="myNotifications" value="on" {% if me.notifications=="on" %} checked {% endif %} ><label for="myNotification">ON</label>
-                                  <input type='radio' id="myNotifications" name="myNotifications" value="off"  {% if me.notifications=="off" %} checked {% endif %}><label for="myNotifications">OFF</label><br>
       <label>{% trans %}Photo{% endtrans %}</label><input type='file' id="myPhoto"name="myPhoto"><img src="{{ me.photo }}"><BR>
+      <label>{% trans %}Notifications{% endtrans %}</label><input type='radio' id="myNotification" name="myNotifications" value="on" {% if me.notifications==1 %} checked {% endif %} ><label for="myNotification">ON</label>
+                                  <input type='radio' id="myNotifications" name="myNotifications" value="off"  {% if me.notifications==0 %} checked {% endif %}><label for="myNotifications">OFF</label><br>
                                    <input type="submit" value="{% trans %}Modify{% endtrans %}">
                                    <input type="hidden" id="oldPhoto" name="oldPhoto" value="<?php echo $field->photo; ?>">
  </form>
- {% endfor %}
 
 {% endblock %}

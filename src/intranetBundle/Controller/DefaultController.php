@@ -5,6 +5,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use intranetBundle\Model\Model;
 use intranetBundle\Entity\Entity\Users;
 use intranetBundle\Entity\Entity\Tasks;
+use intranetBundle\Entity\Entity\NewFeed;
+use intranetBundle\Entity\Entity\userschannel;
 use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
@@ -16,13 +18,15 @@ class DefaultController extends Controller
 
     $m = new Model();
     $params = array('user' => $m->login($ldaprdn,$ldappass),);
-
+//var_dump($params);
     $userLDAP=json_decode(json_encode($params), true);
     $logged=$userLDAP['user'][0]['samaccountname'][0];
-    //echo "<br>".$logged;
+    $rol=$userLDAP['user'][0]['memberof'][0];
+
 $_SESSION['userLDAP_']=$ldaprdn; //NAME
 $_SESSION['userLDAP']=$logged;  //LOGIN
 $_SESSION['passLDAP']=$ldappass;//PASS
+$_SESSION['rol']=$rol;          //ROL
     /*
         Hago una llamada al método con los valores que recojo del formulario. Me devuelve MI usuario.
         Lo reenvío con esos campos y ya puedo filtrar su idioma, y vámono!!!!!
@@ -54,7 +58,7 @@ $_SESSION['passLDAP']=$ldappass;//PASS
       return $this->render('intranetBundle:Default:formHours.html.twig');
   }
 
-  public function formVacationsAction(){
+  public function formVacationAction(){
        return $this->render('intranetBundle:Default:formVacations.html.twig');
    }
    public function formRequestAction(){
@@ -65,46 +69,18 @@ $_SESSION['passLDAP']=$ldappass;//PASS
         return $this->render('intranetBundle:Default:formExpenses.html.twig');
    }
 
-   public function bookRoomAction(){
-     //Aquí llamada a Ajax para que me devuelva todas las fechas y habitaciones
-
-     //Para una fecha dada, return las horas ocupadasd de cada habitación
-     $m = new Model();
-     $params = array('listrooms' => $m->getRooms(),);
-
-        return $this->render(
-           'intranetBundle:Default:bookRoom.html.twig',
-           $params
-          );
-    }
-
-    public function bookAction(){
-      if (!isset($_GET['fecha'])) {
-       throw new Exception('Página no encontrada');
-       }
-         $date = $_GET['fecha'];
-         $m = new Model();
-
-         //Devuelve las reservas de la fecha que viene del formulario del calendario
-         //$params = array('listrooms2' => $m->getBooks($date),);
-
-        $roomsFecha = array('listrooms2' => $m->getRoomsFecha($date),);
-
-         return $this->render(
-            'intranetBundle:Default:book.html.twig',
-            $roomsFecha//, $date
-           );
-    }
-
     public function newsAction(){
-         $m = new Model();
-         $params = array(
-         'listnews' => $m->giveNews(),
-       );
-         return $this->render(
-            'intranetBundle:Default:news.html.twig',
-            $params
-           );
+    $allNews = $this->getDoctrine()
+                    ->getRepository('intranetBundle:Entity\NewFeed')
+                    ->findBy([], ['date' => 'DESC', 'time' => 'DESC']); #findAll
+
+    if (!$allNews) {throw $this->createNotFoundException('No news found');}
+
+    $params=array('new'=>$allNews);
+    //echo gettype($params['new'][0]->getDate());
+
+
+    return $this->render('intranetBundle:Default:news.html.twig',$params);
     }
 
     public function incomingFormsAction(){
@@ -116,6 +92,16 @@ $_SESSION['passLDAP']=$ldappass;//PASS
             'intranetBundle:Default:incomingForms.html.twig',
             $params
            );
+
+
+         $allNews = $this->getDoctrine()
+                         ->getRepository('intranetBundle:Entity\NewFeed')
+                         ->findAll(); #findAll
+
+         if (!$allNews) {throw $this->createNotFoundException('No news found');}
+
+         $params=array('new'=>$allNews);
+         return $this->render('intranetBundle:Default:news.html.twig',$params);
      }
 
      public function oldFormsAction(){
@@ -130,42 +116,31 @@ $_SESSION['passLDAP']=$ldappass;//PASS
     }
 
      public function tasksAction(){
-             $m = new Model();
-             $params = array(
-             'listTasks' => $m->getTasks(),
-           );
-          return $this->render(
-             'intranetBundle:Default:tasks.html.twig',
-             $params
-            );
+       $tareas = $this->getDoctrine()->getRepository('intranetBundle:Entity\Tasks')->findAll();
+       
+       if (!$tareas) {throw $this->createNotFoundException('No product found for id '.$id);}
+       $params=array('listTasks'=>$tareas);
+
+          return $this->render('intranetBundle:Default:tasks.html.twig',$params);
     }
 
     public function userManagementAction(){
-        $m = new Model();
-        /*$params = array('listUsers' => $m->getUsers(),'listLDAP' => $m->getUsersLDAP());
-        $params2 = array('listLDAP' => $m->getUsersLDAP());
-        $userLDAP=json_decode(json_encode($params2), true);*/
-        //*echo $userLDAP['user'][0]['samaccountname'][0];
 
         $usuario = $this->getDoctrine()
                         ->getRepository('intranetBundle:Entity\Users')
                         ->findAll(); #findAll
 
         if (!$usuario) {throw $this->createNotFoundException('No product found for id '.$id);}
-
-        $params=array('listUsers'=>$usuario,'listLDAP' => $m->getUsersLDAP());
-        return $this->render('intranetBundle:Default:userManagement.html.twig',$params);
+        $params=array('listUsers'=>$usuario);
+        return $this->render('intranetBundle:Default:userManagement.html.twig',$usuario);
       }
 
       public function settingsAction(){
-              $m = new Model();
-              $params = array(
-              'listSettings' => $m->getSettings(),
-            );
-           return $this->render(
-              'intranetBundle:Default:settings.html.twig',
-              $params
-             );
+          $usuario = $this->getDoctrine()->getRepository('intranetBundle:Entity\Users')->findOneByLogin($_SESSION['userLDAP']); #findAll
+
+          if (!$usuario) {throw $this->createNotFoundException('No product found for id '.$id);}
+          $params=array('me'=>$usuario);
+          return $this->render('intranetBundle:Default:settings.html.twig',$params);
        }
 
       public function logoutAction(){
@@ -176,9 +151,7 @@ $_SESSION['passLDAP']=$ldappass;//PASS
        }
 
        public function translationAction(){
-           return $this->render(
-             'intranetBundle:Default:translate.html.twig'
-            );
+           return $this->render( 'intranetBundle:Default:translate.html.twig'  );
        }
 
        public function addUserAction(){
@@ -190,25 +163,39 @@ $_SESSION['passLDAP']=$ldappass;//PASS
        }
 
        public function createNewAction(){
-         $m = new Model();
-         #$params0 = array('add' => $m->addUser(),);
-
-         #$params = array('listUsers' => $m->getUsers(),);
          return $this->render('intranetBundle:Default:createNewFeed.html.twig');
        }
 
        public function insertNewAction(){
 
-         #PRIMERO INSERTO LA NOTICIA NUEVA Y LUEGO REDIRIJO AL USUARIO HASTA DONDE ESTABA,
-         #donde se puede ver la noticia ya insertada
+         #PRIMERO INSERTO LA NOTICIA NUEVA
 
-         $m = new Model();
-         //$user,$login,$send,$title, $content
-         $params0 = array('add' => $m->addNew($_SESSION['userLDAP_'],$_SESSION['userLDAP'],date("Y-m-d H:i:s"),$_POST['title'], $_POST['content']),);
-         $params = array('listnews' => $m->giveNews(),);
-         return $this->render('intranetBundle:Default:news.html.twig',$params);
+         $new = new NewFeed(); //date, hour, title, content
+         $new->setDate(date("Y-m-d"));
+         $new->setTime(date("H:i:s"));
+         $new->setTitle($_REQUEST['title']);
+         $new->setContent($_REQUEST['content']);
+
+         $em = $this->getDoctrine()->getManager();
+         $em->persist($new);
+         $em->flush();
+
+        #TAMBIEN HAY QUE HACER LA INSERCION EN LA TABLA INTERMEDIA
+
+        $usch = new userschannel();
+        $usch->setLogin($_SESSION['userLDAP']);
+        $usch->setName($_REQUEST['channel']);//HAY QUE ASEGURARSE DE QUE EL CANAL EXISTA=> SOLVED IF CHECKBOX=> SEVERAL INSERTS
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($usch);
+        $em->flush();
+
+        #REDIRIJO AL USUARIO HASTA DONDE ESTABA donde se puede ver la noticia ya insertada
+        $allNews = $this->getDoctrine()->getRepository('intranetBundle:Entity\NewFeed')->findAll();
+        if (!$allNews) {throw $this->createNotFoundException('No news found');}
+        $params=array('new'=>$allNews);
+        return $this->render('intranetBundle:Default:news.html.twig',$params);
        }
-#usarDoctrine
 
 
 /*                INSERTA TAREA
@@ -243,20 +230,43 @@ $_SESSION['passLDAP']=$ldappass;//PASS
     }
 */
 public function usarDoctrineAction(){
-    $usuario = $this->getDoctrine()
-        ->getRepository('intranetBundle:Entity\Users')
-        ->findOneByLogin('gram1i'); #findAll
-
-    if (!$usuario) {
-        throw $this->createNotFoundException(
-            'No product found for id '.$id
-        );
-      }
-      $params=array('user'=>$usuario);
+    $usuario = $this->getDoctrine()->getRepository('intranetBundle:Entity\Users')->findOneByNameU('Ignacio'); #findAll
+  $params=array('user'=>$usuario);
     return $this->render('intranetBundle:Default:bd.html.twig', $params);
     }
 
 
+    #*********************************************THE BOOK ROOM PART, NOT AVAILABLE *********************************************
+       public function bookRoomAction(){
+         //Aquí llamada a Ajax para que me devuelva todas las fechas y habitaciones
+
+         //Para una fecha dada, return las horas ocupadasd de cada habitación
+         $m = new Model();
+         $params = array('listrooms' => $m->getRooms(),);
+
+            return $this->render(
+               'intranetBundle:Default:bookRoom.html.twig',
+               $params
+              );
+        }
+
+        public function bookAction(){
+          if (!isset($_GET['fecha'])) {
+           throw new Exception('Página no encontrada');
+           }
+             $date = $_GET['fecha'];
+             $m = new Model();
+
+             //Devuelve las reservas de la fecha que viene del formulario del calendario
+             //$params = array('listrooms2' => $m->getBooks($date),);
+
+            $roomsFecha = array('listrooms2' => $m->getRoomsFecha($date),);
+
+             return $this->render(
+                'intranetBundle:Default:book.html.twig',
+                $roomsFecha//, $date
+               );
+        }
 
 
 }

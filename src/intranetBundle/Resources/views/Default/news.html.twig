@@ -4,24 +4,22 @@
 
 
 <table border=1>
-<tr >
-    <th>USER</th>
-    <th>LOGIN</th>
+<tr>
     <th>DATE</th>
+    <th>HOUR</th>
     <th>TITLE</th>
     <th>CONTENT</th>
 </tr>
-{% for new in listnews %}
+{% for n in new %}
 <tr>
-    <td style="padding-left: 10px;padding-right: 10px;">{{ new.user }}</td>
-    <td style="padding-left: 10px;padding-right: 10px;">{{ new.login }}</td>
-    <td style="padding-left: 10px;padding-right: 10px;">{{ new.send }}</td>
-    <td style="padding-left: 10px;padding-right: 10px;">{{ new.title }}</td>
-    <td style="padding-left: 10px;padding-right: 10px;">{{ new.content }}</td>
+    <td style="padding-left: 10px;padding-right: 10px;">{{ n.date|date('Y-m-d')  }}</td>
+    <td style="padding-left: 10px;padding-right: 10px;">{{ n.time|date('H:i') }}</td>
+    <td style="padding-left: 10px;padding-right: 10px;">{{ n.title }}</td>
+    <td style="padding-left: 10px;padding-right: 10px;">{{ n.content }}</td>
 </tr>
 {% endfor %}
-
 </table>
+
 <br><br>
 
 <form action="{{ path('intranet_newnew')}}" method="post" style="border: 1px solid;width: 500px;">

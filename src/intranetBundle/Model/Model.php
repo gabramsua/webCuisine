@@ -26,7 +26,7 @@
       $baseDN ="dc=cuisine, dc=lan";
       $query = "(cn=".$ldaprdn.")";
       // limit attributes we want to look for
-      $attributes_ad = array("displayName","description","cn","givenName","sn","mail","co","company","sAMAccountName");
+      $attributes_ad = array("displayName","description","cn","givenName","sn","mail","co","memberOf","sAMAccountName");
       $result = ldap_search($ldapconn, $baseDN, $query, $attributes_ad) or die ("Error in search query");
       // put search results into the array ($conn variable is defined in the included 'ad_con.php')
       $user = ldap_get_entries($ldapconn, $result);
@@ -131,36 +131,6 @@
 
 
          }
-#################################################################################################################################
-#                                                                                                                               #
-#                                                  NOT WORKING YET                                                              #
-#                                                                                                                               #
-#################################################################################################################################
-         public function getUsersLDAP() {
-           //echo $_SESSION['userLDAP']." y ".$_SESSION['passLDAP'];
-           $ldapDomainName = 'cuisine.lan';
-           // conexión al servidor LDAP
-           $ldapconn = ldap_connect($ldapDomainName, 3268) or die("Could not connect to LDAP server.");
-           if ($ldapconn) {
-               // realizando la autenticación
-               $ldapbind = ldap_bind($ldapconn, $_SESSION['userLDAP_'],$_SESSION['passLDAP'] );
-               // verificación del enlace
-               if ($ldapbind) {
-                   //echo "<b>LDAP bind successful...</b><br><br>";
-               } else {echo "LDAP bind failed...";}
-           }else{echo "no connection =(";}
-
-           $baseDN ="dc=cuisine, dc=lan";
-           $query = "(cn=cuisine-employee)";
-           // limit attributes we want to look for
-           $attributes_ad = array("displayName","sAMAccountName");
-           $result = ldap_search($ldapconn, $baseDN, $query, $attributes_ad) or die ("Error in search query");
-           // put search results into the array ($conn variable is defined in the included 'ad_con.php')
-           $users = ldap_get_entries($ldapconn, $result);
-           return $users;
-           ldap_close($ldapconn);
-          }
-
 
          public function getSettings() {
               $filter = ['login' => $_SESSION['userLDAP']];
@@ -204,17 +174,11 @@
             $bulk->insert($document);
             return $conn->executeBulkWrite("webCuisine.Users", $bulk);
           }
+          public function dimeRol(){
+            $usuario = $this->getDoctrine()->getRepository('intranetBundle:Entity\Users')->findOneByLogin('gram1i');
 
-/*
-
-              $link = mysql_connect('127-0-0-1', 'root', 'root')
-    or die('No se pudo conectar: ' . mysql_error());
-              mysql_select_db("webCuisine", $link);
-              $result = mysql_query("SELECT * FROM Users where login ='".$_SESSION['userLDAP']."';", $link);
-              echo "Nombre: ".mysql_result($result, 0, "nameU")."<br>";
-              echo "Apellidos: ".mysql_result($result, 0, "surnameU")."<br>";
-*/
-
+            return $usuario;
+          }
 
 
 }

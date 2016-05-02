@@ -139,16 +139,6 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_formRequest')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::formRequestAction',  '_locale' => 'en',));
         }
 
-        // intranet_bookRoom
-        if (preg_match('#^/(?P<_locale>en|fr|es)/bookRoom$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_bookRoom')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::bookRoomAction',  '_locale' => 'en',));
-        }
-
-        // intranet_book
-        if (preg_match('#^/(?P<_locale>en|fr|es)/book/\\{ date \\}$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_book')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::bookAction',  '_locale' => 'en',));
-        }
-
         // intranet_news
         if (preg_match('#^/(?P<_locale>en|fr|es)/news$#s', $pathinfo, $matches)) {
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_news')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::newsAction',  '_locale' => 'en',));
@@ -207,6 +197,16 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         // intranet_testBD
         if (preg_match('#^/(?P<_locale>en|fr|es)/testDoctrine$#s', $pathinfo, $matches)) {
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_testBD')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::usarDoctrineAction',  '_locale' => 'en',));
+        }
+
+        // intranet_bookRoom
+        if (preg_match('#^/(?P<_locale>en|fr|es)/bookRoom$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_bookRoom')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::bookRoomAction',  '_locale' => 'en',));
+        }
+
+        // intranet_book
+        if (preg_match('#^/(?P<_locale>en|fr|es)/book/\\{ date \\}$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_book')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::bookAction',  '_locale' => 'en',));
         }
 
         // homepage

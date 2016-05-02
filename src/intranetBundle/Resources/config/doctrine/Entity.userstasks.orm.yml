@@ -1,0 +1,20 @@
+intranetBundle\Entity\Entity\userstasks:
+    type: entity
+    table: null
+    repositoryClass: intranetBundle\Repository\Entity\userstasksRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        login:
+            type: string
+            length: '9'
+            unique: true
+        idTask:
+            type: integer
+            unique: true
+            column: id_task
+    lifecycleCallbacks: {  }

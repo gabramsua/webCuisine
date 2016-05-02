@@ -6,10 +6,19 @@ USE `webCuisine`;
 show tables;
 select * from Tasks;
 select * from Users;
+select * from new_feed;
 
-update Users set rol="buo" where login="gram1i";
+select * from new_feed order by date, time DESC;
 
+select * from userschannel;
 
+insert into new_feed (date, time, title, content) values ("2016-05-02", "10:49", "Titulo1", "Contenido1");
+insert into channel (name) values ("develop");
+update Users set rol="buo" where id=1;
+update new_feed set id=4 where id=7;
+delete from new_feed where id=5;
+insert into Tasks (title, content, who_create) values ('Titulo1','Contenido1','svenlogin');
+insert into userstasks (login, id_task) values ('svenlogin', 1);
 /*------------------------CREATE TABLE------------------------*/
 CREATE TABLE webCuisine.Users (
   login VARCHAR(9) ,
@@ -157,8 +166,8 @@ ALTER TABLE Users ADD CONSTRAINT f13 FOREIGN KEY (login) REFERENCES UserFormTrip
 
 
 /*------------------------INSERTS------------------------*/
-insert into Users values ('gram1i','Gabriel','Ramos Suan','es','user',null,true);
-insert into Users values ('nacho','Ignacio','Gil Martinez','es','user',null,true);
+insert into Users values (1,'gram1i','Gabriel','Ramos Suan','es','user',"no photo",true);
+insert into Users values (2,'nacho','Ignacio','Gil Martinez','es','user',"no photo",true);
 insert into Tasks (title, content, whoCreate) values ('Intranet','Build an intranet','SvenBubblies');
 insert into UsersTasks values('gram1i',2);
 insert into UsersTasks values('nacho',2);

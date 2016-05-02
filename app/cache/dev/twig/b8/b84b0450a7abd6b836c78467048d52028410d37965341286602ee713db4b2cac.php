@@ -21,20 +21,20 @@ class __TwigTemplate_7337c8e60edc634db457eebc990f28e48d625ed485a316e1a98d83ed928
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_6c70294e2ebdc647f4d5479f182e6cd8db98345f400152c1fce1752211106dfd = $this->env->getExtension("native_profiler");
-        $__internal_6c70294e2ebdc647f4d5479f182e6cd8db98345f400152c1fce1752211106dfd->enter($__internal_6c70294e2ebdc647f4d5479f182e6cd8db98345f400152c1fce1752211106dfd_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "intranetBundle:Default:tasks.html.twig"));
+        $__internal_e934cef2fa5c54331d9d5f81f527f2098e3304a4f37c6f07e0e7d7c2bc08c923 = $this->env->getExtension("native_profiler");
+        $__internal_e934cef2fa5c54331d9d5f81f527f2098e3304a4f37c6f07e0e7d7c2bc08c923->enter($__internal_e934cef2fa5c54331d9d5f81f527f2098e3304a4f37c6f07e0e7d7c2bc08c923_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "intranetBundle:Default:tasks.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_6c70294e2ebdc647f4d5479f182e6cd8db98345f400152c1fce1752211106dfd->leave($__internal_6c70294e2ebdc647f4d5479f182e6cd8db98345f400152c1fce1752211106dfd_prof);
+        $__internal_e934cef2fa5c54331d9d5f81f527f2098e3304a4f37c6f07e0e7d7c2bc08c923->leave($__internal_e934cef2fa5c54331d9d5f81f527f2098e3304a4f37c6f07e0e7d7c2bc08c923_prof);
 
     }
 
     // line 3
     public function block_contenido($context, array $blocks = array())
     {
-        $__internal_b3856293d32d73a797bbe303bf3d62ec81aa352ecb90ba319ba9b071bb6fa387 = $this->env->getExtension("native_profiler");
-        $__internal_b3856293d32d73a797bbe303bf3d62ec81aa352ecb90ba319ba9b071bb6fa387->enter($__internal_b3856293d32d73a797bbe303bf3d62ec81aa352ecb90ba319ba9b071bb6fa387_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "contenido"));
+        $__internal_2174b3432cdd67ca4f717a58ed6febb4ac6ae3157618b103cc50c11dfdf8a557 = $this->env->getExtension("native_profiler");
+        $__internal_2174b3432cdd67ca4f717a58ed6febb4ac6ae3157618b103cc50c11dfdf8a557->enter($__internal_2174b3432cdd67ca4f717a58ed6febb4ac6ae3157618b103cc50c11dfdf8a557_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "contenido"));
 
         // line 4
         echo "
@@ -51,9 +51,9 @@ class __TwigTemplate_7337c8e60edc634db457eebc990f28e48d625ed485a316e1a98d83ed928
 
 <table border=1>
 <tr >
-    <th>TITLE</th>
-    <th>DESCRIPTION</th>
-    <th>USERS</th>
+    <th style=\"padding-left: 10px;padding-right: 10px;\">TITLE</th>
+    <th style=\"padding-left: 10px;padding-right: 10px;\">DESCRIPTION</th>
+    <th style=\"padding-left: 10px;padding-right: 10px;\">USERS</th>
 </tr>
 ";
         // line 22
@@ -68,38 +68,25 @@ class __TwigTemplate_7337c8e60edc634db457eebc990f28e48d625ed485a316e1a98d83ed928
             echo "</td>
     <td style=\"padding-left: 10px;padding-right: 10px;\">";
             // line 25
-            echo twig_escape_filter($this->env, $this->getAttribute($context["new"], "description", array()), "html", null, true);
+            echo twig_escape_filter($this->env, $this->getAttribute($context["new"], "content", array()), "html", null, true);
             echo "</td>
-    <td style=\"padding-left: 10px;padding-right: 10px;\">
-    ";
-            // line 27
-            $context['_parent'] = $context;
-            $context['_seq'] = twig_ensure_traversable($this->getAttribute($context["new"], "users", array()));
-            foreach ($context['_seq'] as $context["_key"] => $context["user"]) {
-                // line 28
-                echo "    ";
-                echo twig_escape_filter($this->env, $this->getAttribute($context["user"], "name", array()), "html", null, true);
-                echo ",
-    ";
-            }
-            $_parent = $context['_parent'];
-            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['user'], $context['_parent'], $context['loop']);
-            $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 30
-            echo "    </td>
+    <td style=\"padding-left: 10px;padding-right: 10px;\">";
+            // line 26
+            echo twig_escape_filter($this->env, $this->getAttribute($context["new"], "whocreate", array()), "html", null, true);
+            echo "</td>
 </tr>
 ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['new'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 33
+        // line 29
         echo "
 </table>
 
 ";
         
-        $__internal_b3856293d32d73a797bbe303bf3d62ec81aa352ecb90ba319ba9b071bb6fa387->leave($__internal_b3856293d32d73a797bbe303bf3d62ec81aa352ecb90ba319ba9b071bb6fa387_prof);
+        $__internal_2174b3432cdd67ca4f717a58ed6febb4ac6ae3157618b103cc50c11dfdf8a557->leave($__internal_2174b3432cdd67ca4f717a58ed6febb4ac6ae3157618b103cc50c11dfdf8a557_prof);
 
     }
 
@@ -115,7 +102,7 @@ class __TwigTemplate_7337c8e60edc634db457eebc990f28e48d625ed485a316e1a98d83ed928
 
     public function getDebugInfo()
     {
-        return array (  97 => 33,  89 => 30,  80 => 28,  76 => 27,  71 => 25,  67 => 24,  64 => 23,  60 => 22,  40 => 4,  34 => 3,  11 => 1,);
+        return array (  84 => 29,  75 => 26,  71 => 25,  67 => 24,  64 => 23,  60 => 22,  40 => 4,  34 => 3,  11 => 1,);
     }
 }
 /* {% extends 'intranetBundle::layout.html.twig' %}*/
@@ -135,19 +122,15 @@ class __TwigTemplate_7337c8e60edc634db457eebc990f28e48d625ed485a316e1a98d83ed928
 /* */
 /* <table border=1>*/
 /* <tr >*/
-/*     <th>TITLE</th>*/
-/*     <th>DESCRIPTION</th>*/
-/*     <th>USERS</th>*/
+/*     <th style="padding-left: 10px;padding-right: 10px;">TITLE</th>*/
+/*     <th style="padding-left: 10px;padding-right: 10px;">DESCRIPTION</th>*/
+/*     <th style="padding-left: 10px;padding-right: 10px;">USERS</th>*/
 /* </tr>*/
 /* {% for new in listTasks %}*/
 /* <tr>*/
 /*     <td style="padding-left: 10px;padding-right: 10px;">{{ new.title }}</td>*/
-/*     <td style="padding-left: 10px;padding-right: 10px;">{{ new.description }}</td>*/
-/*     <td style="padding-left: 10px;padding-right: 10px;">*/
-/*     {% for user in new.users %}*/
-/*     {{ user.name }},*/
-/*     {% endfor %}*/
-/*     </td>*/
+/*     <td style="padding-left: 10px;padding-right: 10px;">{{ new.content }}</td>*/
+/*     <td style="padding-left: 10px;padding-right: 10px;">{{new.whocreate}}</td>*/
 /* </tr>*/
 /* {% endfor %}*/
 /* */

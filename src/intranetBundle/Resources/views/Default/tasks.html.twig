@@ -15,19 +15,15 @@
 
 <table border=1>
 <tr >
-    <th>TITLE</th>
-    <th>DESCRIPTION</th>
-    <th>USERS</th>
+    <th style="padding-left: 10px;padding-right: 10px;">TITLE</th>
+    <th style="padding-left: 10px;padding-right: 10px;">DESCRIPTION</th>
+    <th style="padding-left: 10px;padding-right: 10px;">USERS</th>
 </tr>
 {% for new in listTasks %}
 <tr>
     <td style="padding-left: 10px;padding-right: 10px;">{{ new.title }}</td>
-    <td style="padding-left: 10px;padding-right: 10px;">{{ new.description }}</td>
-    <td style="padding-left: 10px;padding-right: 10px;">
-    {% for user in new.users %}
-    {{ user.name }},
-    {% endfor %}
-    </td>
+    <td style="padding-left: 10px;padding-right: 10px;">{{ new.content }}</td>
+    <td style="padding-left: 10px;padding-right: 10px;">{{new.whocreate}}</td>
 </tr>
 {% endfor %}
 

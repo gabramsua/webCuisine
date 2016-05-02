@@ -34,18 +34,6 @@ intranet_formRequest:
     requirements:
         _locale: en|fr|es
 
-intranet_bookRoom:
-    path:     /{_locale}/bookRoom
-    defaults: { _controller: intranetBundle:Default:bookRoom, _locale:en }
-    requirements:
-        _locale: en|fr|es
-
-intranet_book:
-    path:     /{_locale}/book/{ date }
-    defaults: { _controller: intranetBundle:Default:book, _locale:en }
-    requirements:
-        _locale: en|fr|es
-
 intranet_news:
     path:     /{_locale}/news
     defaults: { _controller: intranetBundle:Default:news, _locale:en }
@@ -115,5 +103,18 @@ intranet_insertnew:
 intranet_testBD:
     path:     /{_locale}/testDoctrine
     defaults: { _controller: intranetBundle:Default:usarDoctrine, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
+#*********************************************THE BOOK ROOM PART, NOT AVAILABLE *********************************************      
+intranet_bookRoom:
+    path:     /{_locale}/bookRoom
+    defaults: { _controller: intranetBundle:Default:bookRoom, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
+intranet_book:
+    path:     /{_locale}/book/{ date }
+    defaults: { _controller: intranetBundle:Default:book, _locale:en }
     requirements:
         _locale: en|fr|es

@@ -21,20 +21,20 @@ class __TwigTemplate_adff42e1b948d85bf6ff91ae25bb95075c4b62214361199f92ff3189366
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_7cd674201ba50dae839c89baad153904f9e536a2bd8107bee0e5086fddc3f5a5 = $this->env->getExtension("native_profiler");
-        $__internal_7cd674201ba50dae839c89baad153904f9e536a2bd8107bee0e5086fddc3f5a5->enter($__internal_7cd674201ba50dae839c89baad153904f9e536a2bd8107bee0e5086fddc3f5a5_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "intranetBundle:Default:userManagement.html.twig"));
+        $__internal_41937774838cff87ac0f5b744a177a76d09c69c710a22b21d07482fa08945989 = $this->env->getExtension("native_profiler");
+        $__internal_41937774838cff87ac0f5b744a177a76d09c69c710a22b21d07482fa08945989->enter($__internal_41937774838cff87ac0f5b744a177a76d09c69c710a22b21d07482fa08945989_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "intranetBundle:Default:userManagement.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_7cd674201ba50dae839c89baad153904f9e536a2bd8107bee0e5086fddc3f5a5->leave($__internal_7cd674201ba50dae839c89baad153904f9e536a2bd8107bee0e5086fddc3f5a5_prof);
+        $__internal_41937774838cff87ac0f5b744a177a76d09c69c710a22b21d07482fa08945989->leave($__internal_41937774838cff87ac0f5b744a177a76d09c69c710a22b21d07482fa08945989_prof);
 
     }
 
     // line 3
     public function block_contenido($context, array $blocks = array())
     {
-        $__internal_53b1e6a55c15b058ee181da1d6602508c3aa86b0ef40d74afd2df97e7a95c748 = $this->env->getExtension("native_profiler");
-        $__internal_53b1e6a55c15b058ee181da1d6602508c3aa86b0ef40d74afd2df97e7a95c748->enter($__internal_53b1e6a55c15b058ee181da1d6602508c3aa86b0ef40d74afd2df97e7a95c748_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "contenido"));
+        $__internal_99173b937c82a585d76d6a07104dd69c155cc5602095f890fb0042d1040a656f = $this->env->getExtension("native_profiler");
+        $__internal_99173b937c82a585d76d6a07104dd69c155cc5602095f890fb0042d1040a656f->enter($__internal_99173b937c82a585d76d6a07104dd69c155cc5602095f890fb0042d1040a656f_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "contenido"));
 
         // line 4
         echo "
@@ -83,65 +83,10 @@ class __TwigTemplate_adff42e1b948d85bf6ff91ae25bb95075c4b62214361199f92ff3189366
         echo "\" method=\"post\" style=\"border: 1px solid;width: 500px;\">
     <input type=\"submit\" name=\"newUser\" value=\"NEW USER\">
   </form>
-  <br><hr><br>
-  <table border=1>
-  <tr >
-      <th>Common Name</th>
-      <th>Display Name</th>
-      <th>Mail</th>
-      <th>TEST</th
-  </tr>
-
-  ";
-        // line 34
-        $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["listLDAP"]) ? $context["listLDAP"] : $this->getContext($context, "listLDAP")));
-        foreach ($context['_seq'] as $context["_key"] => $context["intrauser"]) {
-            // line 35
-            echo "    ";
-            $context['_parent'] = $context;
-            $context['_seq'] = twig_ensure_traversable($context["intrauser"]);
-            foreach ($context['_seq'] as $context["_key"] => $context["user"]) {
-                // line 36
-                echo "      ";
-                $context['_parent'] = $context;
-                $context['_seq'] = twig_ensure_traversable($context["user"]);
-                foreach ($context['_seq'] as $context["_key"] => $context["field"]) {
-                    // line 37
-                    echo "  <tr>
-      <td style=\"padding-left: 10px;padding-right: 10px;\">";
-                    // line 38
-                    echo "</td>
-      <td style=\"padding-left: 10px;padding-right: 10px;\">";
-                    // line 39
-                    echo "</td>
-      <td style=\"padding-left: 10px;padding-right: 10px;\">";
-                    // line 40
-                    echo "</td>
-  </tr>
-      ";
-                }
-                $_parent = $context['_parent'];
-                unset($context['_seq'], $context['_iterated'], $context['_key'], $context['field'], $context['_parent'], $context['loop']);
-                $context = array_intersect_key($context, $_parent) + $_parent;
-                // line 43
-                echo "    ";
-            }
-            $_parent = $context['_parent'];
-            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['user'], $context['_parent'], $context['loop']);
-            $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 44
-            echo "  ";
-        }
-        $_parent = $context['_parent'];
-        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['intrauser'], $context['_parent'], $context['loop']);
-        $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 45
-        echo "  </table>
 
 ";
         
-        $__internal_53b1e6a55c15b058ee181da1d6602508c3aa86b0ef40d74afd2df97e7a95c748->leave($__internal_53b1e6a55c15b058ee181da1d6602508c3aa86b0ef40d74afd2df97e7a95c748_prof);
+        $__internal_99173b937c82a585d76d6a07104dd69c155cc5602095f890fb0042d1040a656f->leave($__internal_99173b937c82a585d76d6a07104dd69c155cc5602095f890fb0042d1040a656f_prof);
 
     }
 
@@ -157,7 +102,7 @@ class __TwigTemplate_adff42e1b948d85bf6ff91ae25bb95075c4b62214361199f92ff3189366
 
     public function getDebugInfo()
     {
-        return array (  140 => 45,  134 => 44,  128 => 43,  120 => 40,  117 => 39,  114 => 38,  111 => 37,  106 => 36,  101 => 35,  97 => 34,  82 => 22,  78 => 20,  69 => 17,  65 => 16,  61 => 15,  57 => 14,  54 => 13,  50 => 12,  40 => 4,  34 => 3,  11 => 1,);
+        return array (  82 => 22,  78 => 20,  69 => 17,  65 => 16,  61 => 15,  57 => 14,  54 => 13,  50 => 12,  40 => 4,  34 => 3,  11 => 1,);
     }
 }
 /* {% extends 'intranetBundle::layout.html.twig' %}*/
@@ -184,27 +129,6 @@ class __TwigTemplate_adff42e1b948d85bf6ff91ae25bb95075c4b62214361199f92ff3189366
 /* <form action="{{ path('intranet_newuser')}}" method="post" style="border: 1px solid;width: 500px;">*/
 /*     <input type="submit" name="newUser" value="NEW USER">*/
 /*   </form>*/
-/*   <br><hr><br>*/
-/*   <table border=1>*/
-/*   <tr >*/
-/*       <th>Common Name</th>*/
-/*       <th>Display Name</th>*/
-/*       <th>Mail</th>*/
-/*       <th>TEST</th*/
-/*   </tr>*/
-/* */
-/*   {% for intrauser in listLDAP %}*/
-/*     {% for user in intrauser %}*/
-/*       {% for field in user %}*/
-/*   <tr>*/
-/*       <td style="padding-left: 10px;padding-right: 10px;">{# field.sAMAccountName #}</td>*/
-/*       <td style="padding-left: 10px;padding-right: 10px;">{# field.displayName #}</td>*/
-/*       <td style="padding-left: 10px;padding-right: 10px;">{# field.mail #}</td>*/
-/*   </tr>*/
-/*       {% endfor %}*/
-/*     {% endfor %}*/
-/*   {% endfor %}*/
-/*   </table>*/
 /* */
 /* {% endblock %}*/
 /* */

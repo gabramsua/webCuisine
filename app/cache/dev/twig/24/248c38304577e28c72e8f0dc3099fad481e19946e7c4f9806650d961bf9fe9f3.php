@@ -21,20 +21,20 @@ class __TwigTemplate_255e08a9b54e2896d3188c2a99984d8762fa28b44c80db42ba479de437c
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_8a05654632845066ef5236a965cf0b68a8e76f07e3b0950e101bbb29787cbab4 = $this->env->getExtension("native_profiler");
-        $__internal_8a05654632845066ef5236a965cf0b68a8e76f07e3b0950e101bbb29787cbab4->enter($__internal_8a05654632845066ef5236a965cf0b68a8e76f07e3b0950e101bbb29787cbab4_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "intranetBundle:Default:createNewFeed.html.twig"));
+        $__internal_b6e34e19a495b71d0f757262267051f22ded1e91fed33c17b41ab70a3100b78e = $this->env->getExtension("native_profiler");
+        $__internal_b6e34e19a495b71d0f757262267051f22ded1e91fed33c17b41ab70a3100b78e->enter($__internal_b6e34e19a495b71d0f757262267051f22ded1e91fed33c17b41ab70a3100b78e_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "intranetBundle:Default:createNewFeed.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_8a05654632845066ef5236a965cf0b68a8e76f07e3b0950e101bbb29787cbab4->leave($__internal_8a05654632845066ef5236a965cf0b68a8e76f07e3b0950e101bbb29787cbab4_prof);
+        $__internal_b6e34e19a495b71d0f757262267051f22ded1e91fed33c17b41ab70a3100b78e->leave($__internal_b6e34e19a495b71d0f757262267051f22ded1e91fed33c17b41ab70a3100b78e_prof);
 
     }
 
     // line 3
     public function block_contenido($context, array $blocks = array())
     {
-        $__internal_2a0d9d8dd99f7d783649d7fc24181544fbb9b28f728bfec93cbcb2aa3c6eb5a7 = $this->env->getExtension("native_profiler");
-        $__internal_2a0d9d8dd99f7d783649d7fc24181544fbb9b28f728bfec93cbcb2aa3c6eb5a7->enter($__internal_2a0d9d8dd99f7d783649d7fc24181544fbb9b28f728bfec93cbcb2aa3c6eb5a7_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "contenido"));
+        $__internal_8e24201f73dfa851402eece353e63ef3a4bc1155ba419f9fd8fda901bf39cca8 = $this->env->getExtension("native_profiler");
+        $__internal_8e24201f73dfa851402eece353e63ef3a4bc1155ba419f9fd8fda901bf39cca8->enter($__internal_8e24201f73dfa851402eece353e63ef3a4bc1155ba419f9fd8fda901bf39cca8_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "contenido"));
 
         // line 4
         echo "<h3>CREATE A NEW New</h3><br>
@@ -44,6 +44,7 @@ class __TwigTemplate_255e08a9b54e2896d3188c2a99984d8762fa28b44c80db42ba479de437c
         echo "\" method=\"post\" style=\"border: 1px solid;width: 500px;\">
         <label>TITLE:</label><input type=\"text\" name=\"title\" style=\"margin-left: 40px;\"><br>
         <label>CONTENT:</label><input type=\"textarea\" name=\"content\" style=\"margin-left: 15px;\"> <br>
+        <label>Channel:</label><input type=\"text\" name=\"channel\" style=\"margin-left: 15px;\"value=\"develop\"> <br>
                                      <input type=\"submit\" value=\"CREATE\">
                                      <input type=\"hidden\" name=\"typeF\" value=\"expenses\">
                                      <input type=\"hidden\" name=\"actualDate\">
@@ -53,7 +54,7 @@ class __TwigTemplate_255e08a9b54e2896d3188c2a99984d8762fa28b44c80db42ba479de437c
 
 ";
         
-        $__internal_2a0d9d8dd99f7d783649d7fc24181544fbb9b28f728bfec93cbcb2aa3c6eb5a7->leave($__internal_2a0d9d8dd99f7d783649d7fc24181544fbb9b28f728bfec93cbcb2aa3c6eb5a7_prof);
+        $__internal_8e24201f73dfa851402eece353e63ef3a4bc1155ba419f9fd8fda901bf39cca8->leave($__internal_8e24201f73dfa851402eece353e63ef3a4bc1155ba419f9fd8fda901bf39cca8_prof);
 
     }
 
@@ -79,6 +80,7 @@ class __TwigTemplate_255e08a9b54e2896d3188c2a99984d8762fa28b44c80db42ba479de437c
 /*  <form action="{{path('intranet_insertnew')}}" method="post" style="border: 1px solid;width: 500px;">*/
 /*         <label>TITLE:</label><input type="text" name="title" style="margin-left: 40px;"><br>*/
 /*         <label>CONTENT:</label><input type="textarea" name="content" style="margin-left: 15px;"> <br>*/
+/*         <label>Channel:</label><input type="text" name="channel" style="margin-left: 15px;"value="develop"> <br>*/
 /*                                      <input type="submit" value="CREATE">*/
 /*                                      <input type="hidden" name="typeF" value="expenses">*/
 /*                                      <input type="hidden" name="actualDate">*/

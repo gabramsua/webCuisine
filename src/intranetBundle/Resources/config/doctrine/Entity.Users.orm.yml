@@ -12,13 +12,14 @@ intranetBundle\Entity\Entity\Users:
         login:
             type: string
             length: '9'
-            unique: true
         nameU:
             type: string
             length: '30'
+            column: name_u
         surnameU:
             type: string
             length: '30'
+            column: surname_u
         lang:
             type: string
             length: '15'
@@ -27,7 +28,9 @@ intranetBundle\Entity\Entity\Users:
             length: '15'
         photo:
             type: string
-            length: '30'
+            length: 255
         onboard:
+            type: boolean
+        notifications:
             type: boolean
     lifecycleCallbacks: {  }
