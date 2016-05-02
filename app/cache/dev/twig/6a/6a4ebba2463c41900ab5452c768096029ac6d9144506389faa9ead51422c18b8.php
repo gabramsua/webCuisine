@@ -21,20 +21,20 @@ class __TwigTemplate_bd4e50b4f849c663f87767859ddb70da9606c66cdba4a9767742b8e9dd1
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_f9820873ad2880628c01764264caa8adc2884ea2b564b060e4b4ae964aea9bdd = $this->env->getExtension("native_profiler");
-        $__internal_f9820873ad2880628c01764264caa8adc2884ea2b564b060e4b4ae964aea9bdd->enter($__internal_f9820873ad2880628c01764264caa8adc2884ea2b564b060e4b4ae964aea9bdd_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "intranetBundle:Default:bookRoom.html.twig"));
+        $__internal_0640247262aa5da5c4622d816a66d2b69693c00c2fc71fa12c25e794cba70eeb = $this->env->getExtension("native_profiler");
+        $__internal_0640247262aa5da5c4622d816a66d2b69693c00c2fc71fa12c25e794cba70eeb->enter($__internal_0640247262aa5da5c4622d816a66d2b69693c00c2fc71fa12c25e794cba70eeb_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "intranetBundle:Default:bookRoom.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_f9820873ad2880628c01764264caa8adc2884ea2b564b060e4b4ae964aea9bdd->leave($__internal_f9820873ad2880628c01764264caa8adc2884ea2b564b060e4b4ae964aea9bdd_prof);
+        $__internal_0640247262aa5da5c4622d816a66d2b69693c00c2fc71fa12c25e794cba70eeb->leave($__internal_0640247262aa5da5c4622d816a66d2b69693c00c2fc71fa12c25e794cba70eeb_prof);
 
     }
 
     // line 3
     public function block_contenido($context, array $blocks = array())
     {
-        $__internal_c48a3200bf6a98aed186899358aa6b5cc5eecc36f443b8089422f6c1de05e121 = $this->env->getExtension("native_profiler");
-        $__internal_c48a3200bf6a98aed186899358aa6b5cc5eecc36f443b8089422f6c1de05e121->enter($__internal_c48a3200bf6a98aed186899358aa6b5cc5eecc36f443b8089422f6c1de05e121_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "contenido"));
+        $__internal_efb872a6bd01b3f0644b2f94e9a5a2f213177f777d6f43fa3bddb05fd6f12196 = $this->env->getExtension("native_profiler");
+        $__internal_efb872a6bd01b3f0644b2f94e9a5a2f213177f777d6f43fa3bddb05fd6f12196->enter($__internal_efb872a6bd01b3f0644b2f94e9a5a2f213177f777d6f43fa3bddb05fd6f12196_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "contenido"));
 
         // line 4
         echo "<h3>Aquí las habitaciones para hacer click y redirigir como formulario </h3>
@@ -194,7 +194,7 @@ Aqui empieza el último bloque:
         // line 39
         echo $this->env->getExtension('routing')->getPath("intranet_book");
         echo "\" method=\"get\">
-        <input type=\"number\" name=\"fecha\" id=\"fecha\">
+        <input type=\"date\" name=\"fecha\" id=\"fecha\">
         <input type=\"submit\" value=\"Elegir Room y Hora\">
     </form>
 </div>
@@ -203,7 +203,7 @@ Aqui empieza el último bloque:
 
 ";
         
-        $__internal_c48a3200bf6a98aed186899358aa6b5cc5eecc36f443b8089422f6c1de05e121->leave($__internal_c48a3200bf6a98aed186899358aa6b5cc5eecc36f443b8089422f6c1de05e121_prof);
+        $__internal_efb872a6bd01b3f0644b2f94e9a5a2f213177f777d6f43fa3bddb05fd6f12196->leave($__internal_efb872a6bd01b3f0644b2f94e9a5a2f213177f777d6f43fa3bddb05fd6f12196_prof);
 
     }
 
@@ -261,7 +261,7 @@ Aqui empieza el último bloque:
 /* */
 /* <div style="height: 200px;border: 2px solid red;">*/
 /*     <form action="{{ path('intranet_book')}}" method="get">*/
-/*         <input type="number" name="fecha" id="fecha">*/
+/*         <input type="date" name="fecha" id="fecha">*/
 /*         <input type="submit" value="Elegir Room y Hora">*/
 /*     </form>*/
 /* </div>*/

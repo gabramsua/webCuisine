@@ -3,16 +3,20 @@ namespace intranetBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use intranetBundle\Model\Model;
+use intranetBundle\Entity\Entity\Users;
+use Symfony\Component\HttpFoundation\Response;
 
 class MenuController extends Controller{
 
   public function menuAction(){
 
-      $me = new Model();
-      $user = array('user' => $me->getSettings(),);
-      $userWeb=json_decode(json_encode($user), true)['user'][0];
+      $user = $this->getDoctrine()
+                      ->getRepository('intranetBundle:Entity\Users')
+                      ->findOneByLogin($_SESSION['userLDAP']); #findAll
 
-      return $this->render('::menu.html.twig', $user);
+      if (!$user) {throw $this->createNotFoundException('No product found for id '.$id);}
+      $params=array('user'=>$user);
+      return $this->render('::menu.html.twig', $params);
    }
 
   }

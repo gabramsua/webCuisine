@@ -3,6 +3,9 @@ namespace intranetBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use intranetBundle\Model\Model;
+use intranetBundle\Entity\Entity\Users;
+use intranetBundle\Entity\Entity\Tasks;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
@@ -11,35 +14,40 @@ class DefaultController extends Controller
     $ldaprdn  = $_POST['login'];     // ldap rdn or dn
     $ldappass =$_POST['pass'];
 
-    //$GLOBALS['saludo']="hola";
-
     $m = new Model();
     $params = array('user' => $m->login($ldaprdn,$ldappass),);
+
+    $userLDAP=json_decode(json_encode($params), true);
+    $logged=$userLDAP['user'][0]['samaccountname'][0];
+    //echo "<br>".$logged;
+$_SESSION['userLDAP_']=$ldaprdn; //NAME
+$_SESSION['userLDAP']=$logged;  //LOGIN
+$_SESSION['passLDAP']=$ldappass;//PASS
     /*
         Hago una llamada al método con los valores que recojo del formulario. Me devuelve MI usuario.
         Lo reenvío con esos campos y ya puedo filtrar su idioma, y vámono!!!!!
     */
-    //$session = $this->getRequest()->getSession();
 
-    $user = array('user' => $m->getSettings(),);
+    //$user = array('user' => $m->getSettings(),);
+
     #$userWeb=json_decode(json_encode($user), true)['user'][0];
-    //echo $userWeb['lang'];
+    #echo $userWeb['lang'];
 
-    #$userRole=json_decode(json_encode($user), true)['user'][0];
-    /*$this->get('session')->set('_locale', $userWeb['lang']);*/
+    $user = $this->getDoctrine()
+                    ->getRepository('intranetBundle:Entity\Users')
+                    ->findOneByLogin($_SESSION['userLDAP']); #findAll
 
-    #$this->render('::menu.html.twig',$user);
-    return $this->render('intranetBundle:Default:landinga.html.twig', $user);
+    if (!$user) {throw $this->createNotFoundException('No product found for id '.$id);}
+
+    $params=array('user'=>$user);
+    //return $usuario;
+    return $this->render('intranetBundle:Default:landinga.html.twig', $params);
+
+
    }
 
   public function indexAction(){
-  /*  $me = new Model();
-    $user = array('user' => $me->getSettings(),);
-    $userWeb=json_decode(json_encode($user), true)['user'][0];*/
-    /*$this->get('session')->set('_locale', $userWeb['lang']);*/
-
-    return $this->render('intranetBundle:Default:landing.html.twig'
-         );
+    return $this->render('intranetBundle:Default:landing.html.twig');
   }
 
   public function formHoursAction(){
@@ -134,15 +142,19 @@ class DefaultController extends Controller
 
     public function userManagementAction(){
         $m = new Model();
-        $params = array('listUsers' => $m->getUsers(),'listLDAP' => $m->getUsersLDAP());
+        /*$params = array('listUsers' => $m->getUsers(),'listLDAP' => $m->getUsersLDAP());
         $params2 = array('listLDAP' => $m->getUsersLDAP());
-        #$userWeb=json_decode(json_encode($params2), true)[0];
-        var_dump($params2);
-        #echo "TIENE ".sizeof($userWeb)." elementos.";
-        return $this->render(
-           'intranetBundle:Default:userManagement.html.twig',
-           $params
-          );
+        $userLDAP=json_decode(json_encode($params2), true);*/
+        //*echo $userLDAP['user'][0]['samaccountname'][0];
+
+        $usuario = $this->getDoctrine()
+                        ->getRepository('intranetBundle:Entity\Users')
+                        ->findAll(); #findAll
+
+        if (!$usuario) {throw $this->createNotFoundException('No product found for id '.$id);}
+
+        $params=array('listUsers'=>$usuario,'listLDAP' => $m->getUsersLDAP());
+        return $this->render('intranetBundle:Default:userManagement.html.twig',$params);
       }
 
       public function settingsAction(){
@@ -170,15 +182,81 @@ class DefaultController extends Controller
        }
 
        public function addUserAction(){
-        $m = new Model();
-      $params0 = array('add' => $m->addUser(),);
+         $m = new Model();
+         $params0 = array('add' => $m->addUser(),);
 
-      $params = array('listUsers' => $m->getUsers(),);
-      return $this->render(
-         'intranetBundle:Default:userManagement.html.twig',
-         $params
-        );
+         $params = array('listUsers' => $m->getUsers(),);
+         return $this->render('intranetBundle:Default:userManagement.html.twig',$params);
        }
+
+       public function createNewAction(){
+         $m = new Model();
+         #$params0 = array('add' => $m->addUser(),);
+
+         #$params = array('listUsers' => $m->getUsers(),);
+         return $this->render('intranetBundle:Default:createNewFeed.html.twig');
+       }
+
+       public function insertNewAction(){
+
+         #PRIMERO INSERTO LA NOTICIA NUEVA Y LUEGO REDIRIJO AL USUARIO HASTA DONDE ESTABA,
+         #donde se puede ver la noticia ya insertada
+
+         $m = new Model();
+         //$user,$login,$send,$title, $content
+         $params0 = array('add' => $m->addNew($_SESSION['userLDAP_'],$_SESSION['userLDAP'],date("Y-m-d H:i:s"),$_POST['title'], $_POST['content']),);
+         $params = array('listnews' => $m->giveNews(),);
+         return $this->render('intranetBundle:Default:news.html.twig',$params);
+       }
+#usarDoctrine
+
+
+/*                INSERTA TAREA
+  	public function usarDoctrineAction(){
+        $tarea = new Tasks();
+        $tarea->setTitle('Nombre Tarea');
+        $tarea->setContent('Se trata de hacer la intranet de webCuisine');
+        $tarea->setWhoCreate('Sven Bubblies');
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($tarea);
+        $em->flush();
+
+        return new Response('Created task id '.$tarea->getId()." con el contenido ".$tarea->getContent());
+  	}
+                  INSERTA USUARIO
+    public function usarDoctrineAction(){
+        $usuario = new Users();
+        $usuario->setLogin('gram1i');
+        $usuario->setNameU('Gabriel');
+        $usuario->setSurnameU('Ramos Suan');
+        $usuario->setLang('es');
+        $usuario->setRol('admin');
+        $usuario->setPhoto('no tengo');
+        $usuario->setOnboard(1);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($usuario);
+        $em->flush();
+
+        return new Response('Created user: login '.$usuario->getLogin().", surname ".$usuario->getSurnameU());
+    }
+*/
+public function usarDoctrineAction(){
+    $usuario = $this->getDoctrine()
+        ->getRepository('intranetBundle:Entity\Users')
+        ->findOneByLogin('gram1i'); #findAll
+
+    if (!$usuario) {
+        throw $this->createNotFoundException(
+            'No product found for id '.$id
+        );
+      }
+      $params=array('user'=>$usuario);
+    return $this->render('intranetBundle:Default:bd.html.twig', $params);
+    }
+
+
 
 
 }

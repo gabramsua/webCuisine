@@ -1,29 +1,10 @@
 {% extends 'intranetBundle::layout2.html.twig' %}
-{% from 'intranetBundle::macroMenu.html.twig' import uROL %}
-
 
 {% block contenido %}
 <script>
     window.onload = function(){
-          document.forms['form1'].submit()
+          document.forms['form1'].submit();
     }
 </script>
-{% for me in user %}
-      {% if me.rol=="buo" %}{% set var='buo'%}{% endif %}
-{% set urol=me.rol %}
-
-    <form action="{{ path('intranet_homepage', {_locale: me.lang }) }}" method="post" id="form1">
-        <input type="hidden" id="r" name="r" value="{{me.rol}}">
-    </form>
-{% if is_granted('ROLE_BUO') %}
-{{ uROL(urol) }}
-{% endif %}
-
-    <script>
-        var roll=document.getElementById("r").value;
-        //sessionStorage.setItem("ROL", roll);
-        //alert(roll);
-        document.getElementById("pp").innerHTML =roll;
-    </script>
- {% endfor %}
+    <form action="{{ path('intranet_homepage', {_locale: user.lang }) }}" method="post" id="form1"></form>
 {% endblock %}

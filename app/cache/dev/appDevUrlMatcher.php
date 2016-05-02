@@ -194,6 +194,21 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_newuser')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::addUserAction',  '_locale' => 'en',));
         }
 
+        // intranet_newnew
+        if (preg_match('#^/(?P<_locale>en|fr|es)/createNew$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_newnew')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::createNewAction',  '_locale' => 'en',));
+        }
+
+        // intranet_insertnew
+        if (preg_match('#^/(?P<_locale>en|fr|es)/insertNew$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_insertnew')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::insertNewAction',  '_locale' => 'en',));
+        }
+
+        // intranet_testBD
+        if (preg_match('#^/(?P<_locale>en|fr|es)/testDoctrine$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_testBD')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::usarDoctrineAction',  '_locale' => 'en',));
+        }
+
         // homepage
         if (rtrim($pathinfo, '/') === '') {
             if (substr($pathinfo, -1) !== '/') {

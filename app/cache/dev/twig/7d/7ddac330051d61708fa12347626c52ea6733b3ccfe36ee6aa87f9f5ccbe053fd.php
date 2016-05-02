@@ -21,20 +21,20 @@ class __TwigTemplate_78b41097e9b040098be5fdf51db5415ab948e288b3f3154fb3ffbf60df9
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_7b6b9d33bf9f237ae2c3b093004ca61c50a0497fb27d529839341f4508135cfc = $this->env->getExtension("native_profiler");
-        $__internal_7b6b9d33bf9f237ae2c3b093004ca61c50a0497fb27d529839341f4508135cfc->enter($__internal_7b6b9d33bf9f237ae2c3b093004ca61c50a0497fb27d529839341f4508135cfc_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "intranetBundle:Default:book.html.twig"));
+        $__internal_3b13343a66eb0b310426e9b60e2d8e89b350cc5e5c237319a066b0a351e0b305 = $this->env->getExtension("native_profiler");
+        $__internal_3b13343a66eb0b310426e9b60e2d8e89b350cc5e5c237319a066b0a351e0b305->enter($__internal_3b13343a66eb0b310426e9b60e2d8e89b350cc5e5c237319a066b0a351e0b305_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "intranetBundle:Default:book.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_7b6b9d33bf9f237ae2c3b093004ca61c50a0497fb27d529839341f4508135cfc->leave($__internal_7b6b9d33bf9f237ae2c3b093004ca61c50a0497fb27d529839341f4508135cfc_prof);
+        $__internal_3b13343a66eb0b310426e9b60e2d8e89b350cc5e5c237319a066b0a351e0b305->leave($__internal_3b13343a66eb0b310426e9b60e2d8e89b350cc5e5c237319a066b0a351e0b305_prof);
 
     }
 
     // line 3
     public function block_contenido($context, array $blocks = array())
     {
-        $__internal_d57ffc30dc76f6df203ee55e21e92d461fac64ccdbfc8bc8551fe0ed2069b8ba = $this->env->getExtension("native_profiler");
-        $__internal_d57ffc30dc76f6df203ee55e21e92d461fac64ccdbfc8bc8551fe0ed2069b8ba->enter($__internal_d57ffc30dc76f6df203ee55e21e92d461fac64ccdbfc8bc8551fe0ed2069b8ba_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "contenido"));
+        $__internal_bca15d7537ca6eb49df65edaab7b5b04d41fc7c88ffa1da12f1d018c6d0908a7 = $this->env->getExtension("native_profiler");
+        $__internal_bca15d7537ca6eb49df65edaab7b5b04d41fc7c88ffa1da12f1d018c6d0908a7->enter($__internal_bca15d7537ca6eb49df65edaab7b5b04d41fc7c88ffa1da12f1d018c6d0908a7_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "contenido"));
 
         // line 4
         echo "<h3>Aquí las habitaciones para hacer click y redirigir como formulario </h3>
@@ -181,7 +181,7 @@ class __TwigTemplate_78b41097e9b040098be5fdf51db5415ab948e288b3f3154fb3ffbf60df9
         echo "
 ";
         
-        $__internal_d57ffc30dc76f6df203ee55e21e92d461fac64ccdbfc8bc8551fe0ed2069b8ba->leave($__internal_d57ffc30dc76f6df203ee55e21e92d461fac64ccdbfc8bc8551fe0ed2069b8ba_prof);
+        $__internal_bca15d7537ca6eb49df65edaab7b5b04d41fc7c88ffa1da12f1d018c6d0908a7->leave($__internal_bca15d7537ca6eb49df65edaab7b5b04d41fc7c88ffa1da12f1d018c6d0908a7_prof);
 
     }
 

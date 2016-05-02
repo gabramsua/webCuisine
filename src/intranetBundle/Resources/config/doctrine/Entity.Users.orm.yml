@@ -1,0 +1,33 @@
+intranetBundle\Entity\Entity\Users:
+    type: entity
+    table: null
+    repositoryClass: intranetBundle\Repository\Entity\UsersRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        login:
+            type: string
+            length: '9'
+            unique: true
+        nameU:
+            type: string
+            length: '30'
+        surnameU:
+            type: string
+            length: '30'
+        lang:
+            type: string
+            length: '15'
+        rol:
+            type: string
+            length: '15'
+        photo:
+            type: string
+            length: '30'
+        onboard:
+            type: boolean
+    lifecycleCallbacks: {  }

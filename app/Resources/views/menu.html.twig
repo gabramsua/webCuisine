@@ -1,7 +1,6 @@
 {# {% extends '::base.html.twig' %} #}
 
 {% block menu %}
-{% for me in user %}
 
   <nav class="navbar navbar-inverse">
   <div class="container-fluid">
@@ -25,16 +24,16 @@
           </ul>
         </li>
         <li><a href="{{ path('intranet_bookRoom')}}">{% trans %}Book a room{% endtrans %}</a></li>
-      {% if me.rol=="internship"%}
+      {% if user.rol=="internship"%}
               <li><a href='{{ path('intranet_tasks')}}'>{% trans %}Task {% endtrans %}-<i> internships</i></a></li>"
       {% endif %}
-      {% if me.rol=="admin"%}
+      {% if user.rol=="admin"%}
               <li><a href='{{ path('intranet_userManagement')}}'>{% trans %}User Management {% endtrans %}-<i> admins</i></a></li>
       {% endif %}
-      {% if me.rol=="buo"%}
+      {% if user.rol=="buo"%}
               <li><a href='{{ path('intranet_news')}}'{% trans %}>News Feed {% endtrans %}-<i> BÜOs</i></a></li>
       {% endif %}
-      {% if me.rol=="buo"%}
+      {% if user.rol=="buo"%}
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown">{% trans %}Form Management {% endtrans %}-<i> BÜOs</i><span class="caret"></span></a>
             <ul class="dropdown-menu">
@@ -44,6 +43,7 @@
           </li>{% endif %}
       </ul>
       <ul class="nav navbar-nav navbar-right">
+      <li><a href="{{ path('intranet_testBD')}}"><b>{% trans %}BBDD{% endtrans %}</b></a></li>
         <li><a href="{{ path('intranet_translation')}}"><b>{% trans %}Lang{% endtrans %}</b></a></li>
         <li><a href="#"><b>{% trans %}Hello{% endtrans %} <?php echo $_SESSION["usuario"]; ?></b></a></li>
         <li><a href="{{ path('intranet_settings')}}"><span class="glyphicon glyphicon-user"></span> {% trans %}Settings{% endtrans %}</a></li>
@@ -52,5 +52,4 @@
     </div>
   </div>
   </nav>
-  {% endfor %}
   {% endblock %}

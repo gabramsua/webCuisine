@@ -1,13 +1,16 @@
 <?php
 
  namespace intranetBundle\Model;
+ use intranetBundle\Entity\Entity\Users;
+ use intranetBundle\Entity\Entity\Tasks;
+ use Symfony\Component\HttpFoundation\Response;
+ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
- class Model {
+ class Model extends Controller{
 
    protected $conexion;
 
    public function login($ldaprdn,$ldappass){
-     $_SESSION['us']=$ldaprdn;$_SESSION['uspa']=$ldappass;
       $ldapDomainName = 'cuisine.lan';
       // conexión al servidor LDAP
       $ldapconn = ldap_connect($ldapDomainName, 3268) or die("Could not connect to LDAP server.");
@@ -23,7 +26,7 @@
       $baseDN ="dc=cuisine, dc=lan";
       $query = "(cn=".$ldaprdn.")";
       // limit attributes we want to look for
-      $attributes_ad = array("displayName","description","cn","givenName","sn","mail","co","company","displayName");
+      $attributes_ad = array("displayName","description","cn","givenName","sn","mail","co","company","sAMAccountName");
       $result = ldap_search($ldapconn, $baseDN, $query, $attributes_ad) or die ("Error in search query");
       // put search results into the array ($conn variable is defined in the included 'ad_con.php')
       $user = ldap_get_entries($ldapconn, $result);
@@ -39,21 +42,6 @@
          $this->conexion = $mongo;
      }
 
-   public function dameYo() {
-        $filter = ['login' => getenv("username")];
-
-        $query = new \MongoDB\Driver\Query($filter);
-        $user = $mongo->executeQuery('webCuisine.Users', $query); // $mongo contains the connection object to MongoDB
-        $arrayUser=$user->toArray();
-        /*foreach($arrayUser as $use){
-            if($use->name!=""){
-                $_SESSION["usuario"] =$use->name;
-                $_SESSION["usuario2"] =$use->name." ".$use->surname;
-                $_SESSION["rol"] =$use->rol;
-                $_SESSION["login"] =$use->login;
-             }
-        }*/return $arrayUser;
-    }
       public function getRooms() {
         //Aqui el filtro es que el usuario sea BÜO => TO DO
          $filter = ['number' => array('$gt' => 0)];
@@ -77,7 +65,7 @@
 
     public function giveNews() {
         //Aqui el filtro es que el usuario sea BÜO
-         $filter = ['login' => getenv("username")];
+         $filter = ['login' =>  $_SESSION['userLDAP']];
 
          $query = new \MongoDB\Driver\Query($filter);
          $new = $this->conexion->executeQuery('webCuisine.News', $query); // $mongo contains the connection object to MongoDB
@@ -88,7 +76,7 @@
 
      public function getIncomingForms() {
          //Aqui el filtro es que el usuario sea BÜO => TO DO
-          $filter = ['login' => getenv("username")];
+          $filter = ['login' => $_SESSION['userLDAP']];
 
           $query = new \MongoDB\Driver\Query($filter);
           $forms = $this->conexion->executeQuery('webCuisine.Forms', $query); // $mongo contains the connection object to MongoDB
@@ -128,17 +116,34 @@
              $arrayNews=$new->toArray();
 
              return $arrayNews;
+
+/*
+
+             $usuarios = $this->getDoctrine()
+                             ->getRepository('intranetBundle:Entity\Users')
+                             ->findAll(); #findAll
+
+             if (!$usuarios) {throw $this->createNotFoundException('No product found for id '.$id);}
+
+            #$params=array('user'=>$usuario);
+             return $usuarios;*/
+
+
+
          }
 #################################################################################################################################
+#                                                                                                                               #
 #                                                  NOT WORKING YET                                                              #
+#                                                                                                                               #
 #################################################################################################################################
          public function getUsersLDAP() {
+           //echo $_SESSION['userLDAP']." y ".$_SESSION['passLDAP'];
            $ldapDomainName = 'cuisine.lan';
            // conexión al servidor LDAP
            $ldapconn = ldap_connect($ldapDomainName, 3268) or die("Could not connect to LDAP server.");
            if ($ldapconn) {
                // realizando la autenticación
-               $ldapbind = ldap_bind($ldapconn, $_SESSION['us'],$_SESSION['uspa'] );
+               $ldapbind = ldap_bind($ldapconn, $_SESSION['userLDAP_'],$_SESSION['passLDAP'] );
                // verificación del enlace
                if ($ldapbind) {
                    //echo "<b>LDAP bind successful...</b><br><br>";
@@ -146,9 +151,9 @@
            }else{echo "no connection =(";}
 
            $baseDN ="dc=cuisine, dc=lan";
-           $query = "(ou=cuisine)";
+           $query = "(cn=cuisine-employee)";
            // limit attributes we want to look for
-           $attributes_ad = array("displayName","description","cn","givenName","sn","mail","co","company","displayName");
+           $attributes_ad = array("displayName","sAMAccountName");
            $result = ldap_search($ldapconn, $baseDN, $query, $attributes_ad) or die ("Error in search query");
            // put search results into the array ($conn variable is defined in the included 'ad_con.php')
            $users = ldap_get_entries($ldapconn, $result);
@@ -158,14 +163,24 @@
 
 
          public function getSettings() {
-             //Aqui el filtro es que el usuario sea BÜO
-              $filter = ['login' => getenv("username")];
+              $filter = ['login' => $_SESSION['userLDAP']];
 
               $query = new \MongoDB\Driver\Query($filter);
               $new = $this->conexion->executeQuery('webCuisine.Users', $query); // $mongo contains the connection object to MongoDB
               #$arrayNews=$new->toArray();
 
               return iterator_to_array($new);
+
+/*
+              $usuario = $this->getDoctrine()
+                              ->getRepository('intranetBundle:Entity\Users')
+                              ->findOneByLogin($_SESSION['userLDAP']); #findAll
+
+              if (!$usuario) {throw $this->createNotFoundException('No product found for id '.$id);}
+
+              #$params=array('user'=>$usuario);
+
+              return $usuario;*/
           }
 
           public function addUser(){
@@ -178,5 +193,28 @@
             $bulk->insert($document);
             return $conn->executeBulkWrite("webCuisine.Users", $bulk);
           }
+
+          public function addNew($user,$login,$send,$title, $content){
+            $conn = new \MongoDB\Driver\Manager("mongodb://localhost:27017");
+            $bulk = new \MongoDB\Driver\BulkWrite;
+            //registro para insertar
+            $document = ["user" => $user,"login" => $login,"send" => $send,
+                         "title" => $title,"content" => $content];
+
+            $bulk->insert($document);
+            return $conn->executeBulkWrite("webCuisine.Users", $bulk);
+          }
+
+/*
+
+              $link = mysql_connect('127-0-0-1', 'root', 'root')
+    or die('No se pudo conectar: ' . mysql_error());
+              mysql_select_db("webCuisine", $link);
+              $result = mysql_query("SELECT * FROM Users where login ='".$_SESSION['userLDAP']."';", $link);
+              echo "Nombre: ".mysql_result($result, 0, "nameU")."<br>";
+              echo "Apellidos: ".mysql_result($result, 0, "surnameU")."<br>";
+*/
+
+
 
 }

@@ -99,3 +99,21 @@ intranet_newuser:
     defaults: { _controller: intranetBundle:Default:addUser, _locale:en }
     requirements:
         _locale: en|fr|es
+
+intranet_newnew:
+    path:     /{_locale}/createNew
+    defaults: { _controller: intranetBundle:Default:createNew, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
+intranet_insertnew:
+    path:     /{_locale}/insertNew
+    defaults: { _controller: intranetBundle:Default:insertNew, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
+intranet_testBD:
+    path:     /{_locale}/testDoctrine
+    defaults: { _controller: intranetBundle:Default:usarDoctrine, _locale:en }
+    requirements:
+        _locale: en|fr|es

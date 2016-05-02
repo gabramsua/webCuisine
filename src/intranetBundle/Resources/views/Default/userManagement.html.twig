@@ -7,15 +7,13 @@
     <th>name</th>
     <th>surname</th>
     <th>LOGIN</th>
-    <th>tel</th>
     <th>photo</th>
 </tr>
 {% for intrauser in listUsers %}
 <tr>
-    <td style="padding-left: 10px;padding-right: 10px;">{{ intrauser.name }}</td>
-    <td style="padding-left: 10px;padding-right: 10px;">{{ intrauser.surname }}</td>
+    <td style="padding-left: 10px;padding-right: 10px;">{{ intrauser.nameU }}</td>
+    <td style="padding-left: 10px;padding-right: 10px;">{{ intrauser.surnameu }}</td>
     <td style="padding-left: 10px;padding-right: 10px;">{{ intrauser.login }}</td>
-    <td style="padding-left: 10px;padding-right: 10px;">{{ intrauser.tel }}</td>
     <td style="padding-left: 10px;padding-right: 10px;"><img src="{{ intrauser.photo }}"></td>
 </tr>
 {% endfor %}
@@ -30,13 +28,20 @@
       <th>Common Name</th>
       <th>Display Name</th>
       <th>Mail</th>
+      <th>TEST</th
   </tr>
-  {% for intrauser in listLDAP %}{% for user in intrauser %}{% for field in user %}
+
+  {% for intrauser in listLDAP %}
+    {% for user in intrauser %}
+      {% for field in user %}
   <tr>
-      <td style="padding-left: 10px;padding-right: 10px;">{{ field.cn }}</td>
-      <td style="padding-left: 10px;padding-right: 10px;">{{ field.displayName }}</td>
-      <td style="padding-left: 10px;padding-right: 10px;">{{ field.mail }}</td>
+      <td style="padding-left: 10px;padding-right: 10px;">{# field.sAMAccountName #}</td>
+      <td style="padding-left: 10px;padding-right: 10px;">{# field.displayName #}</td>
+      <td style="padding-left: 10px;padding-right: 10px;">{# field.mail #}</td>
   </tr>
-  {% endfor %}{% endfor %}{% endfor %}
+      {% endfor %}
+    {% endfor %}
+  {% endfor %}
   </table>
+
 {% endblock %}
