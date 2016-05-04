@@ -26,16 +26,16 @@
         <!-- BOOKING ROOM PART
             <li><a href="{# path('intranet_bookRoom')#}">{% trans %}Book a room{% endtrans %}</a></li>
         -->
-      {% if user.rol=="internship"%}
+      {% if user.onboard==1 %}
               <li><a href='{{ path('intranet_tasks')}}'>{% trans %}Task {% endtrans %}-<i> internships</i></a></li>"
       {% endif %}
-      {% if user.rol=="admin"%}
+      {% if role=="administrator"%}
               <li><a href='{{ path('intranet_userManagement')}}'>{% trans %}User Management {% endtrans %}-<i> admins</i></a></li>
       {% endif %}
-      {% if user.rol=="buo"%}
+      {% if role=="buo"%}
               <li><a href='{{ path('intranet_news')}}'{% trans %}>News Feed {% endtrans %}-<i> BÜOs</i></a></li>
       {% endif %}
-      {% if user.rol=="buo"%}
+      {% if role=="buo"%}
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown">{% trans %}Form Management {% endtrans %}-<i> BÜOs</i><span class="caret"></span></a>
             <ul class="dropdown-menu">
@@ -45,7 +45,7 @@
           </li>{% endif %}
       </ul>
       <ul class="nav navbar-nav navbar-right">
-      <li><a href="{{ path('intranet_testBD')}}"><b>{% trans %}BBDD{% endtrans %}</b></a></li>
+      <li><a href="{{ path('intranet_testBD')}}"><b>{% trans %}TEST PAGE{% endtrans %}</b></a></li>
         <li><a href="{{ path('intranet_translation')}}"><b>{% trans %}Lang{% endtrans %}</b></a></li>
         <li><a href="#"><b>{% trans %}Hello{% endtrans %} <?php echo $_SESSION["usuario"]; ?></b></a></li>
         <li><a href="{{ path('intranet_settings')}}"><span class="glyphicon glyphicon-user"></span> {% trans %}Settings{% endtrans %}</a></li>

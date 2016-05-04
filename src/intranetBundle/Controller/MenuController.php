@@ -15,7 +15,7 @@ class MenuController extends Controller{
                       ->findOneByLogin($_SESSION['userLDAP']); #findAll
 
       if (!$user) {throw $this->createNotFoundException('No product found for id '.$id);}
-      $params=array('user'=>$user);
+      $params=array('user'=>$user, 'role'=>$_SESSION['rol']);
       return $this->render('::menu.html.twig', $params);
    }
 

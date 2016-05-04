@@ -1,14 +1,32 @@
+#LOGIN & LOGOUT PART
+
 intranet_login:
     path:     /{_locale}/login
     defaults: { _controller: intranetBundle:Default:login, _locale:en }
     requirements:
         _locale: en|fr|es
 
+intranet_nonExistingUserA:
+    path:     /createUserA
+    defaults: { _controller: intranetBundle:Default:createUserA }
+
+intranet_nonExistingUser:
+    path:     /createUser
+    defaults: { _controller: intranetBundle:Default:createUser }
+
 intranet_homepage:
     path:     /{_locale}/
     defaults: { _controller: intranetBundle:Default:index, _locale:en }
     requirements:
         _locale: en|fr|es
+
+intranet_logout:
+    path:     /{_locale}/intranet_logout
+    defaults: { _controller: intranetBundle:Default:logout, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
+#MENU ROUTING
 
 intranet_formHours:
     path:     /{_locale}/formHours
@@ -70,17 +88,7 @@ intranet_settings:
     requirements:
         _locale: en|fr|es
 
-intranet_logout:
-    path:     /{_locale}/intranet_logout
-    defaults: { _controller: intranetBundle:Default:logout, _locale:en }
-    requirements:
-        _locale: en|fr|es
-
-intranet_translation:
-    path:     /{_locale}/translation
-    defaults: { _controller: intranetBundle:Default:translation, _locale:en }
-    requirements:
-        _locale: en|fr|es
+#CRUD OPERATIONS
 
 intranet_newuser:
     path:     /{_locale}/addUser
@@ -100,13 +108,28 @@ intranet_insertnew:
     requirements:
         _locale: en|fr|es
 
+intranet_f:
+    path:     /{_locale}/historical
+    defaults: { _controller: intranetBundle:Default:insertForm, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
+
+#TESTING SHIT
+
+intranet_translation:
+    path:     /{_locale}/translation
+    defaults: { _controller: intranetBundle:Default:translation, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
 intranet_testBD:
     path:     /{_locale}/testDoctrine
     defaults: { _controller: intranetBundle:Default:usarDoctrine, _locale:en }
     requirements:
         _locale: en|fr|es
 
-#*********************************************THE BOOK ROOM PART, NOT AVAILABLE *********************************************      
+#*********************************************THE BOOK ROOM PART, NOT AVAILABLE *********************************************
 intranet_bookRoom:
     path:     /{_locale}/bookRoom
     defaults: { _controller: intranetBundle:Default:bookRoom, _locale:en }

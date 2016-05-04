@@ -2,16 +2,14 @@
 
  {% block contenido %}
 <h3>EXPENSES</h3><br>
- <form action="vExpenses.php" method="post" style="border: 1px solid;width: 500px;">
+ <form action="{{ path('intranet_f') }}" method="post" style="border: 1px solid;width: 500px;">
         <label>Company:</label><input type="text" name="company"><br>
-        <label>Importe:</label><input type="number" step="any" name="import"> â‚¬<br>
-        <label>Earlier than: </label><input type='date' id="earlier"name="earlier" min="<?php echo date("Y-m-d");?>" value="<?php echo date("Y-m-d");?>"><i>default: TODAY</i><BR>
+        <label>Importe:</label><input type="number" step="any" name="amount"> €<br>
+        <label>Earlier than: </label><input type='date' id="earlier" name="earlier"><BR>
         <input type="textarea" name="concept"> <BR>
                                      <input type="submit" value="Modify">
                                      <input type="hidden" name="typeF" value="expenses">
-                                     <input type="hidden" name="actualDate" value="<?php echo date("Y-m-d H:i:s");?>">
    </form>
-
 
 
 {% endblock %}

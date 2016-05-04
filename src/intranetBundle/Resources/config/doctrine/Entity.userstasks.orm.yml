@@ -12,9 +12,9 @@ intranetBundle\Entity\Entity\userstasks:
         login:
             type: string
             length: '9'
-            unique: true
+            unique: false
         idTask:
             type: integer
-            unique: true
+            unique: false
             column: id_task
     lifecycleCallbacks: {  }

@@ -2,7 +2,6 @@
 
  namespace intranetBundle\Model;
  use intranetBundle\Entity\Entity\Users;
- use intranetBundle\Entity\Entity\Tasks;
  use Symfony\Component\HttpFoundation\Response;
  use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -26,7 +25,7 @@
       $baseDN ="dc=cuisine, dc=lan";
       $query = "(cn=".$ldaprdn.")";
       // limit attributes we want to look for
-      $attributes_ad = array("displayName","description","cn","givenName","sn","mail","co","memberOf","sAMAccountName");
+      $attributes_ad = array("givenName","objectClass","cn","givenName","sn","mail","co","memberOf","sAMAccountName");
       $result = ldap_search($ldapconn, $baseDN, $query, $attributes_ad) or die ("Error in search query");
       // put search results into the array ($conn variable is defined in the included 'ad_con.php')
       $user = ldap_get_entries($ldapconn, $result);
@@ -180,5 +179,9 @@
             return $usuario;
           }
 
+          public function getSplitRole($rol){
+            return explode("=",explode(",",$rol)[0]);
+
+          }
 
 }

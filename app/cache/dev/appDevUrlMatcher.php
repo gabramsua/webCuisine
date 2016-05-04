@@ -110,6 +110,19 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_login')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::loginAction',  '_locale' => 'en',));
         }
 
+        if (0 === strpos($pathinfo, '/createUser')) {
+            // intranet_nonExistingUserA
+            if ($pathinfo === '/createUserA') {
+                return array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::createUserAAction',  '_route' => 'intranet_nonExistingUserA',);
+            }
+
+            // intranet_nonExistingUser
+            if ($pathinfo === '/createUser') {
+                return array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::createUserAction',  '_route' => 'intranet_nonExistingUser',);
+            }
+
+        }
+
         // intranet_homepage
         if (preg_match('#^/(?P<_locale>en|fr|es)/?$#s', $pathinfo, $matches)) {
             if (substr($pathinfo, -1) !== '/') {
@@ -117,6 +130,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             }
 
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_homepage')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::indexAction',  '_locale' => 'en',));
+        }
+
+        // intranet_logout
+        if (preg_match('#^/(?P<_locale>en|fr|es)/intranet_logout$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_logout')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::logoutAction',  '_locale' => 'en',));
         }
 
         // intranet_formHours
@@ -169,16 +187,6 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_settings')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::settingsAction',  '_locale' => 'en',));
         }
 
-        // intranet_logout
-        if (preg_match('#^/(?P<_locale>en|fr|es)/intranet_logout$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_logout')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::logoutAction',  '_locale' => 'en',));
-        }
-
-        // intranet_translation
-        if (preg_match('#^/(?P<_locale>en|fr|es)/translation$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_translation')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::translationAction',  '_locale' => 'en',));
-        }
-
         // intranet_newuser
         if (preg_match('#^/(?P<_locale>en|fr|es)/addUser$#s', $pathinfo, $matches)) {
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_newuser')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::addUserAction',  '_locale' => 'en',));
@@ -192,6 +200,16 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         // intranet_insertnew
         if (preg_match('#^/(?P<_locale>en|fr|es)/insertNew$#s', $pathinfo, $matches)) {
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_insertnew')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::insertNewAction',  '_locale' => 'en',));
+        }
+
+        // intranet_f
+        if (preg_match('#^/(?P<_locale>en|fr|es)/historical$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_f')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::insertFormAction',  '_locale' => 'en',));
+        }
+
+        // intranet_translation
+        if (preg_match('#^/(?P<_locale>en|fr|es)/translation$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_translation')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::translationAction',  '_locale' => 'en',));
         }
 
         // intranet_testBD

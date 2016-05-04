@@ -4,183 +4,67 @@ CREATE DATABASE IF NOT EXISTS webCuisine
 
 USE `webCuisine`;
 show tables;
-select * from Tasks;
-select * from Users;
+
 select * from new_feed;
-
-select * from new_feed order by date, time DESC;
-
+select * from channelnew_feed;
+select * from channel;
 select * from userschannel;
+		select * from Users;
+select * from userstasks;
+select * from Tasks;
+
+select * from f_hours;
+select * from f_vacation;
+select * from f_expenses;
+select * from f_trip;
+
+update Users set login="gram1i" where id=1;
+select * from new_feed order by date, time DESC;
 
 insert into new_feed (date, time, title, content) values ("2016-05-02", "10:49", "Titulo1", "Contenido1");
 insert into channel (name) values ("develop");
+insert into channelnew_feed (name, id_new) values ("develop", 4);
+insert into Tasks (title, content, who_create) values ('Titulo1','Contenido1','svenlogin');
+insert into userstasks (login, id_task) values ('imar1i', 1);
+
+insert into f_hours (num_hours, date1, date2) values (3, "2016-05-04", "2016-05-06");
+insert into f_hours (num_hours, date1, date2) values (6, "2016-05-06", "2016-05-13");
+insert into users_f_hours (login, id_form) values ("gram1i",2);
+insert into f_vacation (date1, date2) values ("2016-06-01", "2016-06-03");
+insert into users_f_vacations (login, id_form) values ("gram1i",1);
+insert into f_expenses (company, date1,concept, amount) values ("McDonalds","2016-05-04","I was hungry", "10.29");
+insert into users_f_expenses (login, id_form) values ("imar1i", 3);
+insert into f_trip (date1, date2, place, name_congress, reasons) values ("2016-05-04","2016-05-04","Peine","AngularJS for Nerds","No tenía ni zorra de AngularJS");
+insert into users_f_trip (login, id_form) values ("imar1i", 1);
+
 update Users set rol="buo" where id=1;
 update new_feed set id=4 where id=7;
-delete from new_feed where id=5;
-insert into Tasks (title, content, who_create) values ('Titulo1','Contenido1','svenlogin');
-insert into userstasks (login, id_task) values ('svenlogin', 1);
-/*------------------------CREATE TABLE------------------------*/
-CREATE TABLE webCuisine.Users (
-  login VARCHAR(9) ,
-  nameU VARCHAR(30) NOT NULL ,
-  surnameU VARCHAR(30) NOT NULL ,
-  lang VARCHAR(15) NOT NULL DEFAULT 'en',
-  rol VARCHAR(15) NOT NULL DEFAULT 'user',
-  photo VARCHAR(15),
-  onboard Boolean not null /*DEFAULT 'false'*/,
-  CONSTRAINT c1 PRIMARY KEY (login)
-)ENGINE=InnoDB;
-
-CREATE TABLE webCuisine.Tasks (
-  id Integer (3) auto_increment,
-  title VARCHAR(20)not null,
-  content VARCHAR(500),
-  whoCreate VARCHAR(20) not null,
-  CONSTRAINT c2 PRIMARY KEY (id)
-)ENGINE=InnoDB;
-
-CREATE TABLE webCuisine.News (
-  id Integer(4) auto_increment ,
-  dateN DATE NOT NULL default '2007-10-04 22:23:00' ,
-  title VARCHAR(20) NOT NULL ,
-  content VARCHAR(500) NOT NULL  ,
-  whoCreate VARCHAR(9) NOT NULL,
-  CONSTRAINT c3 PRIMARY KEY (id)
-)ENGINE=InnoDB;
-
-CREATE TABLE webCuisine.Channel (
-  nameC VARCHAR(15) NOT NULL ,
-  CONSTRAINT c4 PRIMARY KEY (nameC)
-)ENGINE=InnoDB;
-
-CREATE TABLE webCuisine.FormHours (
-  id int(9),
-  typeF VARCHAR(9) NOT NULL ,
-  readF int(1) default 0,
-  numHours int(2)not null,
-  date1 date,
-  date2 date,
-  CONSTRAINT c5 PRIMARY KEY (id)
-)ENGINE=InnoDB;
-
-CREATE TABLE webCuisine.FormVacations (
-  id int(9),
-  typeF VARCHAR(9) NOT NULL ,
-  readF int(1) default 0,
-  date1 date,
-  date2 date,
-  CONSTRAINT c6 PRIMARY KEY (id)
-)ENGINE=InnoDB;
-
-CREATE TABLE webCuisine.FormExpenses (
-  id int(9),
-  typeF VARCHAR(9) NOT NULL ,
-  readF int(1) default 0,
-  date1 date,
-  company varchar(20),
-  concept varchar(20),
-  amount double,
-  CONSTRAINT c7 PRIMARY KEY (id)
-)ENGINE=InnoDB;
-
-CREATE TABLE webCuisine.FormTrip (
-  id int(9),
-  typeF VARCHAR(9) NOT NULL ,
-  readF int(1) default 0,
-  date1 date,
-  date2 date,
-  place varchar(15),
-  nameCongress varchar(20),
-  reason varchar(150),
-  CONSTRAINT c8 PRIMARY KEY (id)
-)ENGINE=InnoDB;
+update f_trip set type="trip"where id>0;
 
 
-/*------------------------CREATE INTERMEDIATES TABLES------------------------*/
+delete from Users where id=7;
+select * from channelnew_feed;
 
-CREATE TABLE webCuisine.UserChannel (
-  login VARCHAR(9) ,
-  nameC VARCHAR(15) NOT NULL ,
-  CONSTRAINT c9 PRIMARY KEY (login, nameC)
-)ENGINE=InnoDB;
+/***************************NOTICIAS A LAS QUE TIENE ACCESO EL USUARIO X********************************************/
+select Users.name_u, channel.name,channelnew_feed.id_new, new_feed.title, new_feed.content from Users 
+	join userschannel on Users.login=userschannel.login 
+    join channel on userschannel.name=channel.name
+    join channelnew_feed on channel.name=channelnew_feed.name
+    join new_feed on channelnew_feed.id_new=new_feed.id
+    where Users.login="gram1i" group by id_new;
+    
+/***************************TAREAS DEL USUARIO X********************************************/
+select users.name_u, tasks.title, tasks.content from Users
+	join userstasks on users.login=userstasks.login
+    join tasks on userstasks.id_task=tasks.id
+    where name_u="Gabriel";
 
-CREATE TABLE webCuisine.ChannelNews (
-  nameC VARCHAR(15) NOT NULL ,
-  id Integer(4) ,
-  CONSTRAINT c10 PRIMARY KEY (nameC, id)
-)ENGINE=InnoDB;
-
-CREATE TABLE webCuisine.UsersTasks (
-  login VARCHAR(9) ,
-  id Integer (3) ,
-  CONSTRAINT c11 PRIMARY KEY (login, id)
-)ENGINE=InnoDB;
-
-CREATE TABLE webCuisine.UserFormHours (
-  login VARCHAR(9) ,
-  id int(9),
-  CONSTRAINT c12 PRIMARY KEY (login, id)
-)ENGINE=InnoDB;
-
-CREATE TABLE webCuisine.UserFormVacations (
-  login VARCHAR(9) ,
-  id int(9),
-  CONSTRAINT c13 PRIMARY KEY (login, id)
-)ENGINE=InnoDB;
-
-CREATE TABLE webCuisine.UserFormExpenses (
-  login VARCHAR(9) ,
-  id int(9),
-  CONSTRAINT c14 PRIMARY KEY (login, id)
-)ENGINE=InnoDB;
-
-CREATE TABLE webCuisine.UserFormTrip (
-  login VARCHAR(9) ,
-  id int(9),
-  CONSTRAINT c15 PRIMARY KEY (login, id)
-)ENGINE=InnoDB;
-
-
-/*------------------------ALTER TABLE------------------------*/
-
-ALTER TABLE Users ADD CONSTRAINT f1 FOREIGN KEY (login) REFERENCES UsersTasks(login) ON UPDATE CASCADE ON DELETE CASCADE;
-/*********/ALTER TABLE Tasks ADD CONSTRAINT f2 FOREIGN KEY (id)REFERENCES UsersTasks(id)ON UPDATE CASCADE ON DELETE CASCADE;
-
-ALTER TABLE Users   ADD CONSTRAINT f3 FOREIGN KEY (login) REFERENCES UserChannel(login) ON UPDATE CASCADE ON DELETE CASCADE;
-/*********/ALTER TABLE Channel ADD CONSTRAINT f4 FOREIGN KEY (nameC) REFERENCES UserChannel(nameC) ON UPDATE CASCADE ON DELETE CASCADE;
-
-ALTER TABLE Channel ADD CONSTRAINT f5 FOREIGN KEY (nameC) REFERENCES ChannelNews(nameC) ON UPDATE CASCADE ON DELETE CASCADE;
-/*********/ALTER TABLE News   ADD CONSTRAINT f6 FOREIGN KEY (id) REFERENCES ChannelNews(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-ALTER TABLE Users ADD CONSTRAINT f7 FOREIGN KEY (login) REFERENCES UserFormHours(login) ON UPDATE CASCADE ON DELETE CASCADE;
-/*********/ALTER TABLE FormHours ADD CONSTRAINT f8 FOREIGN KEY (id) REFERENCES UserFormHours(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-ALTER TABLE Users ADD CONSTRAINT f9 FOREIGN KEY (login) REFERENCES UserFormVacations(login) ON UPDATE CASCADE ON DELETE CASCADE;
-/*********/ALTER TABLE FormVacations ADD CONSTRAINT f10 FOREIGN KEY (id) REFERENCES UserFormVacations(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-ALTER TABLE Users ADD CONSTRAINT f11 FOREIGN KEY (login) REFERENCES UserFormExpenses(login) ON UPDATE CASCADE ON DELETE CASCADE;
-/*********/ALTER TABLE FormExpenses ADD CONSTRAINT f12 FOREIGN KEY (id) REFERENCES UserFormExpenses(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-ALTER TABLE Users ADD CONSTRAINT f13 FOREIGN KEY (login) REFERENCES UserFormTrip(login) ON UPDATE CASCADE ON DELETE CASCADE;
-/*********/ALTER TABLE FormTrip ADD CONSTRAINT f14 FOREIGN KEY (id) REFERENCES UserFormTrip(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
-/*------------------------INSERTS------------------------*/
-insert into Users values (1,'gram1i','Gabriel','Ramos Suan','es','user',"no photo",true);
-insert into Users values (2,'nacho','Ignacio','Gil Martinez','es','user',"no photo",true);
-insert into Tasks (title, content, whoCreate) values ('Intranet','Build an intranet','SvenBubblies');
-insert into UsersTasks values('gram1i',2);
-insert into UsersTasks values('nacho',2);
-/*------------------------SELECTS------------------------*/
-select * from Users;
-select * from Tasks;
-select * from UsersTasks order by id;
-delete from Tasks where id=2;
-delete from Users where login='nacho';
-select * from Users join UsersTasks on Users.login=UsersTasks.login;
-select * from Tasks join UsersTasks on Tasks.id=UsersTasks.id;
-select nameU, content from Users 
-	join UsersTasks on Users.login=UsersTasks.login 
-	join Tasks on Tasks.id=UsersTasks.id;
+/***************************TODOS LOS FORMULARIOS DEL USUARIO X********************************************/
+select name_u as 'QUIEN', num_hours as 'HORAS PEDIDAS', f_vacation.date1 as 'VACACIONES DESDE', f_vacation.date2 as 'VACACIONES HASTA'
+ from Users, f_vacation, f_trip, f_expenses,f_hours/*, users_f_vacations,users_f_hours,users_f_expenses, users_f_trip*/
+	/*join users_f_hours on users.login=users_f_hours.login
+    join f_hours on users_f_hours.id_form=f_hours.id*/;
     
     
+select name_u, users_f_hours.id_form as 'id hours', users_f_vacations.id_form as 'id vacations' 
+from Users, users_f_hours, users_f_vacations where users.login="gram1i";
