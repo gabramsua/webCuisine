@@ -21,20 +21,20 @@ class __TwigTemplate_255e08a9b54e2896d3188c2a99984d8762fa28b44c80db42ba479de437c
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_b6e34e19a495b71d0f757262267051f22ded1e91fed33c17b41ab70a3100b78e = $this->env->getExtension("native_profiler");
-        $__internal_b6e34e19a495b71d0f757262267051f22ded1e91fed33c17b41ab70a3100b78e->enter($__internal_b6e34e19a495b71d0f757262267051f22ded1e91fed33c17b41ab70a3100b78e_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "intranetBundle:Default:createNewFeed.html.twig"));
+        $__internal_dc8b525df37a6719a01686cff2c8c7287f3c16a8508e4dccb57d04f94f51191c = $this->env->getExtension("native_profiler");
+        $__internal_dc8b525df37a6719a01686cff2c8c7287f3c16a8508e4dccb57d04f94f51191c->enter($__internal_dc8b525df37a6719a01686cff2c8c7287f3c16a8508e4dccb57d04f94f51191c_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "intranetBundle:Default:createNewFeed.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_b6e34e19a495b71d0f757262267051f22ded1e91fed33c17b41ab70a3100b78e->leave($__internal_b6e34e19a495b71d0f757262267051f22ded1e91fed33c17b41ab70a3100b78e_prof);
+        $__internal_dc8b525df37a6719a01686cff2c8c7287f3c16a8508e4dccb57d04f94f51191c->leave($__internal_dc8b525df37a6719a01686cff2c8c7287f3c16a8508e4dccb57d04f94f51191c_prof);
 
     }
 
     // line 3
     public function block_contenido($context, array $blocks = array())
     {
-        $__internal_8e24201f73dfa851402eece353e63ef3a4bc1155ba419f9fd8fda901bf39cca8 = $this->env->getExtension("native_profiler");
-        $__internal_8e24201f73dfa851402eece353e63ef3a4bc1155ba419f9fd8fda901bf39cca8->enter($__internal_8e24201f73dfa851402eece353e63ef3a4bc1155ba419f9fd8fda901bf39cca8_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "contenido"));
+        $__internal_06c45e14d8019a7057888d6972fffdb34caf5fbf0b064f8dd8769ec75fe79139 = $this->env->getExtension("native_profiler");
+        $__internal_06c45e14d8019a7057888d6972fffdb34caf5fbf0b064f8dd8769ec75fe79139->enter($__internal_06c45e14d8019a7057888d6972fffdb34caf5fbf0b064f8dd8769ec75fe79139_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "contenido"));
 
         // line 4
         echo "<h3>CREATE A NEW New</h3><br>
@@ -47,14 +47,13 @@ class __TwigTemplate_255e08a9b54e2896d3188c2a99984d8762fa28b44c80db42ba479de437c
         <label>Channel:</label><input type=\"text\" name=\"channel\" style=\"margin-left: 15px;\"value=\"develop\"> <br>
                                      <input type=\"submit\" value=\"CREATE\">
                                      <input type=\"hidden\" name=\"typeF\" value=\"expenses\">
-                                     <input type=\"hidden\" name=\"actualDate\">
    </form>
 
 
 
 ";
         
-        $__internal_8e24201f73dfa851402eece353e63ef3a4bc1155ba419f9fd8fda901bf39cca8->leave($__internal_8e24201f73dfa851402eece353e63ef3a4bc1155ba419f9fd8fda901bf39cca8_prof);
+        $__internal_06c45e14d8019a7057888d6972fffdb34caf5fbf0b064f8dd8769ec75fe79139->leave($__internal_06c45e14d8019a7057888d6972fffdb34caf5fbf0b064f8dd8769ec75fe79139_prof);
 
     }
 
@@ -83,7 +82,6 @@ class __TwigTemplate_255e08a9b54e2896d3188c2a99984d8762fa28b44c80db42ba479de437c
 /*         <label>Channel:</label><input type="text" name="channel" style="margin-left: 15px;"value="develop"> <br>*/
 /*                                      <input type="submit" value="CREATE">*/
 /*                                      <input type="hidden" name="typeF" value="expenses">*/
-/*                                      <input type="hidden" name="actualDate">*/
 /*    </form>*/
 /* */
 /* */

@@ -16,6 +16,7 @@ class Channel
 
     /**
      * @var string
+     *@ORM\ManyToOne(targetEntity="channelnew_feed", inversedBy="channel")
      */
     private $name;
 
@@ -23,7 +24,7 @@ class Channel
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -46,7 +47,7 @@ class Channel
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {

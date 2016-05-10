@@ -7,6 +7,7 @@ use intranetBundle\Entity\Entity\Users;
 use intranetBundle\Entity\Entity\Tasks;
 use intranetBundle\Entity\Entity\NewFeed;
 use intranetBundle\Entity\Entity\userschannel;
+use intranetBundle\Entity\Entity\channelnew_feed;
 use intranetBundle\Entity\Entity\F_Expenses;
 use intranetBundle\Entity\Entity\F_Hours;
 use intranetBundle\Entity\Entity\F_Trip;
@@ -241,7 +242,7 @@ $params=array(
         //TODO
         if (!$usuario) {throw $this->createNotFoundException('No product found for id '.$id);}
         $params=array('listUsers'=>$usuario);
-        return $this->render('intranetBundle:Default:userManagement.html.twig',$usuario);
+        return $this->render('intranetBundle:Default:userManagement.html.twig',$params);
     }
 
       public function settingsAction(){
@@ -293,8 +294,13 @@ $params=array(
          $em->flush();
 
         //But it is also needed to insert in the intermediate table
-        $usch = new userschannel();
-        $usch->setLogin($_SESSION['userLDAP']);
+        $new2 = $this->getDoctrine()
+                        ->getRepository('intranetBundle:Entity\NewFeed')
+                        ->findOneByContent($_REQUEST['content']);
+        $i=$new2->getId();
+
+        $usch = new channelnew_feed();
+        $usch->setIdNew($i);
         //TODO
         $usch->setName($_REQUEST['channel']);//NEEDS TO ASSURE THAT THE CHANNEL EXISTS=> SOLVED IF CHECKBOX=> SEVERAL INSERTS
 
@@ -474,7 +480,70 @@ $params=array(
            return $this->render('intranetBundle:Default:news.html.twig',$params);
         }
 
+        public function editeNewAction(){
+          //get the values from the form, search the object in the database and send it to the view
+          //Need to get the ID and search in the intermediate table, just to get the Name of the Channel.
+          $content=$_REQUEST['content'];
 
+          $new = $this->getDoctrine()
+                          ->getRepository('intranetBundle:Entity\NewFeed')
+                          ->findOneByContent($content);
+
+          /*$entity = $this->getDoctrine()
+                          ->getRepository('intranetBundle:Entity\NewFeed')
+                          ->createQueryBuilder('n')
+                          ->join('n.channelnew_feed', 'c')
+                          ->where('c.id_new = n.id')
+                          ->getQuery()
+                          ->getResult();*/
+
+          //Si ya tengo el ID, puedo buscar el nombre de su canal en la tabla intermedia => $new->getTitle()
+          $i=$new->getId();
+          $chan = $this->getDoctrine()
+                       ->getRepository('intranetBundle:Entity\channelnew_feed')
+                       ->findOneByIdNew($i);
+
+          $params=array('new'=>$new, 'channel'=>$chan);
+          return $this->render('intranetBundle:Default:editNew.html.twig', $params);
+        }
+
+        public function updateNewAction(){
+          if (isset($_POST['update'])) {
+              return self::updatNewAction();
+          } else if (isset($_POST['delete'])) {
+              return self::deletNewAction();
+          }
+        }
+
+        public function updatNewAction(){
+            $em = $this->getDoctrine()->getManager();
+            $product = $em->getRepository('intranetBundle:Entity\NewFeed')->find($_REQUEST['id']);
+
+            $product->setDate($_REQUEST['date']);
+            $product->setTime($_REQUEST['time']);
+            $product->setTitle($_REQUEST['title']);
+            $product->setContent($_REQUEST['content']);
+            $em->flush();
+
+            $intermediate = $em->getRepository('intranetBundle:Entity\channelnew_feed')->findOneByIdNew($_REQUEST['id']);
+            $intermediate->setName($_REQUEST['channel']);
+            $em->flush();
+
+            return self::newsAction();
+        }
+
+        public function deletNewAction(){
+            $em = $this->getDoctrine()->getManager();
+            $product = $em->getRepository('intranetBundle:Entity\NewFeed')->find($_REQUEST['id']);
+            $em->remove($product);
+            $em->flush();
+
+            $intermediate = $em->getRepository('intranetBundle:Entity\channelnew_feed')->findOneByIdNew($_REQUEST['id']);
+            $em->remove($intermediate);
+            $em->flush();
+
+            return self::newsAction();
+        }
 
 
 /*                INSERTA TAREA

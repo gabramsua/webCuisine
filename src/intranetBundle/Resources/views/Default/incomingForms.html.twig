@@ -4,6 +4,7 @@
 <b>TABLA FORMULARIOS HORAS</b>
 <table border=1>
 <tr >
+<th></th>
     <th>Type</th>
     <th>USER</th>
     <th>LOGIN</th>
@@ -14,6 +15,7 @@
 {% for u in relationHours %}
 {% if u.idForm==form.id %}
 <tr>
+  	<td><form action='#' method='post'> <input type="submit" value="VER" ></form></td>
     <td style="padding-left: 10px;padding-right: 10px;">{{ form.type }}</td>
     <td style="padding-left: 10px;padding-right: 10px;">{{ u.login }}</td>
     <td style="padding-left: 10px;padding-right: 10px;">{{ form.numHours }}</td>
@@ -28,6 +30,7 @@
 <b>TABLA FORMULARIOS VACATIONS</b>
 <table border=1>
 <tr>
+<th></th>
    <th>USER</th>
    <th>LOGIN</th>
    <th>DATE</th>
@@ -39,6 +42,7 @@
 {% for u in relationVacations %}
 {% if u.idForm==form.id %}
 <tr>
+  	<td><form action='#' method='post'> <input type="submit" value="VER" ></form></td>
    <td style="padding-left: 10px;padding-right: 10px;">{{ u.login }}</td>
    <td style="padding-left: 10px;padding-right: 10px;">{{ u.login }}</td>
    <td style="padding-left: 10px;padding-right: 10px;">{{ form.send }}</td>
@@ -55,6 +59,7 @@
 <b>TABLA FORMULARIOS EXPENSES</b>
 <table border=1>
 <tr>
+<th></th>
    <th>USER</th>
    <th>LOGIN</th>
    <th>DATE</th>
@@ -67,6 +72,7 @@
 {% for u in relationExpenses %}
 {% if u.idForm==form.id %}
 <tr>
+  	<td><form action='#' method='post'> <input type="submit" value="VER" ></form></td>
    <td style="padding-left: 10px;padding-right: 10px;">{{ u.login }}</td>
    <td style="padding-left: 10px;padding-right: 10px;">{{ u.login }}</td>
    <td style="padding-left: 10px;padding-right: 10px;">{{ form.send }}</td>
@@ -84,6 +90,7 @@
 <b>TABLA FORMULARIOS TRIPS</b>
 <table border=1>
 <tr>
+<th></th>
    <th>USER</th>
    <th>LOGIN</th>
    <th>DATE</th>
@@ -97,6 +104,7 @@
 {% for u in relationTrips %}
 {% if u.idForm==form.id %}
 <tr>
+  	<td><form action='#' method='post'> <input type="submit" value="VER" ></form></td>
    <td style="padding-left: 10px;padding-right: 10px;">{{ u.login }}</td>
    <td style="padding-left: 10px;padding-right: 10px;">{{ u.login }}</td>
    <td style="padding-left: 10px;padding-right: 10px;">{{ form.send }}</td>

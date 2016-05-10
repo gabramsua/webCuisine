@@ -108,9 +108,21 @@ intranet_insertnew:
     requirements:
         _locale: en|fr|es
 
+intranet_editnew:
+    path:     /{_locale}/updateNew
+    defaults: { _controller: intranetBundle:Default:updateNew, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
 intranet_f:
     path:     /{_locale}/historical
     defaults: { _controller: intranetBundle:Default:insertForm, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
+intranet_crudnew:
+    path:     /{_locale}/editeNew
+    defaults: { _controller: intranetBundle:Default:editeNew, _locale:en }
     requirements:
         _locale: en|fr|es
 

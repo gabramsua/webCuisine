@@ -16,6 +16,7 @@ class channelnew_feed
 
     /**
      * @var string
+      * @ORM\OneToMany(targetEntity="Channel", mappedBy="channelnew_feed")
      */
     private $name;
 
@@ -24,11 +25,10 @@ class channelnew_feed
      */
     private $idNew;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -51,7 +51,7 @@ class channelnew_feed
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -74,7 +74,7 @@ class channelnew_feed
     /**
      * Get idNew
      *
-     * @return integer 
+     * @return integer
      */
     public function getIdNew()
     {

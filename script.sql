@@ -23,7 +23,7 @@ select login, num_hours, date1, date2 from users_f_hours join f_hours on users_f
 select name_u, date1 AS 'Cuándo', place, name_congress, reasons from Users join users_f_trip on Users.login=users_f_trip.login join f_trip on users_f_trip.id_form=f_trip.id;
 
 update Users set login="gram1i" where id=1;
-delete from Users where id=3;
+delete from userschannel where id>0;
 select * from new_feed order by date, time DESC;
 
 insert into new_feed (date, time, title, content) values ("2016-05-02", "10:49", "Titulo1", "Contenido1");
@@ -73,3 +73,7 @@ select name_u as 'QUIEN', num_hours as 'HORAS PEDIDAS', f_vacation.date1 as 'VAC
     
 select name_u, users_f_hours.id_form as 'id hours', users_f_vacations.id_form as 'id vacations' 
 from Users, users_f_hours, users_f_vacations where users.login="gram1i";
+
+
+
+grant all on webCuisine.* to nacho @'192.168.30.106' identified by 'nacho';
