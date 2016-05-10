@@ -16,6 +16,7 @@ use intranetBundle\Entity\Entity\Users_F_Vacations;
 use intranetBundle\Entity\Entity\Users_F_Expenses;
 use intranetBundle\Entity\Entity\Users_F_Trip;
 use Symfony\Component\HttpFoundation\Response;
+use Doctrine\ORM\Query\Expr\Join;
 
 class DefaultController extends Controller
 {
@@ -135,20 +136,77 @@ class DefaultController extends Controller
           throw $this->createNotFoundException('No news found');
         }
 
-        $params=array('new'=>$allNews);
+        $params= array('new' => $allNews, );
         return $this->render('intranetBundle:Default:news.html.twig',$params);
     }
 
-    //TODO uses MongoDB
+    //TODO still uses MongoDB
+    #In this web we can see all the forms send, order by non-read forms, date and type.
     public function incomingFormsAction(){
-            $m = new Model();
-            $params = array(
-            'listIncomingForms' => $m->getIncomingForms(),
-          );
-         return $this->render(
-            'intranetBundle:Default:incomingForms.html.twig',
-            $params
-           );
+          /*  $m = new Model();
+            $params = array('listIncomingForms' => $m->getIncomingForms(),);*/
+
+
+    #It is necessary to put all the forms of all tables in a big array and pour it into a table, which is viewed.
+    #Not only all forms, but also the user who sent it.
+
+    #Or maybe pour all the forms in the table, once doctrined => Easier and Quicklier but unordered. => Maybe we can order them in the view
+
+//WORST OPTION => DO IT MANUALLY => ON THE VIEW
+    #I can do the join via field by field here in the method. I can use the $id to link one table to another
+    $formH = $this->getDoctrine()
+                  ->getRepository('intranetBundle:Entity\F_Hours')
+                  ->findBy([], ['send' => 'DESC'/*, 'time' => 'DESC'*/]); #findAll
+
+    $userFormH = $this->getDoctrine()
+                  ->getRepository('intranetBundle:Entity\Users_F_Hours')
+                  ->findAll(); #findAll
+/************************************************************************************************************************/
+    $formV = $this->getDoctrine()
+                  ->getRepository('intranetBundle:Entity\F_Vacation')
+                  ->findBy([], ['send' => 'DESC'/*, 'time' => 'DESC'*/]); #findAll
+
+    $userFormV = $this->getDoctrine()
+                  ->getRepository('intranetBundle:Entity\Users_F_Vacations')
+                  ->findAll();
+/************************************************************************************************************************/
+    $formE = $this->getDoctrine()
+                  ->getRepository('intranetBundle:Entity\F_Expenses')
+                  ->findBy([], ['send' => 'DESC'/*, 'time' => 'DESC'*/]); #findAll
+
+    $userFormE = $this->getDoctrine()
+                  ->getRepository('intranetBundle:Entity\Users_F_Expenses')
+                  ->findAll();
+/************************************************************************************************************************/
+    $formT = $this->getDoctrine()
+                  ->getRepository('intranetBundle:Entity\F_Trip')
+                  ->findBy([], ['send' => 'DESC'/*, 'time' => 'DESC'*/]); #findAll
+
+    $userFormT = $this->getDoctrine()
+                  ->getRepository('intranetBundle:Entity\Users_F_Trip')
+                  ->findAll();
+//BEST OPTION
+    #Or maybe FOUR tables, each one for each type of Form. Ordered by non-read, date.
+    //select login, num_hours, date1, date2 from users_f_hours join f_hours on users_f_hours.id_form=f_hours.id;
+/*            $formH = $this->createQueryBuilder('h');
+            $formH->innerJoin('c.phones', 'p', Join::ON, 'c.id = p.customerId');
+
+
+            /*$formH = $this->getDoctrine()
+                            ->getRepository('intranetBundle:Entity\F_Hours')
+                            ->findBy([], ['send' => 'DESC'/*, 'time' => 'DESC'*///]); #findAll
+
+            //TODO
+            if (!$formH) {
+              throw $this->createNotFoundException('No news found');
+            }
+$params=array(
+  'relationHours'=>$userFormH, 'listIncomingFormsH'=>$formH,
+  'relationVacations'=>$userFormV, 'listIncomingFormsV'=>$formV,
+  'relationExpenses'=>$userFormE, 'listIncomingFormsE'=>$formE,
+  'relationTrips'=>$userFormT, 'listIncomingFormsT'=>$formT
+);
+         return $this->render('intranetBundle:Default:incomingForms.html.twig',$params);
      }
 
      //TODO uses MongoDB
@@ -246,7 +304,7 @@ class DefaultController extends Controller
 
         #REDIRIJO AL USUARIO HASTA DONDE ESTABA donde se puede ver la noticia ya insertada
         //Redirect the user where he can see the new already inserted
-        $allNews = $this->getDoctrine()->getRepository('intranetBundle:Entity\NewFeed')->findAll();
+        $allNews = $this->getDoctrine()->getRepository('intranetBundle:Entity\NewFeed')->findBy([], ['date' => 'DESC', 'time' => 'DESC']);
         if (!$allNews) {throw $this->createNotFoundException('No news found');}
         $params=array('new'=>$allNews);
         return $this->render('intranetBundle:Default:news.html.twig',$params);
@@ -344,7 +402,6 @@ class DefaultController extends Controller
          $em->persist($usform);
          $em->flush();
          ################################################################################
-         #REDIRIJO AL USUARIO HASTA DONDE ESTABA donde se puede ver la noticia ya insertada
          //Redirect the user where he can see the new already inserted
          $allNews = $this->getDoctrine()->getRepository('intranetBundle:Entity\NewFeed')->findAll();
          if (!$allNews) {throw $this->createNotFoundException('No news found');}
@@ -377,7 +434,6 @@ class DefaultController extends Controller
            $em->persist($usform);
            $em->flush();
            ################################################################################
-           #REDIRIJO AL USUARIO HASTA DONDE ESTABA donde se puede ver la noticia ya insertada
            //Redirect the user where he can see the new already inserted
            $allNews = $this->getDoctrine()->getRepository('intranetBundle:Entity\NewFeed')->findAll();
            if (!$allNews) {throw $this->createNotFoundException('No news found');}
@@ -411,7 +467,6 @@ class DefaultController extends Controller
            $em->persist($usform);
            $em->flush();
            ################################################################################
-           #REDIRIJO AL USUARIO HASTA DONDE ESTABA donde se puede ver la noticia ya insertada
            //Redirect the user where he can see the new already inserted
            $allNews = $this->getDoctrine()->getRepository('intranetBundle:Entity\NewFeed')->findAll();
            if (!$allNews) {throw $this->createNotFoundException('No news found');}

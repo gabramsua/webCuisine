@@ -13,12 +13,17 @@ select * from userschannel;
 select * from userstasks;
 select * from Tasks;
 
-select * from f_hours;
-select * from f_vacation;
-select * from f_expenses;
-select * from f_trip;
+select * from users_f_hours;				/*STATUS NULL=non read; 1=ACCEPTED; -1=REJECTED*/
+select * from f_vacation;	/*STATUS NULL=non read; 1=ACCEPTED; -1=REJECTED*/
+select * from f_expenses;			/*STATUS NULL=non read; 1=ACCEPTED; -1=REJECTED*/
+select * from f_trip;				/*STATUS NULL=non read; 1=ACCEPTED; -1=REJECTED*/
+
+select login, num_hours, date1, date2 from users_f_hours join f_hours on users_f_hours.id_form=f_hours.id;
+
+select name_u, date1 AS 'Cuándo', place, name_congress, reasons from Users join users_f_trip on Users.login=users_f_trip.login join f_trip on users_f_trip.id_form=f_trip.id;
 
 update Users set login="gram1i" where id=1;
+delete from Users where id=3;
 select * from new_feed order by date, time DESC;
 
 insert into new_feed (date, time, title, content) values ("2016-05-02", "10:49", "Titulo1", "Contenido1");
