@@ -11,9 +11,14 @@
 </tr>
 {% for intrauser in listUsers %}
 <tr>
+    <td style="padding-left: 10px;padding-right: 10px;">
+        <form action='{{ path('intranet_settings') }}' method='post'>
+              <input type="submit" value="{{ intrauser.login }}" name="login">
+              <input type="hidden" value="webCuisine" name="test">
+        </form>
+    </td>
     <td style="padding-left: 10px;padding-right: 10px;">{{ intrauser.nameU }}</td>
     <td style="padding-left: 10px;padding-right: 10px;">{{ intrauser.surnameu }}</td>
-    <td style="padding-left: 10px;padding-right: 10px;">{{ intrauser.login }}</td>
     <td style="padding-left: 10px;padding-right: 10px;"><img src="{{ intrauser.photo }}"></td>
 </tr>
 {% endfor %}

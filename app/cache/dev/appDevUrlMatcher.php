@@ -192,6 +192,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_settings')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::settingsAction',  '_locale' => 'en',));
         }
 
+        // intranet_cruduser
+        if (preg_match('#^/(?P<_locale>en|fr|es)/editUser$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_cruduser')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::updateUserAction',  '_locale' => 'en',));
+        }
+
         // intranet_newuser
         if (preg_match('#^/(?P<_locale>en|fr|es)/addUser$#s', $pathinfo, $matches)) {
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_newuser')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::addUserAction',  '_locale' => 'en',));

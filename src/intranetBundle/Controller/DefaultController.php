@@ -99,12 +99,18 @@ class DefaultController extends Controller
      $em->persist($newuser);
      $em->flush();
 
-     //Once the users exists in the database, redirect him to the intranet
-     $user = $this->getDoctrine()
-                   ->getRepository('intranetBundle:Entity\Users')
-                   ->findOneByLogin($_SESSION['userLDAP']);
-     $params=array('user'=>$user);
-     return $this->render('intranetBundle:Default:landinga.html.twig', $params);
+     //If an admin is creating the user ->redirect to the userManagement
+     if($_REQUEST['webCuisine']=="test"){
+          return $this->redirect($this->generateUrl('intranet_userManagement'));
+     }else{//if not, it means the user is connecting to the intranet
+
+         //Once the users exists in the database, redirect him to the intranet
+         $user = $this->getDoctrine()
+                       ->getRepository('intranetBundle:Entity\Users')
+                       ->findOneByLogin($_SESSION['userLDAP']);
+         $params=array('user'=>$user);
+         return $this->render('intranetBundle:Default:landinga.html.twig', $params);
+      }
    }
 
    public function indexAction(){
@@ -309,8 +315,13 @@ class DefaultController extends Controller
     }
 
       public function settingsAction(){
-          $usuario = $this->getDoctrine()->getRepository('intranetBundle:Entity\Users')->findOneByLogin($_SESSION['userLDAP']); #findAll
 
+          //si es el usuario en activo o si el administrador está modificando a otra persona
+          if($_REQUEST['test']=="webCuisine"){
+              $usuario = $this->getDoctrine()->getRepository('intranetBundle:Entity\Users')->findOneByLogin($_REQUEST['login']);
+          }else{
+              $usuario = $this->getDoctrine()->getRepository('intranetBundle:Entity\Users')->findOneByLogin($_SESSION['userLDAP']); #findAll
+          }
           //TODO
           if (!$usuario) {throw $this->createNotFoundException('No product found for id '.$id);}
 
@@ -330,15 +341,58 @@ class DefaultController extends Controller
            return $this->render( 'intranetBundle:Default:translate.html.twig'  );
        }
 
-//TODO uses MongoDB
-       public function addUserAction(){
-         $m = new Model();
-         $params0 = array('add' => $m->addUser(),);
+#USERS
 
-         $params = array('listUsers' => $m->getUsers(),);
-         return $this->render('intranetBundle:Default:userManagement.html.twig',$params);
+       public function addUserAction(){
+         return $this->render('intranetBundle:Default:newuser.html.twig');
        }
-//TODO
+
+       public function updateUserAction(){
+         if (isset($_POST['update'])) {
+             return self::updatUserAction();
+         } else if (isset($_POST['delete'])) {
+             return self::deletUserAction();
+         }
+       }
+
+       public function updatUserAction(){
+           $em = $this->getDoctrine()->getManager();
+           $product = $em->getRepository('intranetBundle:Entity\Users')->findOneByLogin($_REQUEST['myLogin']);
+
+           $product->setLogin($_REQUEST['myLogin']);
+           $product->setNameU($_REQUEST['myName']);
+           $product->setSurnameU($_REQUEST['mySurname']);
+           $product->setLang($_REQUEST['myLanguage']);
+           //TODO hay que cambiar el rol del usuario en sesion por el que le quiera dar el LDAP cuando se conecte
+           $product->setRol("developer"/*$_SESSION['rol']*/);
+           $product->setPhoto($_REQUEST['myPhoto']);
+           $product->setOnboard($_REQUEST['onb']);
+           $product->setNotifications($_REQUEST['myNotifications']);
+           $em->flush();
+
+#UPSERT => Si no existe, tengo que hacer insert, pero si existe previamente, hay que ver si se borra(actualiza)
+#           $intermediate = $em->getRepository('intranetBundle:Entity\userschannel')->findOneByIdNew($_REQUEST['myLogin']);
+#           $intermediate->setName($_REQUEST['channel']);
+#           $em->flush();
+
+           return self::userManagementAction();
+       }
+
+       public function deletUserAction(){
+           $em = $this->getDoctrine()->getManager();
+           $product = $em->getRepository('intranetBundle:Entity\NewFeed')->find($_REQUEST['id']);
+           $em->remove($product);
+           $em->flush();
+
+           $intermediate = $em->getRepository('intranetBundle:Entity\channelnew_feed')->findOneByIdNew($_REQUEST['id']);
+           $em->remove($intermediate);
+           $em->flush();
+
+           return self::newsAction();
+       }
+
+
+#FORMS
         public function insertFormAction(){
 
           //The first thing is to know what type of form is and persist it into the correct tables
@@ -505,6 +559,7 @@ class DefaultController extends Controller
            //Redirect the user where he can see the new already inserted
            return self::myFormsAction();
         }
+
 #NEWS
 
        public function createNewAction(){

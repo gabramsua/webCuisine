@@ -95,6 +95,11 @@ intranet_settings:
         _locale: en|fr|es
 
 #CRUD OPERATIONS
+intranet_cruduser:
+    path:     /{_locale}/editUser
+    defaults: { _controller: intranetBundle:Default:updateUser, _locale:en }
+    requirements:
+        _locale: en|fr|es
 
 intranet_newuser:
     path:     /{_locale}/addUser
