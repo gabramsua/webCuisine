@@ -17,6 +17,7 @@
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown">{% trans %}Forms {% endtrans %}<span class="caret"></span></a>
           <ul class="dropdown-menu">
+          <li><a href="{{ path('intranet_formHistorical')}}">{% trans %}My Historical{% endtrans %}</a></li>
             <li><a href="{{ path('intranet_formHours')}}">{% trans %}Overtime Hours{% endtrans %}</a></li>
             <li><a href="{{ path('intranet_formVacations')}}">{% trans %}Vacation{% endtrans %}</a></li>
             <li><a href="{{ path('intranet_formExpenses')}}">{% trans %}Expenses{% endtrans %}</a></li>

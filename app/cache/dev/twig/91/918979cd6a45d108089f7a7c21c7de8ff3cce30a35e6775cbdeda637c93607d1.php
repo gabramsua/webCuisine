@@ -16,8 +16,8 @@ class __TwigTemplate_d6d713f26b57dff2b511328a8cd9c45a1314eee6e8267bc884aa0fac247
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_f0098ca6c71d9d3f23d70df560e2409dc91997a10d3ba07a7d5bbbe3cc658117 = $this->env->getExtension("native_profiler");
-        $__internal_f0098ca6c71d9d3f23d70df560e2409dc91997a10d3ba07a7d5bbbe3cc658117->enter($__internal_f0098ca6c71d9d3f23d70df560e2409dc91997a10d3ba07a7d5bbbe3cc658117_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "::menu.html.twig"));
+        $__internal_b9ec67dd6ea4926fc86847d71a0f710e4bd44d25706c6e5cdd00bc96a72053cb = $this->env->getExtension("native_profiler");
+        $__internal_b9ec67dd6ea4926fc86847d71a0f710e4bd44d25706c6e5cdd00bc96a72053cb->enter($__internal_b9ec67dd6ea4926fc86847d71a0f710e4bd44d25706c6e5cdd00bc96a72053cb_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "::menu.html.twig"));
 
         // line 2
         echo "
@@ -25,14 +25,14 @@ class __TwigTemplate_d6d713f26b57dff2b511328a8cd9c45a1314eee6e8267bc884aa0fac247
         // line 3
         $this->displayBlock('menu', $context, $blocks);
         
-        $__internal_f0098ca6c71d9d3f23d70df560e2409dc91997a10d3ba07a7d5bbbe3cc658117->leave($__internal_f0098ca6c71d9d3f23d70df560e2409dc91997a10d3ba07a7d5bbbe3cc658117_prof);
+        $__internal_b9ec67dd6ea4926fc86847d71a0f710e4bd44d25706c6e5cdd00bc96a72053cb->leave($__internal_b9ec67dd6ea4926fc86847d71a0f710e4bd44d25706c6e5cdd00bc96a72053cb_prof);
 
     }
 
     public function block_menu($context, array $blocks = array())
     {
-        $__internal_218bfc0afa8828e1baf639ef94e89a5f456c015bd97905e05a925a4d2a7e1d60 = $this->env->getExtension("native_profiler");
-        $__internal_218bfc0afa8828e1baf639ef94e89a5f456c015bd97905e05a925a4d2a7e1d60->enter($__internal_218bfc0afa8828e1baf639ef94e89a5f456c015bd97905e05a925a4d2a7e1d60_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "menu"));
+        $__internal_8611b9628607618599710333115974c072e0f0bde0de15844fa1b5d552369bfa = $this->env->getExtension("native_profiler");
+        $__internal_8611b9628607618599710333115974c072e0f0bde0de15844fa1b5d552369bfa->enter($__internal_8611b9628607618599710333115974c072e0f0bde0de15844fa1b5d552369bfa_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "menu"));
 
         // line 4
         echo "
@@ -57,26 +57,32 @@ class __TwigTemplate_d6d713f26b57dff2b511328a8cd9c45a1314eee6e8267bc884aa0fac247
         echo $this->env->getExtension('translator')->getTranslator()->trans("Forms", array(), "messages");
         echo "<span class=\"caret\"></span></a>
           <ul class=\"dropdown-menu\">
-            <li><a href=\"";
+          <li><a href=\"";
         // line 20
+        echo $this->env->getExtension('routing')->getPath("intranet_formHistorical");
+        echo "\">";
+        echo $this->env->getExtension('translator')->getTranslator()->trans("My Historical", array(), "messages");
+        echo "</a></li>
+            <li><a href=\"";
+        // line 21
         echo $this->env->getExtension('routing')->getPath("intranet_formHours");
         echo "\">";
         echo $this->env->getExtension('translator')->getTranslator()->trans("Overtime Hours", array(), "messages");
         echo "</a></li>
             <li><a href=\"";
-        // line 21
+        // line 22
         echo $this->env->getExtension('routing')->getPath("intranet_formVacations");
         echo "\">";
         echo $this->env->getExtension('translator')->getTranslator()->trans("Vacation", array(), "messages");
         echo "</a></li>
             <li><a href=\"";
-        // line 22
+        // line 23
         echo $this->env->getExtension('routing')->getPath("intranet_formExpenses");
         echo "\">";
         echo $this->env->getExtension('translator')->getTranslator()->trans("Expenses", array(), "messages");
         echo "</a></li>
             <li><a href=\"";
-        // line 23
+        // line 24
         echo $this->env->getExtension('routing')->getPath("intranet_formRequest");
         echo "\">";
         echo $this->env->getExtension('translator')->getTranslator()->trans("Request Business Trip", array(), "messages");
@@ -85,15 +91,15 @@ class __TwigTemplate_d6d713f26b57dff2b511328a8cd9c45a1314eee6e8267bc884aa0fac247
         </li>
         <!-- BOOKING ROOM PART
             <li><a href=\"";
-        // line 27
+        // line 28
         echo "\">";
         echo $this->env->getExtension('translator')->getTranslator()->trans("Book a room", array(), "messages");
         echo "</a></li>
         -->
       ";
-        // line 29
+        // line 30
         if (($this->getAttribute((isset($context["user"]) ? $context["user"] : $this->getContext($context, "user")), "onboard", array()) == 1)) {
-            // line 30
+            // line 31
             echo "              <li><a href='";
             echo $this->env->getExtension('routing')->getPath("intranet_tasks");
             echo "'>";
@@ -101,10 +107,10 @@ class __TwigTemplate_d6d713f26b57dff2b511328a8cd9c45a1314eee6e8267bc884aa0fac247
             echo "-<i> internships</i></a></li>\"
       ";
         }
-        // line 32
+        // line 33
         echo "      ";
         if (((isset($context["role"]) ? $context["role"] : $this->getContext($context, "role")) == "administrator")) {
-            // line 33
+            // line 34
             echo "              <li><a href='";
             echo $this->env->getExtension('routing')->getPath("intranet_userManagement");
             echo "'>";
@@ -112,10 +118,10 @@ class __TwigTemplate_d6d713f26b57dff2b511328a8cd9c45a1314eee6e8267bc884aa0fac247
             echo "-<i> admins</i></a></li>
       ";
         }
-        // line 35
+        // line 36
         echo "      ";
         if (((isset($context["role"]) ? $context["role"] : $this->getContext($context, "role")) == "buo")) {
-            // line 36
+            // line 37
             echo "              <li><a href='";
             echo $this->env->getExtension('routing')->getPath("intranet_news");
             echo "'";
@@ -123,24 +129,24 @@ class __TwigTemplate_d6d713f26b57dff2b511328a8cd9c45a1314eee6e8267bc884aa0fac247
             echo "-<i> BÜOs</i></a></li>
       ";
         }
-        // line 38
+        // line 39
         echo "      ";
         if (((isset($context["role"]) ? $context["role"] : $this->getContext($context, "role")) == "buo")) {
-            // line 39
+            // line 40
             echo "          <li class=\"dropdown\">
             <a class=\"dropdown-toggle\" data-toggle=\"dropdown\">";
-            // line 40
+            // line 41
             echo $this->env->getExtension('translator')->getTranslator()->trans("Form Management", array(), "messages");
             echo "-<i> BÜOs</i><span class=\"caret\"></span></a>
             <ul class=\"dropdown-menu\">
               <li><a href='";
-            // line 42
+            // line 43
             echo $this->env->getExtension('routing')->getPath("intranet_incomingForms");
             echo "'>";
             echo $this->env->getExtension('translator')->getTranslator()->trans("Incoming Forms", array(), "messages");
             echo "</a></li>
               <li><a href=\"";
-            // line 43
+            // line 44
             echo $this->env->getExtension('routing')->getPath("intranet_oldForms");
             echo "\">";
             echo $this->env->getExtension('translator')->getTranslator()->trans("Old Forms", array(), "messages");
@@ -148,33 +154,33 @@ class __TwigTemplate_d6d713f26b57dff2b511328a8cd9c45a1314eee6e8267bc884aa0fac247
             </ul>
           </li>";
         }
-        // line 46
+        // line 47
         echo "      </ul>
       <ul class=\"nav navbar-nav navbar-right\">
       <li><a href=\"";
-        // line 48
+        // line 49
         echo $this->env->getExtension('routing')->getPath("intranet_testBD");
         echo "\"><b>";
         echo $this->env->getExtension('translator')->getTranslator()->trans("TEST PAGE", array(), "messages");
         echo "</b></a></li>
         <li><a href=\"";
-        // line 49
+        // line 50
         echo $this->env->getExtension('routing')->getPath("intranet_translation");
         echo "\"><b>";
         echo $this->env->getExtension('translator')->getTranslator()->trans("Lang", array(), "messages");
         echo "</b></a></li>
         <li><a href=\"#\"><b>";
-        // line 50
+        // line 51
         echo $this->env->getExtension('translator')->getTranslator()->trans("Hello", array(), "messages");
         echo " <?php echo \$_SESSION[\"usuario\"]; ?></b></a></li>
         <li><a href=\"";
-        // line 51
+        // line 52
         echo $this->env->getExtension('routing')->getPath("intranet_settings");
         echo "\"><span class=\"glyphicon glyphicon-user\"></span> ";
         echo $this->env->getExtension('translator')->getTranslator()->trans("Settings", array(), "messages");
         echo "</a></li>
         <li><a href=\"";
-        // line 52
+        // line 53
         echo $this->env->getExtension('routing')->getPath("intranet_logout");
         echo "\"><span class=\"glyphicon glyphicon-log-in\"></span> Log out</a></li>
       </ul>
@@ -183,7 +189,7 @@ class __TwigTemplate_d6d713f26b57dff2b511328a8cd9c45a1314eee6e8267bc884aa0fac247
   </nav>
   ";
         
-        $__internal_218bfc0afa8828e1baf639ef94e89a5f456c015bd97905e05a925a4d2a7e1d60->leave($__internal_218bfc0afa8828e1baf639ef94e89a5f456c015bd97905e05a925a4d2a7e1d60_prof);
+        $__internal_8611b9628607618599710333115974c072e0f0bde0de15844fa1b5d552369bfa->leave($__internal_8611b9628607618599710333115974c072e0f0bde0de15844fa1b5d552369bfa_prof);
 
     }
 
@@ -194,7 +200,7 @@ class __TwigTemplate_d6d713f26b57dff2b511328a8cd9c45a1314eee6e8267bc884aa0fac247
 
     public function getDebugInfo()
     {
-        return array (  178 => 52,  172 => 51,  168 => 50,  162 => 49,  156 => 48,  152 => 46,  144 => 43,  138 => 42,  133 => 40,  130 => 39,  127 => 38,  119 => 36,  116 => 35,  108 => 33,  105 => 32,  97 => 30,  95 => 29,  89 => 27,  80 => 23,  74 => 22,  68 => 21,  62 => 20,  57 => 18,  49 => 13,  38 => 4,  26 => 3,  23 => 2,);
+        return array (  184 => 53,  178 => 52,  174 => 51,  168 => 50,  162 => 49,  158 => 47,  150 => 44,  144 => 43,  139 => 41,  136 => 40,  133 => 39,  125 => 37,  122 => 36,  114 => 34,  111 => 33,  103 => 31,  101 => 30,  95 => 28,  86 => 24,  80 => 23,  74 => 22,  68 => 21,  62 => 20,  57 => 18,  49 => 13,  38 => 4,  26 => 3,  23 => 2,);
     }
 }
 /* {# {% extends '::base.html.twig' %} #}*/
@@ -216,6 +222,7 @@ class __TwigTemplate_d6d713f26b57dff2b511328a8cd9c45a1314eee6e8267bc884aa0fac247
 /*         <li class="dropdown">*/
 /*           <a class="dropdown-toggle" data-toggle="dropdown">{% trans %}Forms {% endtrans %}<span class="caret"></span></a>*/
 /*           <ul class="dropdown-menu">*/
+/*           <li><a href="{{ path('intranet_formHistorical')}}">{% trans %}My Historical{% endtrans %}</a></li>*/
 /*             <li><a href="{{ path('intranet_formHours')}}">{% trans %}Overtime Hours{% endtrans %}</a></li>*/
 /*             <li><a href="{{ path('intranet_formVacations')}}">{% trans %}Vacation{% endtrans %}</a></li>*/
 /*             <li><a href="{{ path('intranet_formExpenses')}}">{% trans %}Expenses{% endtrans %}</a></li>*/

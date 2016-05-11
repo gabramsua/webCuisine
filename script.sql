@@ -13,7 +13,7 @@ select * from userschannel;
 select * from userstasks;
 select * from Tasks;
 
-select * from users_f_hours;				/*STATUS NULL=non read; 1=ACCEPTED; -1=REJECTED*/
+select * from f_hours;				/*STATUS NULL=non read; 1=ACCEPTED; -1=REJECTED*/
 select * from f_vacation;	/*STATUS NULL=non read; 1=ACCEPTED; -1=REJECTED*/
 select * from f_expenses;			/*STATUS NULL=non read; 1=ACCEPTED; -1=REJECTED*/
 select * from f_trip;				/*STATUS NULL=non read; 1=ACCEPTED; -1=REJECTED*/
@@ -23,14 +23,14 @@ select login, num_hours, date1, date2 from users_f_hours join f_hours on users_f
 select name_u, date1 AS 'Cuándo', place, name_congress, reasons from Users join users_f_trip on Users.login=users_f_trip.login join f_trip on users_f_trip.id_form=f_trip.id;
 
 update Users set login="gram1i" where id=1;
-delete from userschannel where id>0;
+delete from userstasks where id>0;
 select * from new_feed order by date, time DESC;
 
-insert into new_feed (date, time, title, content) values ("2016-05-02", "10:49", "Titulo1", "Contenido1");
+insert into new_feed (date, time, title, content) values ("2016-05-11", "10:49", "Titulo1", "Contenido1");
 insert into channel (name) values ("develop");
-insert into channelnew_feed (name, id_new) values ("develop", 4);
-insert into Tasks (title, content, who_create) values ('Titulo1','Contenido1','svenlogin');
-insert into userstasks (login, id_task) values ('imar1i', 1);
+insert into channelnew_feed (name, id_new) values ("develop", 1);
+insert into Tasks (title, content, who_create) values ('Titulo5','Contenido5','svenlogin');
+insert into userstasks (login, id_task) values ('gram1i', 5);
 
 insert into f_hours (num_hours, date1, date2) values (3, "2016-05-04", "2016-05-06");
 insert into f_hours (num_hours, date1, date2) values (6, "2016-05-06", "2016-05-13");

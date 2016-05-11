@@ -28,6 +28,12 @@ intranet_logout:
 
 #MENU ROUTING
 
+intranet_formHistorical:
+    path:     /{_locale}/MyHistorical
+    defaults: { _controller: intranetBundle:Default:myforms, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
 intranet_formHours:
     path:     /{_locale}/formHours
     defaults: { _controller: intranetBundle:Default:formHours, _locale:en }
@@ -108,9 +114,15 @@ intranet_insertnew:
     requirements:
         _locale: en|fr|es
 
-intranet_editnew:
-    path:     /{_locale}/updateNew
-    defaults: { _controller: intranetBundle:Default:updateNew, _locale:en }
+intranet_newtask:
+    path:     /{_locale}/createTask
+    defaults: { _controller: intranetBundle:Default:createtask, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
+intranet_insertTask:
+    path:     /{_locale}/insertTask
+    defaults: { _controller: intranetBundle:Default:insertTask, _locale:en }
     requirements:
         _locale: en|fr|es
 
@@ -123,6 +135,24 @@ intranet_f:
 intranet_crudnew:
     path:     /{_locale}/editeNew
     defaults: { _controller: intranetBundle:Default:editeNew, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
+intranet_editnew:
+    path:     /{_locale}/updateNew
+    defaults: { _controller: intranetBundle:Default:updateNew, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
+intranet_crudtask:
+    path:     /{_locale}/editeTask
+    defaults: { _controller: intranetBundle:Default:editeTask, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
+intranet_edittask:
+    path:     /{_locale}/updateTask
+    defaults: { _controller: intranetBundle:Default:updatetask, _locale:en }
     requirements:
         _locale: en|fr|es
 
