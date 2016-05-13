@@ -167,6 +167,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_news')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::newsAction',  '_locale' => 'en',));
         }
 
+        // intranet_channels
+        if (preg_match('#^/(?P<_locale>en|fr|es)/channels$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_channels')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::channelsAction',  '_locale' => 'en',));
+        }
+
         // intranet_incomingForms
         if (preg_match('#^/(?P<_locale>en|fr|es)/incomingForms$#s', $pathinfo, $matches)) {
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_incomingForms')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::incomingFormsAction',  '_locale' => 'en',));
@@ -212,14 +217,14 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_insertnew')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::insertNewAction',  '_locale' => 'en',));
         }
 
-        // intranet_newtask
-        if (preg_match('#^/(?P<_locale>en|fr|es)/createTask$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_newtask')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::createtaskAction',  '_locale' => 'en',));
-        }
-
         // intranet_insertTask
         if (preg_match('#^/(?P<_locale>en|fr|es)/insertTask$#s', $pathinfo, $matches)) {
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_insertTask')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::insertTaskAction',  '_locale' => 'en',));
+        }
+
+        // intranet_newtask
+        if (preg_match('#^/(?P<_locale>en|fr|es)/createTask$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_newtask')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::createtaskAction',  '_locale' => 'en',));
         }
 
         // intranet_f
@@ -245,6 +250,26 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         // intranet_edittask
         if (preg_match('#^/(?P<_locale>en|fr|es)/updateTask$#s', $pathinfo, $matches)) {
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_edittask')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::updatetaskAction',  '_locale' => 'en',));
+        }
+
+        // intranet_newchannel
+        if (preg_match('#^/(?P<_locale>en|fr|es)/createChannel$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_newchannel')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::createChannelAction',  '_locale' => 'en',));
+        }
+
+        // intranet_insertChannel
+        if (preg_match('#^/(?P<_locale>en|fr|es)/insertChannel$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_insertChannel')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::insertChannelAction',  '_locale' => 'en',));
+        }
+
+        // intranet_crudchannel
+        if (preg_match('#^/(?P<_locale>en|fr|es)/editeChannel$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_crudchannel')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::editeChannelAction',  '_locale' => 'en',));
+        }
+
+        // intranet_editchannel
+        if (preg_match('#^/(?P<_locale>en|fr|es)/updateChannel$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_editchannel')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::updatechannelAction',  '_locale' => 'en',));
         }
 
         // intranet_translation

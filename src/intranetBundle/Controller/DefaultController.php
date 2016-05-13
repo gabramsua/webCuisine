@@ -6,6 +6,7 @@ use intranetBundle\Model\Model;
 use intranetBundle\Entity\Entity\Users;
 use intranetBundle\Entity\Entity\Tasks;
 use intranetBundle\Entity\Entity\NewFeed;
+use intranetBundle\Entity\Entity\Channel;
 use intranetBundle\Entity\Entity\userschannel;
 use intranetBundle\Entity\Entity\userstasks;
 use intranetBundle\Entity\Entity\channelnew_feed;
@@ -20,10 +21,9 @@ use intranetBundle\Entity\Entity\Users_F_Trip;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\Query\Expr\Join;
 
-class DefaultController extends Controller
-{
+class DefaultController extends Controller{
 
-  //Method which does the login:
+
   //Verify LDAP credentials
   //link LDAP with the database if not, creates a new user in DB
   public function loginAction(){
@@ -41,6 +41,7 @@ class DefaultController extends Controller
     $surname=$userLDAP['user'][0]['sn'][0];
 
     //Method which split the whole role returned from LDAP used to know if the user is admin or not
+    //TODO How can I difference the user vs the admin?ß
     $m = new Model();
     $r = $m->getSplitRole($rol);
 
@@ -49,16 +50,17 @@ class DefaultController extends Controller
     $_SESSION['userLDAP']=$logged;   //LOGIN
     $_SESSION['rol']=$r[1];          //Admin, Buo, User
 
-    //TODO
-    #There is no way to difference Buos vs Users yet
-
-
     //Search the user in the local database with the credentials introduced before
     $user = $this->getDoctrine()
-                    ->getRepository('intranetBundle:Entity\Users')
-                    ->findOneByLogin($logged); #findAll
+                 ->getRepository('intranetBundle:Entity\Users')
+                 ->findOneByLogin($logged);
 
-    $params=array('login'=>$logged,'name'=>$name,'surname'=>$surname,'rol'=>$rol[1]);
+    $params=array(
+      'login'=>$logged,
+      'name'=>$name,
+      'surname'=>$surname,
+      'rol'=>$rol[1]
+    );
 
     if (!$user) {
       //If the user doesn't exists, redirect to another routing path to create one
@@ -77,7 +79,7 @@ class DefaultController extends Controller
       'name'=>$_SESSION['name'],
       'surname'=>$_SESSION['surname'],
       'rol'=>$_SESSION['rol']
-      );
+    );
 
     return $this->render('intranetBundle:Error:error_login.html.twig', $params);
   }
@@ -99,6 +101,7 @@ class DefaultController extends Controller
      $em->persist($newuser);
      $em->flush();
 
+
      //If an admin is creating the user ->redirect to the userManagement
      if($_REQUEST['webCuisine']=="test"){
           return $this->redirect($this->generateUrl('intranet_userManagement'));
@@ -113,8 +116,8 @@ class DefaultController extends Controller
       }
    }
 
-   public function indexAction(){
-    return $this->render('intranetBundle:Default:landing.html.twig');
+  public function indexAction(){
+     return $this->render('intranetBundle:Default:landing.html.twig');
   }
 
   public function formHoursAction(){
@@ -131,7 +134,7 @@ class DefaultController extends Controller
 
   public function formExpensesAction(){
         return $this->render('intranetBundle:Default:formExpenses.html.twig');
-   }
+  }
 
     public function newsAction(){
         //Obtains all the news ordered by date DESC
@@ -144,25 +147,25 @@ class DefaultController extends Controller
           throw $this->createNotFoundException('No news found');
         }
 
-        $params= array('new' => $allNews, );
+        $params= array('new' => $allNews);
         return $this->render('intranetBundle:Default:news.html.twig',$params);
     }
 
-    #In this web we can see all the forms send, order by non-read forms, date and type.
+    //In this page we can see all the forms send, order by non-read forms, date and type.
     public function incomingFormsAction(){
 
-      #It is necessary to put all the forms of all tables in a big array and pour it into a table, which is viewed.
-      #Not only all forms, but also the user who sent it.
+      //It is necessary to put all the forms of all tables in a big array and pour it into a table, which is viewed.
+      //Not only all forms, but also the user who sent it.
 
       //WORST OPTION => DO IT MANUALLY => ON THE VIEW
-      #I can do the join via field by field here in the method. I can use the $id to link one table to another
+      //I can do the join via field by field here in the method. I can use the $id to link one table to another
       $formH = $this->getDoctrine()
                     ->getRepository('intranetBundle:Entity\F_Hours')
                     ->findBy([], ['send' => 'DESC']);
 
       $userFormH = $this->getDoctrine()
                     ->getRepository('intranetBundle:Entity\Users_F_Hours')
-                    ->findAll(); #findAll
+                    ->findAll();
                     /************************************************************************************************************************/
       $formV = $this->getDoctrine()
                     ->getRepository('intranetBundle:Entity\F_Vacation')
@@ -303,6 +306,18 @@ class DefaultController extends Controller
        return $this->render('intranetBundle:Default:tasks.html.twig',$params);
      }
 
+     public function channelsAction(){
+       $channels = $this->getDoctrine()
+                      ->getRepository('intranetBundle:Entity\Channel')
+                      ->findAll();
+
+      //TODO
+       if (!$channels) {throw $this->createNotFoundException('No product found for id '.$id);}
+
+       $params=array('listChannels'=>$channels);
+       return $this->render('intranetBundle:Default:channels.html.twig',$params);
+     }
+
     public function userManagementAction(){
 
         $usuario = $this->getDoctrine()
@@ -315,18 +330,21 @@ class DefaultController extends Controller
     }
 
       public function settingsAction(){
-
-          //si es el usuario en activo o si el administrador está modificando a otra persona
-          if($_REQUEST['test']=="webCuisine"){
-              $usuario = $this->getDoctrine()->getRepository('intranetBundle:Entity\Users')->findOneByLogin($_REQUEST['login']);
+          //if the user is active or the admin is modifyng another user
+          if(isset($_REQUEST['isAdmin'])){
+            $usuario = $this->getDoctrine()->getRepository('intranetBundle:Entity\Users')->findOneByLogin($_REQUEST['login']);
+            $params=array('me'=>$usuario);
+            return $this->render('intranetBundle:Default:settingsForAdmin.html.twig',$params);
           }else{
               $usuario = $this->getDoctrine()->getRepository('intranetBundle:Entity\Users')->findOneByLogin($_SESSION['userLDAP']); #findAll
+              $params=array('me'=>$usuario);
+              return $this->render('intranetBundle:Default:settings.html.twig',$params);
           }
+
           //TODO
           if (!$usuario) {throw $this->createNotFoundException('No product found for id '.$id);}
 
-          $params=array('me'=>$usuario);
-          return $this->render('intranetBundle:Default:settings.html.twig',$params);
+          //return $this->render('intranetBundle:Default:settings.html.twig',$params);
       }
 
       public function logoutAction(){
@@ -344,7 +362,11 @@ class DefaultController extends Controller
 #USERS
 
        public function addUserAction(){
-         return $this->render('intranetBundle:Default:newuser.html.twig');
+         $channels = $this->getDoctrine()
+                          ->getRepository('intranetBundle:Entity\Channel')
+                          ->findAll();
+         $params=array('listChannels'=>$channels);
+         return $this->render('intranetBundle:Default:newuser.html.twig', $params);
        }
 
        public function updateUserAction(){
@@ -364,31 +386,48 @@ class DefaultController extends Controller
            $product->setSurnameU($_REQUEST['mySurname']);
            $product->setLang($_REQUEST['myLanguage']);
            //TODO hay que cambiar el rol del usuario en sesion por el que le quiera dar el LDAP cuando se conecte
-           $product->setRol("developer"/*$_SESSION['rol']*/);
+           $product->setRol("developer");
            $product->setPhoto($_REQUEST['myPhoto']);
-           $product->setOnboard($_REQUEST['onb']);
+           if(isset($_REQUEST['myOnboard'])){
+                $product->setOnboard(1);
+            }
            $product->setNotifications($_REQUEST['myNotifications']);
            $em->flush();
 
 #UPSERT => Si no existe, tengo que hacer insert, pero si existe previamente, hay que ver si se borra(actualiza)
+#       => Ya existe un usuario con ese Login
 #           $intermediate = $em->getRepository('intranetBundle:Entity\userschannel')->findOneByIdNew($_REQUEST['myLogin']);
 #           $intermediate->setName($_REQUEST['channel']);
 #           $em->flush();
 
+           //if ADMIN, USERMANAGEMENT
+           if($_SESSION['rol']=="Admin")
            return self::userManagementAction();
+           //IF NOT, HOMEPAGE
+           else return $this->render('intranetBundle:Default:landing.html.twig');
        }
 
        public function deletUserAction(){
            $em = $this->getDoctrine()->getManager();
-           $product = $em->getRepository('intranetBundle:Entity\NewFeed')->find($_REQUEST['id']);
+           $product = $em->getRepository('intranetBundle:Entity\Users')->findOneById([$_REQUEST['id']]);
            $em->remove($product);
            $em->flush();
 
-           $intermediate = $em->getRepository('intranetBundle:Entity\channelnew_feed')->findOneByIdNew($_REQUEST['id']);
-           $em->remove($intermediate);
-           $em->flush();
+           $intermediate = $em->getRepository('intranetBundle:Entity\userschannel')->findByLogin([$_REQUEST['myLogin']]);
+           //For each element in the intermediate table, it is necessary to delete all of them
+           foreach ($intermediate as $index => $object) {
+             $em->remove($object);
+             $em->flush();
+           }
 
-           return self::newsAction();
+           $intermediate = $em->getRepository('intranetBundle:Entity\userstasks')->findByLogin([$_REQUEST['myLogin']]);
+           //For each element in the intermediate table, it is necessary to delete all of them
+           foreach ($intermediate as $index => $object) {
+             $em->remove($object);
+             $em->flush();
+           }
+
+           return self::userManagementAction();
        }
 
 
@@ -563,7 +602,11 @@ class DefaultController extends Controller
 #NEWS
 
        public function createNewAction(){
-         return $this->render('intranetBundle:Default:createNewFeed.html.twig');
+         $allChannels = $this->getDoctrine()
+                         ->getRepository('intranetBundle:Entity\Channel')
+                         ->findAll(); #findAll
+         $params = array('channels' =>$allChannels);
+         return $this->render('intranetBundle:Default:createNewFeed.html.twig', $params);
        }
 
        public function insertNewAction(){
@@ -584,40 +627,45 @@ class DefaultController extends Controller
                         ->getRepository('intranetBundle:Entity\NewFeed')
                         ->findOneByContent($_REQUEST['content']);
         $i=$new2->getId();
+        $allChannels = $this->getDoctrine()
+                            ->getRepository('intranetBundle:Entity\Channel')
+                            ->findAll();
 
-        $usch = new channelnew_feed();
-        $usch->setIdNew($i);
-        //TODO
-        $usch->setName($_REQUEST['channel']);//NEEDS TO ASSURE THAT THE CHANNEL EXISTS=> SOLVED IF CHECKBOX=> SEVERAL INSERTS
+         foreach ($allChannels as $index => $object) {
+           if(isset($_REQUEST[$object->getName()])){
+             $newcha = new channelnew_feed();
+             $newcha->setName($_REQUEST[$object->getName()]);
+             $newcha->setIdNew($i);
+             $em = $this->getDoctrine()->getManager();
+             $em->persist($newcha);
+             $em->flush();
+           }
+         }
 
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($usch);
-        $em->flush();
-
-        #REDIRIJO AL USUARIO HASTA DONDE ESTABA donde se puede ver la noticia ya insertada
         //Redirect the user where he can see the new already inserted
-        $allNews = $this->getDoctrine()->getRepository('intranetBundle:Entity\NewFeed')->findBy([], ['date' => 'DESC', 'time' => 'DESC']);
-        if (!$allNews) {throw $this->createNotFoundException('No news found');}
-        $params=array('new'=>$allNews);
-        return $this->render('intranetBundle:Default:news.html.twig',$params);
+         return self::newsAction();//l.137
        }
 
         public function editeNewAction(){
           //get the values from the form, search the object in the database and send it to the view
-          //Need to get the ID and search in the intermediate table, just to get the Name of the Channel.
+          //Obtain the channels of the intermediate table and pour them onto the checkboxes
           $content=$_REQUEST['content'];
 
           $new = $this->getDoctrine()
                           ->getRepository('intranetBundle:Entity\NewFeed')
                           ->findOneByContent($content);
 
-          //Si ya tengo el ID, puedo buscar el nombre de su canal en la tabla intermedia => $new->getTitle()
+          //Si ya tengo el ID, puedo buscar el nombre de su canal en la tabla intermedia
           $i=$new->getId();
+          $allChannels = $this->getDoctrine()
+                       ->getRepository('intranetBundle:Entity\Channel')
+                       ->findAll();
+
           $chan = $this->getDoctrine()
                        ->getRepository('intranetBundle:Entity\channelnew_feed')
-                       ->findOneByIdNew($i);
+                       ->findBy(['idNew'=>$i]);
 
-          $params=array('new'=>$new, 'channel'=>$chan);
+          $params=array('new'=>$new, 'newschannels' => $chan, 'allChannels' => $allChannels);
           return $this->render('intranetBundle:Default:editNew.html.twig', $params);
         }
 
@@ -639,9 +687,33 @@ class DefaultController extends Controller
             $product->setContent($_REQUEST['content']);
             $em->flush();
 
-            $intermediate = $em->getRepository('intranetBundle:Entity\channelnew_feed')->findOneByIdNew($_REQUEST['id']);
-            $intermediate->setName($_REQUEST['channel']);
-            $em->flush();
+            //Update also the intermediate table
+
+            $allChannels = $this->getDoctrine()
+                                ->getRepository('intranetBundle:Entity\Channel')
+                                ->findAll();
+            foreach ($allChannels as $index => $object) {
+              if(isset($_REQUEST[$object->getName()])){
+                $em = $this->getDoctrine()->getManager();
+                $product = $em->getRepository('intranetBundle:Entity\channelnew_feed')->findBy(['idNew' =>$_REQUEST['id'], 'name' => $object->getName()]);
+
+                if(sizeof($product)==0){
+                  $intermediate = new channelnew_feed();
+                  $intermediate->setIdNew($_REQUEST['id']);
+                  $intermediate->setName($object->getName());
+                  $em = $this->getDoctrine()->getManager();
+                  $em->persist($intermediate);
+                  $em->flush();
+                }
+              }else {
+                $em = $this->getDoctrine()->getManager();
+                $product = $em->getRepository('intranetBundle:Entity\channelnew_feed')->findBy(['idNew' =>$_REQUEST['id'], 'name' => $object->getName()]);
+                foreach ($product as $index => $ob) {
+                  $em->remove($ob);
+                  $em->flush();
+                }
+              }
+            }
 
             return self::newsAction();
         }
@@ -658,14 +730,18 @@ class DefaultController extends Controller
 
             return self::newsAction();
         }
+
 #TASKS
 
         public function createTaskAction(){
-          return $this->render('intranetBundle:Default:createNewTask.html.twig');
+          $allUsers = $this->getDoctrine()
+                          ->getRepository('intranetBundle:Entity\Users')
+                          ->findAll(); #findAll
+          $params = array('users' =>$allUsers);
+          return $this->render('intranetBundle:Default:createNewTask.html.twig', $params);
         }
 
         public function insertTaskAction(){
-
           //The first thing is persist the New
           $task = new Tasks();
           $task->setTitle($_REQUEST['title']);
@@ -682,24 +758,28 @@ class DefaultController extends Controller
                          ->findOneByContent($_REQUEST['content']);
          $i=$task2->getId();
 
-         $usta = new userstasks();
-         $usta->setIdTask($i);
-         //TODO
-         $usta->setLogin($_REQUEST['login']);//NEEDS TO ASSURE THAT THE CHANNEL EXISTS=> SOLVED IF CHECKBOX=> SEVERAL INSERTS
+         //For each user, I see if his checkbox is sent. In case of YES, insert the row with all the users marked.
+         $allUsers = $this->getDoctrine()
+                          ->getRepository('intranetBundle:Entity\Users')
+                          ->findAll(); #$params = array('users' =>$allUsers);
 
-         $em = $this->getDoctrine()->getManager();
-         $em->persist($usta);
-         $em->flush();
-
-         #REDIRIJO AL USUARIO HASTA DONDE ESTABA donde se puede ver la noticia ya insertada
+          foreach ($allUsers as $index => $object) {
+            if(isset($_REQUEST[$object->getLogin()])){
+              $usta = new userstasks();
+              $usta->setIdTask($i);
+              $usta->setLogin($object->getLogin());
+              $em = $this->getDoctrine()->getManager();
+              $em->persist($usta);
+              $em->flush();
+            }
+          }
          //Redirect the user where he can see the task already inserted
-
-         return self::tasksAction();
+         return self::tasksAction();//l.295
         }
 
         public function editeTaskAction(){
           //get the values from the form, search the object in the database and send it to the view
-          //Need to get the ID and search in the intermediate table, just to get the Name of the Channel.
+          //Need to get the ID and search in the intermediate table, just to get the Users assigned.
           $id=$_REQUEST['id'];
 
           $task = $this->getDoctrine()
@@ -707,11 +787,13 @@ class DefaultController extends Controller
                           ->findOneById($id);
 
            //Once had the ID, I can look for the users assigned in the intermediate table
-           $users = $this->getDoctrine()
-                        ->getRepository('intranetBundle:Entity\userstasks')
-                        ->findBy(['idTask'=>$id]);
-
-           $params=array('task'=>$task,'users'=>$users);
+           $usersWithTask = $this->getDoctrine()
+                                 ->getRepository('intranetBundle:Entity\userstasks')
+                                 ->findBy(['idTask'=>$id]);
+           $allUsers = $this->getDoctrine()
+                                 ->getRepository('intranetBundle:Entity\Users')
+                                 ->findAll();
+           $params=array('task'=>$task,'usersWithTask'=>$usersWithTask, 'allUsers'=>$allUsers);
            return $this->render('intranetBundle:Default:editTask.html.twig', $params);
         }
 
@@ -731,11 +813,36 @@ class DefaultController extends Controller
             $product->setContent($_REQUEST['content']);
             $product->setWhoCreate($_REQUEST['whocreate']);
             $em->flush();
-            //TODO HAY QUE ACTUALIZAR LOS USUARIOS ASIGNADOS A LA TAREA DE LA TABLA INTERMEDIA
-            /*$intermediate = $em->getRepository('intranetBundle:Entity\userstasks')->findOneById($_REQUEST['id']);
-            $intermediate->setName($_REQUEST['channel']);
-            $em->flush();
-            */
+
+            $intermediate = $em->getRepository('intranetBundle:Entity\userstasks')->findBy(['idTask'=>$_REQUEST['id']]);
+
+            //For each user, I see if his checkbox is sent. In case of YES, insert the row with all the users marked.
+            $allUsers = $this->getDoctrine()
+                             ->getRepository('intranetBundle:Entity\Users')
+                             ->findAll();
+
+             foreach ($allUsers as $index => $object) {
+               if(isset($_REQUEST[$object->getLogin()])){
+                 $em = $this->getDoctrine()->getManager();
+                 $product = $em->getRepository('intranetBundle:Entity\userstasks')->findBy(['idTask' =>$_REQUEST['id'], 'login' => $object->getLogin()]);
+                 if(sizeof($product)==0){
+                   $intermediate = new userstasks();
+                   $intermediate->setIdTask($_REQUEST['id']);
+                   $intermediate->setLogin($object->getLogin());
+                   $em = $this->getDoctrine()->getManager();
+                   $em->persist($intermediate);
+                   $em->flush();
+                 }
+               }else {
+                 $em = $this->getDoctrine()->getManager();
+                 $product = $em->getRepository('intranetBundle:Entity\userstasks')->findBy(['idTask' =>$_REQUEST['id'], 'login' => $object->getLogin()]);
+                 foreach ($product as $index => $ob) {
+                   $em->remove($ob);
+                   $em->flush();
+
+                 }
+               }
+             }
             return self::tasksAction();
         }
 
@@ -755,29 +862,138 @@ class DefaultController extends Controller
             return self::tasksAction();
         }
 
-/*
-                  INSERTA USUARIO
-    public function usarDoctrineAction(){
-        $usuario = new Users();
-        $usuario->setLogin('gram1i');
-        $usuario->setNameU('Gabriel');
-        $usuario->setSurnameU('Ramos Suan');
-        $usuario->setLang('es');
-        $usuario->setRol('admin');
-        $usuario->setPhoto('no tengo');
-        $usuario->setOnboard(1);
+#CHANNEL
+        public function createChannelAction(){
+          $allChannels = $this->getDoctrine()
+                          ->getRepository('intranetBundle:Entity\Channel')
+                          ->findAll(); #findAll
+          $allUsers = $this->getDoctrine()
+                          ->getRepository('intranetBundle:Entity\Users')
+                          ->findAll(); #findAll
+          $params = array('channels' =>$allChannels,'users' =>$allUsers);
+          return $this->render('intranetBundle:Default:createNewChannel.html.twig', $params);
+        }
 
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($usuario);
-        $em->flush();
+        public function insertChannelAction(){
+          //The first thing is persist the New
+          $channel = new Channel();
+          $channel->setName($_REQUEST['name']);
 
-        return new Response('Created user: login '.$usuario->getLogin().", surname ".$usuario->getSurnameU());
-    }
-*/
+          $em = $this->getDoctrine()->getManager();
+          $em->persist($channel);
+          $em->flush();
+
+         //For each user, I see if his checkbox is sent. In case of YES, insert the row with all the users marked.
+         $allUsers = $this->getDoctrine()
+                          ->getRepository('intranetBundle:Entity\Users')
+                          ->findAll();
+
+          foreach ($allUsers as $index => $object) {
+            if(isset($_REQUEST[$object->getLogin()])){
+              $usta = new userschannel();
+              $usta->setName($_REQUEST['name']);
+              $usta->setLogin($object->getLogin());
+              $em = $this->getDoctrine()->getManager();
+              $em->persist($usta);
+              $em->flush();
+            }
+          }
+         //Redirect the user where he can see the channel already inserted
+         return self::channelsAction();//l.308
+        }
+
+        public function editeChannelAction(){
+          //get the values from the form, search the object in the database and send it to the view
+          //Need to get the ID and search in the intermediate table, just to get the Users assigned.
+          $nameChannel=$_REQUEST['nameChannel'];
+
+          #First of all is to see all the information related to the channel clicked
+          $channel = $this->getDoctrine()
+                            ->getRepository('intranetBundle:Entity\Channel')
+                            ->findOneByName($nameChannel);
+
+           //Once had the ID, I can look for the users assigned in the intermediate table
+           $usersWithChannel = $this->getDoctrine()
+                                 ->getRepository('intranetBundle:Entity\userschannel')
+                                 ->findBy(['name'=>$nameChannel]);
+           $allUsers = $this->getDoctrine()
+                                 ->getRepository('intranetBundle:Entity\Users')
+                                 ->findAll();
+
+            #TODO Not showing yet all the news related to this channel
+
+           $params=array('channel'=>$channel,'usersWithChannel'=>$usersWithChannel, 'allUsers'=>$allUsers);
+           return $this->render('intranetBundle:Default:editChannel.html.twig', $params);
+        }
+
+        public function updatechannelAction(){
+          if (isset($_POST['update'])) {
+              return self::updatChannelAction();
+          } else if (isset($_POST['delete'])) {
+              return self::deletChannelAction();
+          }
+        }
+
+        public function updatChannelAction(){
+            $em = $this->getDoctrine()->getManager();
+            $product = $em->getRepository('intranetBundle:Entity\Channel')->findOneById($_REQUEST['id']);
+            $product->setName($_REQUEST['nameChannel']);
+            $em->flush();
+
+            $intermediate = $em->getRepository('intranetBundle:Entity\userschannel')->findOneByName(['name'=>$_REQUEST['nameChannel']]);
+
+            //For each user, I see if his checkbox is sent. In case of YES, insert the row with all the users marked.
+            $allUsers = $this->getDoctrine()
+                             ->getRepository('intranetBundle:Entity\Users')
+                             ->findAll();
+
+             foreach ($allUsers as $index => $object) {
+               if(isset($_REQUEST[$object->getLogin()])){
+                 $em = $this->getDoctrine()->getManager();
+                 $product = $em->getRepository('intranetBundle:Entity\userschannel')->findBy(['name' =>$_REQUEST['nameChannel'], 'login' => $object->getLogin()]);
+                 if(sizeof($product)==0){
+                   $intermediate = new userschannel();
+                   $intermediate->setName($_REQUEST['nameChannel']);
+                   $intermediate->setLogin($object->getLogin());
+                   $em = $this->getDoctrine()->getManager();
+                   $em->persist($intermediate);
+                   $em->flush();
+                 }
+               }else {
+                 $em = $this->getDoctrine()->getManager();
+                 $product = $em->getRepository('intranetBundle:Entity\userschannel')->findBy(['name' =>$_REQUEST['nameChannel'], 'login' => $object->getLogin()]);
+                 foreach ($product as $index => $ob) {
+                   $em->remove($ob);
+                   $em->flush();
+
+                 }
+               }
+             }
+            return self::channelsAction();
+        }
+
+        public function deletChannelAction(){
+            $em = $this->getDoctrine()->getManager();
+            $product = $em->getRepository('intranetBundle:Entity\Channel')->findOneByName($_REQUEST['nameChannel']);
+            $em->remove($product);
+            $em->flush();
+
+            //userschannel
+            $intermediate = $em->getRepository('intranetBundle:Entity\userschannel')->findBy(['name' => $_REQUEST['nameChannel']]);
+            for ($i=0; $i < sizeof($intermediate); $i++) {
+                          $em->remove($intermediate[$i]);
+                          $em->flush();
+            }
+
+            //TODO channelnew_feed
+
+            return self::channelsAction();
+        }
+
 
 //TODELETE
     public function usarDoctrineAction(){
-      $usuario = $this->getDoctrine()->getRepository('intranetBundle:Entity\Users')->findOneByNameU('Gabriel'); #findAll
+      $usuario = $this->getDoctrine()->getRepository('intranetBundle:Entity\Users')->findOneByLogin($_SESSION['userLDAP']); #findAll
       $params=array('user'=>$usuario);
 
       return $this->render('intranetBundle:Default:bd.html.twig', $params);
@@ -785,7 +1001,7 @@ class DefaultController extends Controller
 
 
     #*********************************************THE BOOK ROOM PART, NOT AVAILABLE *********************************************#
-       public function bookRoomAction(){
+      public function bookRoomAction(){
          //Aquí llamada a Ajax para que me devuelva todas las fechas y habitaciones
 
          //Para una fecha dada, return las horas ocupadasd de cada habitación
@@ -797,6 +1013,8 @@ class DefaultController extends Controller
                $params
               );
       }
+
+
 
         public function bookAction(){
           if (!isset($_GET['fecha'])) {
@@ -815,6 +1033,5 @@ class DefaultController extends Controller
                 $roomsFecha//, $date
                );
         }
-
 
 }

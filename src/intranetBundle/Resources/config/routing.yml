@@ -64,6 +64,12 @@ intranet_news:
     requirements:
         _locale: en|fr|es
 
+intranet_channels:
+    path:     /{_locale}/channels
+    defaults: { _controller: intranetBundle:Default:channels, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
 intranet_incomingForms:
     path:     /{_locale}/incomingForms
     defaults: { _controller: intranetBundle:Default:incomingForms, _locale:en }
@@ -119,15 +125,15 @@ intranet_insertnew:
     requirements:
         _locale: en|fr|es
 
+intranet_insertTask:
+  path:     /{_locale}/insertTask
+  defaults: { _controller: intranetBundle:Default:insertTask, _locale:en }
+  requirements:
+    _locale: en|fr|es
+
 intranet_newtask:
     path:     /{_locale}/createTask
     defaults: { _controller: intranetBundle:Default:createtask, _locale:en }
-    requirements:
-        _locale: en|fr|es
-
-intranet_insertTask:
-    path:     /{_locale}/insertTask
-    defaults: { _controller: intranetBundle:Default:insertTask, _locale:en }
     requirements:
         _locale: en|fr|es
 
@@ -158,6 +164,30 @@ intranet_crudtask:
 intranet_edittask:
     path:     /{_locale}/updateTask
     defaults: { _controller: intranetBundle:Default:updatetask, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
+intranet_newchannel:
+    path:     /{_locale}/createChannel
+    defaults: { _controller: intranetBundle:Default:createChannel, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
+intranet_insertChannel:
+  path:     /{_locale}/insertChannel
+  defaults: { _controller: intranetBundle:Default:insertChannel, _locale:en }
+  requirements:
+    _locale: en|fr|es
+
+intranet_crudchannel:
+    path:     /{_locale}/editeChannel
+    defaults: { _controller: intranetBundle:Default:editeChannel, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
+intranet_editchannel:
+    path:     /{_locale}/updateChannel
+    defaults: { _controller: intranetBundle:Default:updatechannel, _locale:en }
     requirements:
         _locale: en|fr|es
 

@@ -8,13 +8,20 @@
       <label>{% trans %}Content{% endtrans %}</label><input type='text' id="content" name="content" value="{{task.content}}"><BR>
       <label>{% trans %}Who Create{% endtrans %}</label><input type='text' name="whocreate" id="whocreate" value="{{task.whocreate}}"><BR>
       <label>{% trans %}Users{% endtrans %}</label><br>
-              {% for u in users %}
-              <input type='text' name="channel" id="myName" value="{{ u.login }}"readonly><BR>
+              {% for u in allUsers %}
+              {% set flag=0 %}
+                {% for us in usersWithTask %}
+                    {% if u.login==us.login %}
+                      <input type='checkbox' name="{{ us.login }}" id="{{ us.login }}" value="{{ us.login }}" checked>{{ us.login }}<BR>
+                      {% set flag=1 %}
+                    {% endif %}
+                {% endfor %}
+                {% if flag==0 %}
+                    <input type='checkbox' name="{{ u.login }}" id="{{ u.login }}" value="{{ u.login }}" >{{ u.login }}<br>
+                {% endif %}
               {% endfor %}
                                    <input type="submit" name="update" value="{% trans %}Modify{% endtrans %}">
                                    <input type="submit" name="delete" value="{% trans %}DELETE{% endtrans %}">
                                    <input type="hidden" name="id" value="{{task.id}}">
  </form>
-
-
 {% endblock %}

@@ -21,20 +21,20 @@ class __TwigTemplate_c90c0804c1f9100230f2747fcc9745b0234692da06f58f291c351bdc09c
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_adc0f11488942bd22a32cb5b1288c7a2cf825e03cfea5c137d2861fb2b58d933 = $this->env->getExtension("native_profiler");
-        $__internal_adc0f11488942bd22a32cb5b1288c7a2cf825e03cfea5c137d2861fb2b58d933->enter($__internal_adc0f11488942bd22a32cb5b1288c7a2cf825e03cfea5c137d2861fb2b58d933_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "intranetBundle:Default:editNew.html.twig"));
+        $__internal_369c70de668b8d70f1497e7bc7e50b6fb0f8f77400cd72d0f96442bc471f7837 = $this->env->getExtension("native_profiler");
+        $__internal_369c70de668b8d70f1497e7bc7e50b6fb0f8f77400cd72d0f96442bc471f7837->enter($__internal_369c70de668b8d70f1497e7bc7e50b6fb0f8f77400cd72d0f96442bc471f7837_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "intranetBundle:Default:editNew.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_adc0f11488942bd22a32cb5b1288c7a2cf825e03cfea5c137d2861fb2b58d933->leave($__internal_adc0f11488942bd22a32cb5b1288c7a2cf825e03cfea5c137d2861fb2b58d933_prof);
+        $__internal_369c70de668b8d70f1497e7bc7e50b6fb0f8f77400cd72d0f96442bc471f7837->leave($__internal_369c70de668b8d70f1497e7bc7e50b6fb0f8f77400cd72d0f96442bc471f7837_prof);
 
     }
 
     // line 3
     public function block_contenido($context, array $blocks = array())
     {
-        $__internal_121e493c64f91aaa34aa535ffc6dd6f69f8e9c8a02c2d4608e5498a31298b7d2 = $this->env->getExtension("native_profiler");
-        $__internal_121e493c64f91aaa34aa535ffc6dd6f69f8e9c8a02c2d4608e5498a31298b7d2->enter($__internal_121e493c64f91aaa34aa535ffc6dd6f69f8e9c8a02c2d4608e5498a31298b7d2_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "contenido"));
+        $__internal_2d70237532d622fa694f298a30bd076bbbbf0de623cb74d3a7010c11671ec6ed = $this->env->getExtension("native_profiler");
+        $__internal_2d70237532d622fa694f298a30bd076bbbbf0de623cb74d3a7010c11671ec6ed->enter($__internal_2d70237532d622fa694f298a30bd076bbbbf0de623cb74d3a7010c11671ec6ed_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "contenido"));
 
         // line 4
         echo "
@@ -42,12 +42,7 @@ class __TwigTemplate_c90c0804c1f9100230f2747fcc9745b0234692da06f58f291c351bdc09c
         // line 5
         echo $this->env->getExtension('routing')->getPath("intranet_editnew");
         echo "\" method=\"post\" style=\"border: 1px solid;width: 500px;\">
-      <label>";
-        // line 6
-        echo $this->env->getExtension('translator')->getTranslator()->trans("Channel", array(), "messages");
-        echo "</label><input type='text' name=\"channel\" id=\"myName\" value=\"";
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["channel"]) ? $context["channel"] : $this->getContext($context, "channel")), "name", array()), "html", null, true);
-        echo "\"><BR>
+
       <label>";
         // line 7
         echo $this->env->getExtension('translator')->getTranslator()->trans("Date", array(), "messages");
@@ -72,23 +67,83 @@ class __TwigTemplate_c90c0804c1f9100230f2747fcc9745b0234692da06f58f291c351bdc09c
         echo "</label><input type='text' id=\"content\" name=\"content\" value=\"";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["new"]) ? $context["new"] : $this->getContext($context, "new")), "content", array()), "html", null, true);
         echo "\"><BR>
+<label>Channels </label>
+
+";
+        // line 13
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable((isset($context["allChannels"]) ? $context["allChannels"] : $this->getContext($context, "allChannels")));
+        foreach ($context['_seq'] as $context["_key"] => $context["ch"]) {
+            // line 14
+            $context["flag"] = 0;
+            // line 15
+            echo "  ";
+            $context['_parent'] = $context;
+            $context['_seq'] = twig_ensure_traversable((isset($context["newschannels"]) ? $context["newschannels"] : $this->getContext($context, "newschannels")));
+            foreach ($context['_seq'] as $context["_key"] => $context["nc"]) {
+                // line 16
+                echo "      ";
+                if (($this->getAttribute($context["ch"], "name", array()) == $this->getAttribute($context["nc"], "name", array()))) {
+                    // line 17
+                    echo "        <input type=\"checkbox\" name=\"";
+                    echo twig_escape_filter($this->env, $this->getAttribute($context["ch"], "name", array()), "html", null, true);
+                    echo "\" id=\"";
+                    echo twig_escape_filter($this->env, $this->getAttribute($context["ch"], "name", array()), "html", null, true);
+                    echo "\" value=\"";
+                    echo twig_escape_filter($this->env, $this->getAttribute($context["ch"], "name", array()), "html", null, true);
+                    echo "\" checked> ";
+                    echo twig_escape_filter($this->env, $this->getAttribute($context["ch"], "name", array()), "html", null, true);
+                    echo "
+        ";
+                    // line 18
+                    $context["flag"] = 1;
+                    // line 19
+                    echo "        ";
+                }
+                // line 20
+                echo "  ";
+            }
+            $_parent = $context['_parent'];
+            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['nc'], $context['_parent'], $context['loop']);
+            $context = array_intersect_key($context, $_parent) + $_parent;
+            // line 21
+            echo "      ";
+            if (((isset($context["flag"]) ? $context["flag"] : $this->getContext($context, "flag")) == 0)) {
+                // line 22
+                echo "        <input type=\"checkbox\" name=\"";
+                echo twig_escape_filter($this->env, $this->getAttribute($context["ch"], "name", array()), "html", null, true);
+                echo "\" id=\"";
+                echo twig_escape_filter($this->env, $this->getAttribute($context["ch"], "name", array()), "html", null, true);
+                echo "\" value=\"";
+                echo twig_escape_filter($this->env, $this->getAttribute($context["ch"], "name", array()), "html", null, true);
+                echo "\"> ";
+                echo twig_escape_filter($this->env, $this->getAttribute($context["ch"], "name", array()), "html", null, true);
+                echo "
+        ";
+            }
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['ch'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 25
+        echo "<br><br>
                                    <input type=\"submit\" name=\"update\" value=\"";
-        // line 11
+        // line 26
         echo $this->env->getExtension('translator')->getTranslator()->trans("Modify", array(), "messages");
         echo "\">
                                    <input type=\"submit\" name=\"delete\" value=\"";
-        // line 12
+        // line 27
         echo $this->env->getExtension('translator')->getTranslator()->trans("DELETE", array(), "messages");
         echo "\">
                                    <input type=\"hidden\" name=\"id\" value=\"";
-        // line 13
+        // line 28
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["new"]) ? $context["new"] : $this->getContext($context, "new")), "id", array()), "html", null, true);
         echo "\">
  </form>
 
 ";
         
-        $__internal_121e493c64f91aaa34aa535ffc6dd6f69f8e9c8a02c2d4608e5498a31298b7d2->leave($__internal_121e493c64f91aaa34aa535ffc6dd6f69f8e9c8a02c2d4608e5498a31298b7d2_prof);
+        $__internal_2d70237532d622fa694f298a30bd076bbbbf0de623cb74d3a7010c11671ec6ed->leave($__internal_2d70237532d622fa694f298a30bd076bbbbf0de623cb74d3a7010c11671ec6ed_prof);
 
     }
 
@@ -104,7 +159,7 @@ class __TwigTemplate_c90c0804c1f9100230f2747fcc9745b0234692da06f58f291c351bdc09c
 
     public function getDebugInfo()
     {
-        return array (  85 => 13,  81 => 12,  77 => 11,  71 => 10,  65 => 9,  59 => 8,  53 => 7,  47 => 6,  43 => 5,  40 => 4,  34 => 3,  11 => 1,);
+        return array (  140 => 28,  136 => 27,  132 => 26,  129 => 25,  113 => 22,  110 => 21,  104 => 20,  101 => 19,  99 => 18,  88 => 17,  85 => 16,  80 => 15,  78 => 14,  74 => 13,  66 => 10,  60 => 9,  54 => 8,  48 => 7,  43 => 5,  40 => 4,  34 => 3,  11 => 1,);
     }
 }
 /* {% extends 'intranetBundle::layout.html.twig' %}*/
@@ -112,11 +167,26 @@ class __TwigTemplate_c90c0804c1f9100230f2747fcc9745b0234692da06f58f291c351bdc09c
 /*  {% block contenido %}*/
 /* */
 /* <form action="{{ path('intranet_editnew') }}" method="post" style="border: 1px solid;width: 500px;">*/
-/*       <label>{% trans %}Channel{% endtrans %}</label><input type='text' name="channel" id="myName" value="{{channel.name}}"><BR>*/
+/* */
 /*       <label>{% trans %}Date{% endtrans %}</label><input type='date' id="date" name="date" value="{{new.date}}"><BR>*/
 /*       <label>{% trans %}Time{% endtrans %}</label><input type='text' id="time "name="time" value="{{new.time}}"><BR>*/
 /*       <label>{% trans %}Title{% endtrans %}</label><input type='text' id="title" name="title" value="{{new.title}}"><BR>*/
 /*       <label>{% trans %}Content{% endtrans %}</label><input type='text' id="content" name="content" value="{{new.content}}"><BR>*/
+/* <label>Channels </label>*/
+/* */
+/* {% for ch in allChannels %}*/
+/* {% set flag=0 %}*/
+/*   {% for nc in newschannels %}*/
+/*       {% if ch.name==nc.name %}*/
+/*         <input type="checkbox" name="{{ch.name}}" id="{{ch.name}}" value="{{ch.name}}" checked> {{ch.name}}*/
+/*         {% set flag=1 %}*/
+/*         {% endif %}*/
+/*   {% endfor %}*/
+/*       {% if flag==0 %}*/
+/*         <input type="checkbox" name="{{ch.name}}" id="{{ch.name}}" value="{{ch.name}}"> {{ch.name}}*/
+/*         {% endif %}*/
+/* {% endfor %}*/
+/* <br><br>*/
 /*                                    <input type="submit" name="update" value="{% trans %}Modify{% endtrans %}">*/
 /*                                    <input type="submit" name="delete" value="{% trans %}DELETE{% endtrans %}">*/
 /*                                    <input type="hidden" name="id" value="{{new.id}}">*/

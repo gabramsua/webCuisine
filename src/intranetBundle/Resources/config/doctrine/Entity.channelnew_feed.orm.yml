@@ -14,6 +14,5 @@ intranetBundle\Entity\Entity\channelnew_feed:
             length: 255
         idNew:
             type: integer
-            unique: true
             column: id_new
     lifecycleCallbacks: {  }

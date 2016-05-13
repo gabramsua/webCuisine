@@ -16,8 +16,8 @@ class __TwigTemplate_d6d713f26b57dff2b511328a8cd9c45a1314eee6e8267bc884aa0fac247
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_b9ec67dd6ea4926fc86847d71a0f710e4bd44d25706c6e5cdd00bc96a72053cb = $this->env->getExtension("native_profiler");
-        $__internal_b9ec67dd6ea4926fc86847d71a0f710e4bd44d25706c6e5cdd00bc96a72053cb->enter($__internal_b9ec67dd6ea4926fc86847d71a0f710e4bd44d25706c6e5cdd00bc96a72053cb_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "::menu.html.twig"));
+        $__internal_f06777530794aeaa90345ede66276bf1ebaebd7b16b3fd8afef390bb650f1b6d = $this->env->getExtension("native_profiler");
+        $__internal_f06777530794aeaa90345ede66276bf1ebaebd7b16b3fd8afef390bb650f1b6d->enter($__internal_f06777530794aeaa90345ede66276bf1ebaebd7b16b3fd8afef390bb650f1b6d_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "::menu.html.twig"));
 
         // line 2
         echo "
@@ -25,14 +25,14 @@ class __TwigTemplate_d6d713f26b57dff2b511328a8cd9c45a1314eee6e8267bc884aa0fac247
         // line 3
         $this->displayBlock('menu', $context, $blocks);
         
-        $__internal_b9ec67dd6ea4926fc86847d71a0f710e4bd44d25706c6e5cdd00bc96a72053cb->leave($__internal_b9ec67dd6ea4926fc86847d71a0f710e4bd44d25706c6e5cdd00bc96a72053cb_prof);
+        $__internal_f06777530794aeaa90345ede66276bf1ebaebd7b16b3fd8afef390bb650f1b6d->leave($__internal_f06777530794aeaa90345ede66276bf1ebaebd7b16b3fd8afef390bb650f1b6d_prof);
 
     }
 
     public function block_menu($context, array $blocks = array())
     {
-        $__internal_8611b9628607618599710333115974c072e0f0bde0de15844fa1b5d552369bfa = $this->env->getExtension("native_profiler");
-        $__internal_8611b9628607618599710333115974c072e0f0bde0de15844fa1b5d552369bfa->enter($__internal_8611b9628607618599710333115974c072e0f0bde0de15844fa1b5d552369bfa_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "menu"));
+        $__internal_60508053f720342f2d703e5f7838606263981aebbbf70bbefcc48571f31ca4f8 = $this->env->getExtension("native_profiler");
+        $__internal_60508053f720342f2d703e5f7838606263981aebbbf70bbefcc48571f31ca4f8->enter($__internal_60508053f720342f2d703e5f7838606263981aebbbf70bbefcc48571f31ca4f8_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "menu"));
 
         // line 4
         echo "
@@ -127,26 +127,32 @@ class __TwigTemplate_d6d713f26b57dff2b511328a8cd9c45a1314eee6e8267bc884aa0fac247
             echo "'";
             echo $this->env->getExtension('translator')->getTranslator()->trans(">News Feed", array(), "messages");
             echo "-<i> BÜOs</i></a></li>
+              <li><a href='";
+            // line 38
+            echo $this->env->getExtension('routing')->getPath("intranet_channels");
+            echo "'";
+            echo $this->env->getExtension('translator')->getTranslator()->trans(">Channels", array(), "messages");
+            echo "-<i> BÜOs</i></a></li>
       ";
         }
-        // line 39
+        // line 40
         echo "      ";
         if (((isset($context["role"]) ? $context["role"] : $this->getContext($context, "role")) == "buo")) {
-            // line 40
+            // line 41
             echo "          <li class=\"dropdown\">
             <a class=\"dropdown-toggle\" data-toggle=\"dropdown\">";
-            // line 41
+            // line 42
             echo $this->env->getExtension('translator')->getTranslator()->trans("Form Management", array(), "messages");
             echo "-<i> BÜOs</i><span class=\"caret\"></span></a>
             <ul class=\"dropdown-menu\">
               <li><a href='";
-            // line 43
+            // line 44
             echo $this->env->getExtension('routing')->getPath("intranet_incomingForms");
             echo "'>";
             echo $this->env->getExtension('translator')->getTranslator()->trans("Incoming Forms", array(), "messages");
             echo "</a></li>
               <li><a href=\"";
-            // line 44
+            // line 45
             echo $this->env->getExtension('routing')->getPath("intranet_oldForms");
             echo "\">";
             echo $this->env->getExtension('translator')->getTranslator()->trans("Old Forms", array(), "messages");
@@ -154,33 +160,33 @@ class __TwigTemplate_d6d713f26b57dff2b511328a8cd9c45a1314eee6e8267bc884aa0fac247
             </ul>
           </li>";
         }
-        // line 47
+        // line 48
         echo "      </ul>
       <ul class=\"nav navbar-nav navbar-right\">
       <li><a href=\"";
-        // line 49
+        // line 50
         echo $this->env->getExtension('routing')->getPath("intranet_testBD");
         echo "\"><b>";
         echo $this->env->getExtension('translator')->getTranslator()->trans("TEST PAGE", array(), "messages");
         echo "</b></a></li>
         <li><a href=\"";
-        // line 50
+        // line 51
         echo $this->env->getExtension('routing')->getPath("intranet_translation");
         echo "\"><b>";
         echo $this->env->getExtension('translator')->getTranslator()->trans("Lang", array(), "messages");
         echo "</b></a></li>
         <li><a href=\"#\"><b>";
-        // line 51
+        // line 52
         echo $this->env->getExtension('translator')->getTranslator()->trans("Hello", array(), "messages");
         echo " <?php echo \$_SESSION[\"usuario\"]; ?></b></a></li>
         <li><a href=\"";
-        // line 52
+        // line 53
         echo $this->env->getExtension('routing')->getPath("intranet_settings");
         echo "\"><span class=\"glyphicon glyphicon-user\"></span> ";
         echo $this->env->getExtension('translator')->getTranslator()->trans("Settings", array(), "messages");
         echo "</a></li>
         <li><a href=\"";
-        // line 53
+        // line 54
         echo $this->env->getExtension('routing')->getPath("intranet_logout");
         echo "\"><span class=\"glyphicon glyphicon-log-in\"></span> Log out</a></li>
       </ul>
@@ -189,7 +195,7 @@ class __TwigTemplate_d6d713f26b57dff2b511328a8cd9c45a1314eee6e8267bc884aa0fac247
   </nav>
   ";
         
-        $__internal_8611b9628607618599710333115974c072e0f0bde0de15844fa1b5d552369bfa->leave($__internal_8611b9628607618599710333115974c072e0f0bde0de15844fa1b5d552369bfa_prof);
+        $__internal_60508053f720342f2d703e5f7838606263981aebbbf70bbefcc48571f31ca4f8->leave($__internal_60508053f720342f2d703e5f7838606263981aebbbf70bbefcc48571f31ca4f8_prof);
 
     }
 
@@ -200,7 +206,7 @@ class __TwigTemplate_d6d713f26b57dff2b511328a8cd9c45a1314eee6e8267bc884aa0fac247
 
     public function getDebugInfo()
     {
-        return array (  184 => 53,  178 => 52,  174 => 51,  168 => 50,  162 => 49,  158 => 47,  150 => 44,  144 => 43,  139 => 41,  136 => 40,  133 => 39,  125 => 37,  122 => 36,  114 => 34,  111 => 33,  103 => 31,  101 => 30,  95 => 28,  86 => 24,  80 => 23,  74 => 22,  68 => 21,  62 => 20,  57 => 18,  49 => 13,  38 => 4,  26 => 3,  23 => 2,);
+        return array (  190 => 54,  184 => 53,  180 => 52,  174 => 51,  168 => 50,  164 => 48,  156 => 45,  150 => 44,  145 => 42,  142 => 41,  139 => 40,  132 => 38,  125 => 37,  122 => 36,  114 => 34,  111 => 33,  103 => 31,  101 => 30,  95 => 28,  86 => 24,  80 => 23,  74 => 22,  68 => 21,  62 => 20,  57 => 18,  49 => 13,  38 => 4,  26 => 3,  23 => 2,);
     }
 }
 /* {# {% extends '::base.html.twig' %} #}*/
@@ -240,6 +246,7 @@ class __TwigTemplate_d6d713f26b57dff2b511328a8cd9c45a1314eee6e8267bc884aa0fac247
 /*       {% endif %}*/
 /*       {% if role=="buo"%}*/
 /*               <li><a href='{{ path('intranet_news')}}'{% trans %}>News Feed {% endtrans %}-<i> BÜOs</i></a></li>*/
+/*               <li><a href='{{ path('intranet_channels')}}'{% trans %}>Channels {% endtrans %}-<i> BÜOs</i></a></li>*/
 /*       {% endif %}*/
 /*       {% if role=="buo"%}*/
 /*           <li class="dropdown">*/
