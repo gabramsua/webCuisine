@@ -33,13 +33,20 @@
       ldap_close($ldapconn);
    }
 
+   public function getSplitRole($rol){
+      //Divide the whole thing in strings, first with comas, then with equals signs
+      //CN=ROL, OU=cuisine, DC=cuisine, DC=lan
+      //In this way I am always taking the rol after the first CN, So I suppose it is the same for developers, or admins, or buos or whatever
+      return explode("=",explode(",",$rol)[0]);
+   }
+
+
+   //NOT USED
+   //Just to test Doctrine here in the model
    public function dimeRol(){
       $usuario = $this->getDoctrine()->getRepository('intranetBundle:Entity\Users')->findOneByLogin('gram1i');
       return $usuario;
    }
 
-    public function getSplitRole($rol){
-      return explode("=",explode(",",$rol)[0]);
-    }
 
 }

@@ -37,11 +37,6 @@ class Users
     /**
      * @var string
      */
-    private $rol;
-
-    /**
-     * @var string
-     */
     private $photo;
 
     /**
@@ -157,28 +152,6 @@ class Users
         return $this->lang;
     }
 
-    /**
-     * Set rol
-     *
-     * @param string $rol
-     * @return Users
-     */
-    public function setRol($rol)
-    {
-        $this->rol = $rol;
-
-        return $this;
-    }
-
-    /**
-     * Get rol
-     *
-     * @return string
-     */
-    public function getRol()
-    {
-        return $this->rol;
-    }
 
     /**
      * Set photo

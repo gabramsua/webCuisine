@@ -1,8 +1,7 @@
 {% extends 'intranetBundle::layout.html.twig' %}
 
  {% block contenido %}
-<b>TABLA FORMULARIOS HORAS</b><br>
-<i>to esta web viene heredada de incomingForms.html.twig</i>
+<b>TABLA FORMULARIOS HORAS</b><br><br>
 <table border=1>
 <tr >
 <th></th>
@@ -13,7 +12,8 @@
 {% for forms in myHours %}
 {% for f in forms %}
 <tr>
-  	<td><form action='#' method='post'> <input type="submit" value="VER" ></form></td>
+  	<td><form action='{{ path('intranet_crudForm') }}' method='post'><input type="hidden" name="typeF" value="hours">
+    <input type="hidden" name="id" value="{{f.id}}"> <input type="submit" value="VERME" ></form></td>
     <td style="padding-left: 10px;padding-right: 10px;">{{ f.id }}</td>
     <td style="padding-left: 10px;padding-right: 10px;">{{ f.date1 }}</td>
     <td style="padding-left: 10px;padding-right: 10px;">{{ f.date2 }}</td>
@@ -37,7 +37,8 @@
 {% for forms in myVacations %}
 {% for f in forms %}
 <tr>
-  	<td><form action='#' method='post'> <input type="submit" value="VER" ></form></td>
+  	<td><form action='#' method='post'> <input type="hidden" name="typeF" value="hours">
+    <input type="hidden" name="id" value="{{f.id}}"><input type="submit" value="VER" ></form></td>
     <td style="padding-left: 10px;padding-right: 10px;">{{ f.send }}</td>
     <td style="padding-left: 10px;padding-right: 10px;">{{ f.date1 }}</td>
     <td style="padding-left: 10px;padding-right: 10px;">{{ f.date2 }}</td>
@@ -62,7 +63,8 @@
 {% for forms in myExpenses %}
 {% for f in forms %}
 <tr>
-  	<td><form action='#' method='post'> <input type="submit" value="VER" ></form></td>
+  	<td><form action='#' method='post'><input type="hidden" name="typeF" value="hours">
+    <input type="hidden" name="id" value="{{f.id}}"> <input type="submit" value="VER" ></form></td>
     <td style="padding-left: 10px;padding-right: 10px;">{{ f.send }}</td>
     <td style="padding-left: 10px;padding-right: 10px;">{{ f.company }}</td>
     <td style="padding-left: 10px;padding-right: 10px;">{{ f.date1 }}</td>
@@ -90,7 +92,8 @@
 {% for forms in myTrips %}
 {% for f in forms %}
 <tr>
-  	<td><form action='#' method='post'> <input type="submit" value="VER" ></form></td>
+  	<td><form action='#' method='post'><input type="hidden" name="typeF" value="hours">
+    <input type="hidden" name="id" value="{{f.id}}"> <input type="submit" value="VER" ></form></td>
     <td style="padding-left: 10px;padding-right: 10px;">{{ f.send }}</td>
     <td style="padding-left: 10px;padding-right: 10px;">{{ f.place }}</td>
     <td style="padding-left: 10px;padding-right: 10px;">{{ f.nameCongress }}</td>

@@ -137,12 +137,6 @@ intranet_newtask:
     requirements:
         _locale: en|fr|es
 
-intranet_f:
-    path:     /{_locale}/historical
-    defaults: { _controller: intranetBundle:Default:insertForm, _locale:en }
-    requirements:
-        _locale: en|fr|es
-
 intranet_crudnew:
     path:     /{_locale}/editeNew
     defaults: { _controller: intranetBundle:Default:editeNew, _locale:en }
@@ -190,6 +184,37 @@ intranet_editchannel:
     defaults: { _controller: intranetBundle:Default:updatechannel, _locale:en }
     requirements:
         _locale: en|fr|es
+
+intranet_f:
+    path:     /{_locale}/historical
+    defaults: { _controller: intranetBundle:Default:insertForm, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
+intranet_readForm:
+    path:     /{_locale}/readForm
+    defaults: { _controller: intranetBundle:Default:readForm, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
+intranet_statusForm:
+    path:     /{_locale}/statusForm
+    defaults: { _controller: intranetBundle:Default:statusForm, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
+intranet_crudForm:
+    path:     /{_locale}/crudForm
+    defaults: { _controller: intranetBundle:Default:crudForm, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
+intranet_editForm:
+    path:     /{_locale}/editForm
+    defaults: { _controller: intranetBundle:Default:editForm, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
 
 
 #TESTING SHIT

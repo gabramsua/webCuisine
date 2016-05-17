@@ -30,6 +30,11 @@ class F_Vacation
     private $status;
 
     /**
+     * @var int
+     */
+    private $isread;
+
+    /**
      * @var string
      */
     private $type;
@@ -137,6 +142,31 @@ class F_Vacation
 
         return $this;
     }
+
+    /**
+     * Set read
+     *
+     * @param integer read
+     * @return F_Hours
+     */
+    public function setIsread($isread)
+    {
+        $this->isread = $isread;
+
+        return $this;
+    }
+
+    /**
+     * Get read
+     *
+     * @return integer
+     */
+    public function getIsread()
+    {
+        return $this->isread;
+    }
+
+
 
     /**
      * Set type

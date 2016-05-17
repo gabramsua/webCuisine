@@ -20,6 +20,9 @@ intranetBundle\Entity\Entity\F_Hours:
         status:
             type: integer
             nullable: true
+        isread:
+            type: integer
+            nullable: true
         type:
             type: string
             length: 8

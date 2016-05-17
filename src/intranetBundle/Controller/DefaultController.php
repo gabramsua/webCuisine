@@ -41,7 +41,6 @@ class DefaultController extends Controller{
     $surname=$userLDAP['user'][0]['sn'][0];
 
     //Method which split the whole role returned from LDAP used to know if the user is admin or not
-    //TODO How can I difference the user vs the admin?ß
     $m = new Model();
     $r = $m->getSplitRole($rol);
 
@@ -354,10 +353,6 @@ class DefaultController extends Controller{
          );
       }
 
-//TODELETE
-       public function translationAction(){
-           return $this->render( 'intranetBundle:Default:translate.html.twig'  );
-       }
 
 #USERS
 
@@ -381,24 +376,25 @@ class DefaultController extends Controller{
            $em = $this->getDoctrine()->getManager();
            $product = $em->getRepository('intranetBundle:Entity\Users')->findOneByLogin($_REQUEST['myLogin']);
 
+           #UPSERT => Si no existe, tengo que hacer insert, pero si existe previamente, hay que ver si se borra(actualiza)
+           #       => Ya existe un usuario con ese Login
+
            $product->setLogin($_REQUEST['myLogin']);
            $product->setNameU($_REQUEST['myName']);
            $product->setSurnameU($_REQUEST['mySurname']);
            $product->setLang($_REQUEST['myLanguage']);
-           //TODO hay que cambiar el rol del usuario en sesion por el que le quiera dar el LDAP cuando se conecte
-           $product->setRol("developer");
            $product->setPhoto($_REQUEST['myPhoto']);
            if(isset($_REQUEST['myOnboard'])){
                 $product->setOnboard(1);
             }
            $product->setNotifications($_REQUEST['myNotifications']);
            $em->flush();
-
-#UPSERT => Si no existe, tengo que hacer insert, pero si existe previamente, hay que ver si se borra(actualiza)
-#       => Ya existe un usuario con ese Login
-#           $intermediate = $em->getRepository('intranetBundle:Entity\userschannel')->findOneByIdNew($_REQUEST['myLogin']);
-#           $intermediate->setName($_REQUEST['channel']);
-#           $em->flush();
+           //TODO
+            #UPSERT => Si no existe, tengo que hacer insert, pero si existe previamente, hay que ver si se borra(actualiza)
+            #       => Ya existe un usuario con ese Login
+            #           $intermediate = $em->getRepository('intranetBundle:Entity\userschannel')->findOneByIdNew($_REQUEST['myLogin']);
+            #           $intermediate->setName($_REQUEST['channel']);
+            #           $em->flush();
 
            //if ADMIN, USERMANAGEMENT
            if($_SESSION['rol']=="Admin")
@@ -456,7 +452,7 @@ class DefaultController extends Controller{
                   $concept=$_REQUEST['concept'];
                   return self::insertFormExpensesAction($date1,$company,$amount,$concept,$formtype);
                   break;
-            case 'businessRequest':
+            case 'trip':
                   $date1=$_REQUEST['from'];
                   $date2=$_REQUEST['to'];
                   $where=$_REQUEST['where'];
@@ -597,6 +593,284 @@ class DefaultController extends Controller{
            ################################################################################
            //Redirect the user where he can see the new already inserted
            return self::myFormsAction();
+        }
+
+        public function readFormAction(){
+
+          //It is necessary to know the type of form to look for it directly in its table
+          $formtype=$_REQUEST['typeF'];
+          $id=$_REQUEST['id'];
+
+          switch ($formtype) {
+            case 'hours':
+                  return self::readFormHoursAction($id);
+                  break;
+            case 'vacations':
+                  return self::readFormVacationAction($id);
+                  break;
+            case 'expenses':
+                  return self::readFormExpensesAction($id);
+                  break;
+            case 'trip':
+                  return self::readFormBusinessAction($id);
+                  break;
+            default:
+                  return new Response("A problem occurred during the submit of your ".$formtype." form");
+                  break;
+          }
+        }
+
+        //In the next methods, we can access to the form clicked to read the information
+        public function readFormHoursAction($id){
+
+          $em = $this->getDoctrine()->getManager();
+          $product = $em->getRepository('intranetBundle:Entity\F_Hours')->find($id);
+
+          //Every time the BÜO read a form, the system put the bit as read => not in bold anymore
+          $product->setIsRead(1);
+          $em->persist($product);
+          $em->flush();
+
+          $fh = $this->getDoctrine()
+                     ->getRepository('intranetBundle:Entity\F_Hours')
+                     ->findOneById($id);
+
+          $params=array('form'=>$fh);
+          return $this->render('intranetBundle:Default:readForm.html.twig', $params);
+        }
+
+        public function readFormVacationAction($id){
+
+          $em = $this->getDoctrine()->getManager();
+          $product = $em->getRepository('intranetBundle:Entity\F_Vacation')->find($id);
+
+          //Every time the BÜO read a form, the system put the bit as read => not in bold anymore
+          $product->setIsRead(1);
+          $em->persist($product);
+          $em->flush();
+
+          $fh = $this->getDoctrine()
+                     ->getRepository('intranetBundle:Entity\F_Vacation')
+                     ->findOneById($id);
+
+          $params=array('form'=>$fh);
+          return $this->render('intranetBundle:Default:readForm.html.twig', $params);
+        }
+
+        public function readFormExpensesAction($id){
+
+          $em = $this->getDoctrine()->getManager();
+          $product = $em->getRepository('intranetBundle:Entity\F_Expenses')->find($id);
+
+          //Every time the BÜO read a form, the system put the bit as read => not in bold anymore
+          $product->setIsRead(1);
+          $em->persist($product);
+          $em->flush();
+
+          $fh = $this->getDoctrine()
+                     ->getRepository('intranetBundle:Entity\F_Expenses')
+                     ->findOneById($id);
+
+          $params=array('form'=>$fh);
+          return $this->render('intranetBundle:Default:readForm.html.twig', $params);
+        }
+
+        public function readFormTripsAction($id){
+
+          $em = $this->getDoctrine()->getManager();
+          $product = $em->getRepository('intranetBundle:Entity\F_Trip')->find($id);
+
+          //Every time the BÜO read a form, the system put the bit as read => not in bold anymore
+          $product->setIsRead(1);
+          $em->persist($product);
+          $em->flush();
+
+          $fh = $this->getDoctrine()
+                     ->getRepository('intranetBundle:Entity\F_Trip')
+                     ->findOneById($id);
+
+          $params=array('form'=>$fh);
+          return $this->render('intranetBundle:Default:readForm.html.twig', $params);
+        }
+
+        public function statusFormAction(){
+
+          //Depending on the type of Form send, we pour the choice of the user(BÜO) if he wants to accept the form or reject it
+          $choice=$_REQUEST['status'];
+          $formtype=$_REQUEST['typeF'];
+          $id=$_REQUEST['id'];
+
+          switch ($formtype) {
+            case 'hours':
+                  switch ($choice) {
+                    case 'accept':
+                          $em = $this->getDoctrine()->getManager();
+                          $product = $em->getRepository('intranetBundle:Entity\F_Hours')->find($id);
+
+                          $product->setStatus(1);
+                          $em->persist($product);
+                          $em->flush();
+                          return self::incomingFormsAction();
+                          break;
+                    case 'reject':
+                          $em = $this->getDoctrine()->getManager();
+                          $product = $em->getRepository('intranetBundle:Entity\F_Hours')->find($id);
+
+                          $product->setStatus(-1);
+                          $em->persist($product);
+                          $em->flush();
+                          return self::incomingFormsAction();
+                          break;
+                    default:
+                          return new Response("A problem occurred during the submit of your choice");
+                          break;
+                  }
+                  break;
+            case 'vacation':
+                  switch ($choice) {
+                    case 'accept':
+                          $em = $this->getDoctrine()->getManager();
+                          $product = $em->getRepository('intranetBundle:Entity\F_Vacation')->find($id);
+
+                          $product->setStatus(1);
+                          $em->persist($product);
+                          $em->flush();
+                          return self::incomingFormsAction();
+                          break;
+                    case 'reject':
+                          $em = $this->getDoctrine()->getManager();
+                          $product = $em->getRepository('intranetBundle:Entity\F_Vacation')->find($id);
+
+                          $product->setStatus(-1);
+                          $em->persist($product);
+                          $em->flush();
+                          return self::incomingFormsAction();
+                          break;
+                    default:
+                          return new Response("A problem occurred during the submit of your choice");
+                          break;
+                  }
+                  break;
+            case 'expenses':
+                  switch ($choice) {
+                    case 'accept':
+                          $em = $this->getDoctrine()->getManager();
+                          $product = $em->getRepository('intranetBundle:Entity\F_Expenses')->find($id);
+
+                          $product->setStatus(1);
+                          $em->persist($product);
+                          $em->flush();
+                          return self::incomingFormsAction();
+                          break;
+                    case 'reject':
+                          $em = $this->getDoctrine()->getManager();
+                          $product = $em->getRepository('intranetBundle:Entity\F_Expenses')->find($id);
+
+                          $product->setStatus(-1);
+                          $em->persist($product);
+                          $em->flush();
+                          return self::incomingFormsAction();
+                          break;
+                    default:
+                          return new Response("A problem occurred during the submit of your choice");
+                          break;
+                  }
+                  break;
+            case 'trip':
+                  switch ($choice) {
+                    case 'accept':
+                          $em = $this->getDoctrine()->getManager();
+                          $product = $em->getRepository('intranetBundle:Entity\F_Trip')->find($id);
+
+                          $product->setStatus(1);
+                          $em->persist($product);
+                          $em->flush();
+                          return self::incomingFormsAction();
+                          break;
+                    case 'reject':
+                          $em = $this->getDoctrine()->getManager();
+                          $product = $em->getRepository('intranetBundle:Entity\F_Trip')->find($id);
+
+                          $product->setStatus(-1);
+                          $em->persist($product);
+                          $em->flush();
+                          return self::incomingFormsAction();
+                          break;
+                    default:
+                          return new Response("A problem occurred during the submit of your choice");
+                          break;
+                  }
+                  break;
+            default:
+                  return new Response("A problem occurred during the submit of your ".$formtype." form");
+                  break;
+          }
+
+        }
+
+        public function crudFormAction(){
+          //The typeF is used to filter the tables
+          $formtype=$_REQUEST['typeF'];
+          $id=$_REQUEST['id'];
+
+          switch ($formtype) {
+            case 'hours':
+
+                  //The user only can update those forms who hasn't been read
+                  $f = $this->getDoctrine()
+                               ->getRepository('intranetBundle:Entity\F_Hours')
+                               ->findOneById($id);
+
+                  $params=array('f'=>$f);
+                  return $this->render('intranetBundle:Default:editHours.html.twig', $params);
+                  break;
+            case 'vacations':
+                  return self::readFormVacationAction($id);
+                  break;
+            case 'expenses':
+                  return self::readFormExpensesAction($id);
+                  break;
+            case 'trip':
+                  return self::readFormBusinessAction($id);
+                  break;
+            default:
+                  return new Response("A problem occurred during the submit of your ".$formtype." form");
+                  break;
+          }
+        }
+
+        public function editFormAction(){
+
+          $id=$_REQUEST['id'];
+
+          switch ($_REQUEST['typeF']) {
+            case 'hours':
+                  $formtype='Hours';
+                  break;
+            case 'vacations':
+                  $formtype='Vacation';
+                  break;
+            case 'expenses':
+                  $formtype='Expenses';
+                  break;
+            case 'trip':
+                  $formtype='Trip';
+                  break;
+            default:
+                  return new Response("A problem occurred during the submit of your ".$formtype." form");
+                  break;
+          }
+
+          $em = $this->getDoctrine()->getManager();
+          $product = $em->getRepository('intranetBundle:Entity\F_'.$formtype)->find($_REQUEST['id']);
+          $em->remove($product);
+          $em->flush();
+
+          $intermediate = $em->getRepository('intranetBundle:Entity\Users_F_'.$formtype)->findOneByIdForm($_REQUEST['id']);
+          $em->remove($intermediate);
+          $em->flush();
+
+          return self::myFormsAction();
         }
 
 #NEWS
@@ -991,7 +1265,7 @@ class DefaultController extends Controller{
         }
 
 
-//TODELETE
+    //TODELETE
     public function usarDoctrineAction(){
       $usuario = $this->getDoctrine()->getRepository('intranetBundle:Entity\Users')->findOneByLogin($_SESSION['userLDAP']); #findAll
       $params=array('user'=>$usuario);
@@ -999,6 +1273,10 @@ class DefaultController extends Controller{
       return $this->render('intranetBundle:Default:bd.html.twig', $params);
     }
 
+    //TODELETE
+           public function translationAction(){
+               return $this->render( 'intranetBundle:Default:translate.html.twig'  );
+           }
 
     #*********************************************THE BOOK ROOM PART, NOT AVAILABLE *********************************************#
       public function bookRoomAction(){
@@ -1035,3 +1313,4 @@ class DefaultController extends Controller{
         }
 
 }
+//1366

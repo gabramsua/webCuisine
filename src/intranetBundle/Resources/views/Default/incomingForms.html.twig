@@ -10,16 +10,24 @@
     <th>LOGIN</th>
     <th>DATE</th>
     <th>READ</th>
+    <th>STATUS</th>
 </tr>
 {% for form in listIncomingFormsH %}
 {% for u in relationHours %}
 {% if u.idForm==form.id %}
 <tr>
-  	<td><form action='#' method='post'> <input type="submit" value="VER" ></form></td>
+  	<td>
+          <form action='{{ path('intranet_readForm')}}' method='post'>
+                <input type="submit" value="VER">
+                  <input type="hidden" name="typeF" value="hours">
+                  <input type="hidden" name="id" value="{{form.id}}">
+          </form>
+    </td>
     <td style="padding-left: 10px;padding-right: 10px;">{{ form.type }}</td>
     <td style="padding-left: 10px;padding-right: 10px;">{{ u.login }}</td>
     <td style="padding-left: 10px;padding-right: 10px;">{{ form.numHours }}</td>
     <td style="padding-left: 10px;padding-right: 10px;">{{ form.send }}</td>
+    <td style="padding-left: 10px;padding-right: 10px;">{{ form.isread }}</td>
     <td style="padding-left: 10px;padding-right: 10px;">{{ form.status }}</td>
 </tr>{% endif %}
 {% endfor %}{% endfor %}
@@ -37,18 +45,26 @@
    <th>READ</th>
    <th>FROM</th>
    <th>TO</th>
+   <th>STATUS</th>
 </tr>
 {% for form in listIncomingFormsV %}
 {% for u in relationVacations %}
 {% if u.idForm==form.id %}
 <tr>
-  	<td><form action='#' method='post'> <input type="submit" value="VER" ></form></td>
+   <td>
+        <form action='{{ path('intranet_readForm')}}' method='post'>
+              <input type="submit" value="VER">
+                <input type="hidden" name="typeF" value="vacations">
+                <input type="hidden" name="id" value="{{form.id}}">
+        </form>
+   </td>
    <td style="padding-left: 10px;padding-right: 10px;">{{ u.login }}</td>
    <td style="padding-left: 10px;padding-right: 10px;">{{ u.login }}</td>
    <td style="padding-left: 10px;padding-right: 10px;">{{ form.send }}</td>
-   <td style="padding-left: 10px;padding-right: 10px;">{{ form.status }}</td>
+   <td style="padding-left: 10px;padding-right: 10px;">{{ form.isread }}</td>
    <td style="padding-left: 10px;padding-right: 10px;">{{ form.date1 }}</td>
    <td style="padding-left: 10px;padding-right: 10px;">{{ form.date2 }}</td>
+   <td style="padding-left: 10px;padding-right: 10px;">{{ form.status }}</td>
 </tr>{% endif %}
 {% endfor %}{% endfor %}
 
@@ -67,19 +83,27 @@
    <th>COMPANY</th>
    <th>CONCEPT</th>
    <th>AMOUNT</th>
+   <th>STATUS</th>
 </tr>
 {% for form in listIncomingFormsE %}
 {% for u in relationExpenses %}
 {% if u.idForm==form.id %}
 <tr>
-  	<td><form action='#' method='post'> <input type="submit" value="VER" ></form></td>
+   <td>
+        <form action='{{ path('intranet_readForm')}}' method='post'>
+              <input type="submit" value="VER">
+                <input type="hidden" name="typeF" value="expenses">
+                <input type="hidden" name="id" value="{{form.id}}">
+        </form>
+   </td>
    <td style="padding-left: 10px;padding-right: 10px;">{{ u.login }}</td>
    <td style="padding-left: 10px;padding-right: 10px;">{{ u.login }}</td>
    <td style="padding-left: 10px;padding-right: 10px;">{{ form.send }}</td>
-   <td style="padding-left: 10px;padding-right: 10px;">{{ form.status }}</td>
+   <td style="padding-left: 10px;padding-right: 10px;">{{ form.isread }}</td>
    <td style="padding-left: 10px;padding-right: 10px;">{{ form.company }}</td>
    <td style="padding-left: 10px;padding-right: 10px;">{{ form.concept }}</td>
    <td style="padding-left: 10px;padding-right: 10px;">{{ form.amount }} €</td>
+   <td style="padding-left: 10px;padding-right: 10px;">{{ form.status }}</td>
 </tr>{% endif %}
 {% endfor %}{% endfor %}
 
@@ -99,20 +123,28 @@
    <th>TO</th>
    <th>PLACE</th>
    <th>REASON</th>
+   <th>STATUS</th>
 </tr>
 {% for form in listIncomingFormsT %}
 {% for u in relationTrips %}
 {% if u.idForm==form.id %}
 <tr>
-  	<td><form action='#' method='post'> <input type="submit" value="VER" ></form></td>
+   <td>
+        <form action='{{ path('intranet_readForm')}}' method='post'>
+              <input type="submit" value="VER">
+                <input type="hidden" name="typeF" value="trips">
+                <input type="hidden" name="id" value="{{form.id}}">
+        </form>
+   </td>
    <td style="padding-left: 10px;padding-right: 10px;">{{ u.login }}</td>
    <td style="padding-left: 10px;padding-right: 10px;">{{ u.login }}</td>
    <td style="padding-left: 10px;padding-right: 10px;">{{ form.send }}</td>
-   <td style="padding-left: 10px;padding-right: 10px;">{{ form.status }}</td>
+   <td style="padding-left: 10px;padding-right: 10px;">{{ form.isread }}</td>
    <td style="padding-left: 10px;padding-right: 10px;">{{ form.date1 }}</td>
    <td style="padding-left: 10px;padding-right: 10px;">{{ form.date2 }}</td>
    <td style="padding-left: 10px;padding-right: 10px;">{{ form.place }}</td>
    <td style="padding-left: 10px;padding-right: 10px;">{{ form.reasons }}</td>
+   <td style="padding-left: 10px;padding-right: 10px;">{{ form.status }}</td>
 </tr>{% endif %}
 {% endfor %}{% endfor %}
 

@@ -40,6 +40,11 @@ class F_Expenses
     private $status;
 
     /**
+     * @var int
+     */
+    private $isread;
+
+    /**
      * @var string
      */
     private $type;
@@ -164,6 +169,31 @@ class F_Expenses
     {
         return $this->status;
     }
+
+    /**
+     * Set read
+     *
+     * @param integer read
+     * @return F_Hours
+     */
+    public function setIsread($isread)
+    {
+        $this->isread = $isread;
+
+        return $this;
+    }
+
+    /**
+     * Get read
+     *
+     * @return integer
+     */
+    public function getIsread()
+    {
+        return $this->isread;
+    }
+
+
 
     /**
      * Get type

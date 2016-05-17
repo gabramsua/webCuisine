@@ -21,20 +21,20 @@ class __TwigTemplate_d1782896c72ecd646a185d3a4c1dd1f73c887a22835d838ac8f8bbaf5a2
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_3b4cd8a0774614bf5b19c80fed8c0060f33279e72d9d5b91e3411bcaf7a47af2 = $this->env->getExtension("native_profiler");
-        $__internal_3b4cd8a0774614bf5b19c80fed8c0060f33279e72d9d5b91e3411bcaf7a47af2->enter($__internal_3b4cd8a0774614bf5b19c80fed8c0060f33279e72d9d5b91e3411bcaf7a47af2_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "intranetBundle:Default:settingsForAdmin.html.twig"));
+        $__internal_1368d4858085c1e153f7943ecf3a4c1470a15dea1a06f16c73fb09ee3e461759 = $this->env->getExtension("native_profiler");
+        $__internal_1368d4858085c1e153f7943ecf3a4c1470a15dea1a06f16c73fb09ee3e461759->enter($__internal_1368d4858085c1e153f7943ecf3a4c1470a15dea1a06f16c73fb09ee3e461759_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "intranetBundle:Default:settingsForAdmin.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_3b4cd8a0774614bf5b19c80fed8c0060f33279e72d9d5b91e3411bcaf7a47af2->leave($__internal_3b4cd8a0774614bf5b19c80fed8c0060f33279e72d9d5b91e3411bcaf7a47af2_prof);
+        $__internal_1368d4858085c1e153f7943ecf3a4c1470a15dea1a06f16c73fb09ee3e461759->leave($__internal_1368d4858085c1e153f7943ecf3a4c1470a15dea1a06f16c73fb09ee3e461759_prof);
 
     }
 
     // line 3
     public function block_contenido($context, array $blocks = array())
     {
-        $__internal_b74cb1d7ad316ab5811f451e7af4d1a6887841132f2ff73536f101a3271f7561 = $this->env->getExtension("native_profiler");
-        $__internal_b74cb1d7ad316ab5811f451e7af4d1a6887841132f2ff73536f101a3271f7561->enter($__internal_b74cb1d7ad316ab5811f451e7af4d1a6887841132f2ff73536f101a3271f7561_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "contenido"));
+        $__internal_d1a7e797f144b6db53330ea10871ecce57ab16f0e6d8e8e761d9fe9e652517d1 = $this->env->getExtension("native_profiler");
+        $__internal_d1a7e797f144b6db53330ea10871ecce57ab16f0e6d8e8e761d9fe9e652517d1->enter($__internal_d1a7e797f144b6db53330ea10871ecce57ab16f0e6d8e8e761d9fe9e652517d1_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "contenido"));
 
         // line 4
         echo "CONTENIDO DEL ADMIN line.4
@@ -58,25 +58,25 @@ class __TwigTemplate_d1782896c72ecd646a185d3a4c1dd1f73c887a22835d838ac8f8bbaf5a2
         // line 8
         echo $this->env->getExtension('translator')->getTranslator()->trans("Language", array(), "messages");
         echo "</label><br>
-                <input type='radio' id=\"myLanguage\" name=\"myLanguage\" value=\"es\"";
+                <input type='radio' id=\"myLanguage\" name=\"myLanguage\" value=\"es\" ";
         // line 9
         if (($this->getAttribute((isset($context["me"]) ? $context["me"] : $this->getContext($context, "me")), "lang", array()) == "es")) {
             echo " checked ";
         }
         echo "><label for=\"myLanguage\">ES</label><BR>
-                <input type='radio' id=\"myLanguage\" name=\"myLanguage\" value=\"en\"";
+                <input type='radio' id=\"myLanguage\" name=\"myLanguage\" value=\"en\" ";
         // line 10
         if (($this->getAttribute((isset($context["me"]) ? $context["me"] : $this->getContext($context, "me")), "lang", array()) == "en")) {
             echo " checked ";
         }
         echo "><label for=\"myLanguage\">EN</label><BR>
-                <input type='radio' id=\"myLanguage\" name=\"myLanguage\" value=\"fr\"";
+                <input type='radio' id=\"myLanguage\" name=\"myLanguage\" value=\"fr\" ";
         // line 11
         if (($this->getAttribute((isset($context["me"]) ? $context["me"] : $this->getContext($context, "me")), "lang", array()) == "fr")) {
             echo " checked ";
         }
         echo "><label for=\"myLanguage\">FR</label><BR>
-                <input type='radio' id=\"myLanguage\" name=\"myLanguage\" value=\"de\"";
+                <input type='radio' id=\"myLanguage\" name=\"myLanguage\" value=\"de\" ";
         // line 12
         if (($this->getAttribute((isset($context["me"]) ? $context["me"] : $this->getContext($context, "me")), "lang", array()) == "de")) {
             echo " checked ";
@@ -145,7 +145,7 @@ class __TwigTemplate_d1782896c72ecd646a185d3a4c1dd1f73c887a22835d838ac8f8bbaf5a2
 
 ";
         
-        $__internal_b74cb1d7ad316ab5811f451e7af4d1a6887841132f2ff73536f101a3271f7561->leave($__internal_b74cb1d7ad316ab5811f451e7af4d1a6887841132f2ff73536f101a3271f7561_prof);
+        $__internal_d1a7e797f144b6db53330ea10871ecce57ab16f0e6d8e8e761d9fe9e652517d1->leave($__internal_d1a7e797f144b6db53330ea10871ecce57ab16f0e6d8e8e761d9fe9e652517d1_prof);
 
     }
 
@@ -172,10 +172,10 @@ class __TwigTemplate_d1782896c72ecd646a185d3a4c1dd1f73c887a22835d838ac8f8bbaf5a2
 /*       <label>{% trans %}Name{% endtrans %}</label><input type='text' name="myName" id="myName" value="{{ me.nameU }}"><BR>*/
 /*       <label>{% trans %}Surname{% endtrans %}</label><input type='text' id="mySurname" name="mySurname" value="{{ me.surnameU }}"><BR>*/
 /*       <label>{% trans %}Language{% endtrans %}</label><br>*/
-/*                 <input type='radio' id="myLanguage" name="myLanguage" value="es"{% if me.lang=="es" %} checked {% endif %}><label for="myLanguage">ES</label><BR>*/
-/*                 <input type='radio' id="myLanguage" name="myLanguage" value="en"{% if me.lang=="en" %} checked {% endif %}><label for="myLanguage">EN</label><BR>*/
-/*                 <input type='radio' id="myLanguage" name="myLanguage" value="fr"{% if me.lang=="fr" %} checked {% endif %}><label for="myLanguage">FR</label><BR>*/
-/*                 <input type='radio' id="myLanguage" name="myLanguage" value="de"{% if me.lang=="de" %} checked {% endif %}><label for="myLanguage">DE</label><BR>*/
+/*                 <input type='radio' id="myLanguage" name="myLanguage" value="es" {% if me.lang=="es" %} checked {% endif %}><label for="myLanguage">ES</label><BR>*/
+/*                 <input type='radio' id="myLanguage" name="myLanguage" value="en" {% if me.lang=="en" %} checked {% endif %}><label for="myLanguage">EN</label><BR>*/
+/*                 <input type='radio' id="myLanguage" name="myLanguage" value="fr" {% if me.lang=="fr" %} checked {% endif %}><label for="myLanguage">FR</label><BR>*/
+/*                 <input type='radio' id="myLanguage" name="myLanguage" value="de" {% if me.lang=="de" %} checked {% endif %}><label for="myLanguage">DE</label><BR>*/
 /*       <label>{% trans %}Photo{% endtrans %}</label><input type='file' id="myPhoto" name="myPhoto"><img src="{{ me.photo }}"><BR>*/
 /* <!-- SI NO SOY YO, PUEDO BORRAR EL USUARIO YA QUE SOY ADMIN -->*/
 /* {# if no soy yo#}*/

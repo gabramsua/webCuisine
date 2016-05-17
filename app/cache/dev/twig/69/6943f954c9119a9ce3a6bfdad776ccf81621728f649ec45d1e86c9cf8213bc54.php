@@ -21,24 +21,23 @@ class __TwigTemplate_9414f3df1f9d58ba73d6f6470a024b035fdbdc6edd7492e77b598646911
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_729dea77fe3423a4ae8728ccb05c3336319ac85bc6c520aa0f97864ad8d6247c = $this->env->getExtension("native_profiler");
-        $__internal_729dea77fe3423a4ae8728ccb05c3336319ac85bc6c520aa0f97864ad8d6247c->enter($__internal_729dea77fe3423a4ae8728ccb05c3336319ac85bc6c520aa0f97864ad8d6247c_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "intranetBundle:Default:myhistoricalforms.html.twig"));
+        $__internal_9f64857b64f407eabae45455b19844a94efb50590faa9da09ed4c31a2ba50cb2 = $this->env->getExtension("native_profiler");
+        $__internal_9f64857b64f407eabae45455b19844a94efb50590faa9da09ed4c31a2ba50cb2->enter($__internal_9f64857b64f407eabae45455b19844a94efb50590faa9da09ed4c31a2ba50cb2_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "intranetBundle:Default:myhistoricalforms.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_729dea77fe3423a4ae8728ccb05c3336319ac85bc6c520aa0f97864ad8d6247c->leave($__internal_729dea77fe3423a4ae8728ccb05c3336319ac85bc6c520aa0f97864ad8d6247c_prof);
+        $__internal_9f64857b64f407eabae45455b19844a94efb50590faa9da09ed4c31a2ba50cb2->leave($__internal_9f64857b64f407eabae45455b19844a94efb50590faa9da09ed4c31a2ba50cb2_prof);
 
     }
 
     // line 3
     public function block_contenido($context, array $blocks = array())
     {
-        $__internal_70b926cc1a432c981d2bed85468b71341bbba6dfb4143e45d5e920797f901fa3 = $this->env->getExtension("native_profiler");
-        $__internal_70b926cc1a432c981d2bed85468b71341bbba6dfb4143e45d5e920797f901fa3->enter($__internal_70b926cc1a432c981d2bed85468b71341bbba6dfb4143e45d5e920797f901fa3_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "contenido"));
+        $__internal_b7ceb68c2f241e95a8a5d9ab79e114ec4bb471468279d33090b844da8b269122 = $this->env->getExtension("native_profiler");
+        $__internal_b7ceb68c2f241e95a8a5d9ab79e114ec4bb471468279d33090b844da8b269122->enter($__internal_b7ceb68c2f241e95a8a5d9ab79e114ec4bb471468279d33090b844da8b269122_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "contenido"));
 
         // line 4
-        echo "<b>TABLA FORMULARIOS HORAS</b><br>
-<i>to esta web viene heredada de incomingForms.html.twig</i>
+        echo "<b>TABLA FORMULARIOS HORAS</b><br><br>
 <table border=1>
 <tr >
 <th></th>
@@ -47,17 +46,24 @@ class __TwigTemplate_9414f3df1f9d58ba73d6f6470a024b035fdbdc6edd7492e77b598646911
     <th>TO</th>
 </tr>
 ";
-        // line 13
+        // line 12
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["myHours"]) ? $context["myHours"] : $this->getContext($context, "myHours")));
         foreach ($context['_seq'] as $context["_key"] => $context["forms"]) {
-            // line 14
+            // line 13
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable($context["forms"]);
             foreach ($context['_seq'] as $context["_key"] => $context["f"]) {
-                // line 15
+                // line 14
                 echo "<tr>
-  \t<td><form action='#' method='post'> <input type=\"submit\" value=\"VER\" ></form></td>
+  \t<td><form action='";
+                // line 15
+                echo $this->env->getExtension('routing')->getPath("intranet_crudForm");
+                echo "' method='post'><input type=\"hidden\" name=\"typeF\" value=\"hours\">
+    <input type=\"hidden\" name=\"id\" value=\"";
+                // line 16
+                echo twig_escape_filter($this->env, $this->getAttribute($context["f"], "id", array()), "html", null, true);
+                echo "\"> <input type=\"submit\" value=\"VERME\" ></form></td>
     <td style=\"padding-left: 10px;padding-right: 10px;\">";
                 // line 17
                 echo twig_escape_filter($this->env, $this->getAttribute($context["f"], "id", array()), "html", null, true);
@@ -107,17 +113,21 @@ class __TwigTemplate_9414f3df1f9d58ba73d6f6470a024b035fdbdc6edd7492e77b598646911
             foreach ($context['_seq'] as $context["_key"] => $context["f"]) {
                 // line 39
                 echo "<tr>
-  \t<td><form action='#' method='post'> <input type=\"submit\" value=\"VER\" ></form></td>
-    <td style=\"padding-left: 10px;padding-right: 10px;\">";
+  \t<td><form action='#' method='post'> <input type=\"hidden\" name=\"typeF\" value=\"hours\">
+    <input type=\"hidden\" name=\"id\" value=\"";
                 // line 41
+                echo twig_escape_filter($this->env, $this->getAttribute($context["f"], "id", array()), "html", null, true);
+                echo "\"><input type=\"submit\" value=\"VER\" ></form></td>
+    <td style=\"padding-left: 10px;padding-right: 10px;\">";
+                // line 42
                 echo twig_escape_filter($this->env, $this->getAttribute($context["f"], "send", array()), "html", null, true);
                 echo "</td>
     <td style=\"padding-left: 10px;padding-right: 10px;\">";
-                // line 42
+                // line 43
                 echo twig_escape_filter($this->env, $this->getAttribute($context["f"], "date1", array()), "html", null, true);
                 echo "</td>
     <td style=\"padding-left: 10px;padding-right: 10px;\">";
-                // line 43
+                // line 44
                 echo twig_escape_filter($this->env, $this->getAttribute($context["f"], "date2", array()), "html", null, true);
                 echo "</td>
 </tr>
@@ -130,11 +140,11 @@ class __TwigTemplate_9414f3df1f9d58ba73d6f6470a024b035fdbdc6edd7492e77b598646911
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['forms'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 47
+        // line 48
         echo "</table><br>
 
 ";
-        // line 50
+        // line 51
         echo "
 <br>
 <b>TABLA FORMULARIOS EXPENSES</b><br>
@@ -148,35 +158,39 @@ class __TwigTemplate_9414f3df1f9d58ba73d6f6470a024b035fdbdc6edd7492e77b598646911
     <th>Amount</th>
 </tr>
 ";
-        // line 62
+        // line 63
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["myExpenses"]) ? $context["myExpenses"] : $this->getContext($context, "myExpenses")));
         foreach ($context['_seq'] as $context["_key"] => $context["forms"]) {
-            // line 63
+            // line 64
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable($context["forms"]);
             foreach ($context['_seq'] as $context["_key"] => $context["f"]) {
-                // line 64
+                // line 65
                 echo "<tr>
-  \t<td><form action='#' method='post'> <input type=\"submit\" value=\"VER\" ></form></td>
+  \t<td><form action='#' method='post'><input type=\"hidden\" name=\"typeF\" value=\"hours\">
+    <input type=\"hidden\" name=\"id\" value=\"";
+                // line 67
+                echo twig_escape_filter($this->env, $this->getAttribute($context["f"], "id", array()), "html", null, true);
+                echo "\"> <input type=\"submit\" value=\"VER\" ></form></td>
     <td style=\"padding-left: 10px;padding-right: 10px;\">";
-                // line 66
+                // line 68
                 echo twig_escape_filter($this->env, $this->getAttribute($context["f"], "send", array()), "html", null, true);
                 echo "</td>
     <td style=\"padding-left: 10px;padding-right: 10px;\">";
-                // line 67
+                // line 69
                 echo twig_escape_filter($this->env, $this->getAttribute($context["f"], "company", array()), "html", null, true);
                 echo "</td>
     <td style=\"padding-left: 10px;padding-right: 10px;\">";
-                // line 68
+                // line 70
                 echo twig_escape_filter($this->env, $this->getAttribute($context["f"], "date1", array()), "html", null, true);
                 echo "</td>
     <td style=\"padding-left: 10px;padding-right: 10px;\">";
-                // line 69
+                // line 71
                 echo twig_escape_filter($this->env, $this->getAttribute($context["f"], "concept", array()), "html", null, true);
                 echo "</td>
     <td style=\"padding-left: 10px;padding-right: 10px;\">";
-                // line 70
+                // line 72
                 echo twig_escape_filter($this->env, $this->getAttribute($context["f"], "amount", array()), "html", null, true);
                 echo "</td>
 </tr>
@@ -189,11 +203,11 @@ class __TwigTemplate_9414f3df1f9d58ba73d6f6470a024b035fdbdc6edd7492e77b598646911
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['forms'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 74
+        // line 76
         echo "</table><br>
 
 ";
-        // line 77
+        // line 79
         echo "
 <br>
 <b>TABLA FORMULARIOS TRIP</b><br>
@@ -208,39 +222,43 @@ class __TwigTemplate_9414f3df1f9d58ba73d6f6470a024b035fdbdc6edd7492e77b598646911
     <th>To</th>
 </tr>
 ";
-        // line 90
+        // line 92
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["myTrips"]) ? $context["myTrips"] : $this->getContext($context, "myTrips")));
         foreach ($context['_seq'] as $context["_key"] => $context["forms"]) {
-            // line 91
+            // line 93
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable($context["forms"]);
             foreach ($context['_seq'] as $context["_key"] => $context["f"]) {
-                // line 92
-                echo "<tr>
-  \t<td><form action='#' method='post'> <input type=\"submit\" value=\"VER\" ></form></td>
-    <td style=\"padding-left: 10px;padding-right: 10px;\">";
                 // line 94
+                echo "<tr>
+  \t<td><form action='#' method='post'><input type=\"hidden\" name=\"typeF\" value=\"hours\">
+    <input type=\"hidden\" name=\"id\" value=\"";
+                // line 96
+                echo twig_escape_filter($this->env, $this->getAttribute($context["f"], "id", array()), "html", null, true);
+                echo "\"> <input type=\"submit\" value=\"VER\" ></form></td>
+    <td style=\"padding-left: 10px;padding-right: 10px;\">";
+                // line 97
                 echo twig_escape_filter($this->env, $this->getAttribute($context["f"], "send", array()), "html", null, true);
                 echo "</td>
     <td style=\"padding-left: 10px;padding-right: 10px;\">";
-                // line 95
+                // line 98
                 echo twig_escape_filter($this->env, $this->getAttribute($context["f"], "place", array()), "html", null, true);
                 echo "</td>
     <td style=\"padding-left: 10px;padding-right: 10px;\">";
-                // line 96
+                // line 99
                 echo twig_escape_filter($this->env, $this->getAttribute($context["f"], "nameCongress", array()), "html", null, true);
                 echo "</td>
     <td style=\"padding-left: 10px;padding-right: 10px;\">";
-                // line 97
+                // line 100
                 echo twig_escape_filter($this->env, $this->getAttribute($context["f"], "reasons", array()), "html", null, true);
                 echo "</td>
     <td style=\"padding-left: 10px;padding-right: 10px;\">";
-                // line 98
+                // line 101
                 echo twig_escape_filter($this->env, $this->getAttribute($context["f"], "date1", array()), "html", null, true);
                 echo "</td>
     <td style=\"padding-left: 10px;padding-right: 10px;\">";
-                // line 99
+                // line 102
                 echo twig_escape_filter($this->env, $this->getAttribute($context["f"], "date2", array()), "html", null, true);
                 echo "</td>
 </tr>
@@ -253,12 +271,12 @@ class __TwigTemplate_9414f3df1f9d58ba73d6f6470a024b035fdbdc6edd7492e77b598646911
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['forms'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 103
+        // line 106
         echo "</table>
 
 ";
         
-        $__internal_70b926cc1a432c981d2bed85468b71341bbba6dfb4143e45d5e920797f901fa3->leave($__internal_70b926cc1a432c981d2bed85468b71341bbba6dfb4143e45d5e920797f901fa3_prof);
+        $__internal_b7ceb68c2f241e95a8a5d9ab79e114ec4bb471468279d33090b844da8b269122->leave($__internal_b7ceb68c2f241e95a8a5d9ab79e114ec4bb471468279d33090b844da8b269122_prof);
 
     }
 
@@ -274,14 +292,13 @@ class __TwigTemplate_9414f3df1f9d58ba73d6f6470a024b035fdbdc6edd7492e77b598646911
 
     public function getDebugInfo()
     {
-        return array (  257 => 103,  244 => 99,  240 => 98,  236 => 97,  232 => 96,  228 => 95,  224 => 94,  220 => 92,  216 => 91,  212 => 90,  197 => 77,  193 => 74,  180 => 70,  176 => 69,  172 => 68,  168 => 67,  164 => 66,  160 => 64,  156 => 63,  152 => 62,  138 => 50,  134 => 47,  121 => 43,  117 => 42,  113 => 41,  109 => 39,  105 => 38,  101 => 37,  89 => 27,  84 => 23,  71 => 19,  67 => 18,  63 => 17,  59 => 15,  55 => 14,  51 => 13,  40 => 4,  34 => 3,  11 => 1,);
+        return array (  275 => 106,  262 => 102,  258 => 101,  254 => 100,  250 => 99,  246 => 98,  242 => 97,  238 => 96,  234 => 94,  230 => 93,  226 => 92,  211 => 79,  207 => 76,  194 => 72,  190 => 71,  186 => 70,  182 => 69,  178 => 68,  174 => 67,  170 => 65,  166 => 64,  162 => 63,  148 => 51,  144 => 48,  131 => 44,  127 => 43,  123 => 42,  119 => 41,  115 => 39,  111 => 38,  107 => 37,  95 => 27,  90 => 23,  77 => 19,  73 => 18,  69 => 17,  65 => 16,  61 => 15,  58 => 14,  54 => 13,  50 => 12,  40 => 4,  34 => 3,  11 => 1,);
     }
 }
 /* {% extends 'intranetBundle::layout.html.twig' %}*/
 /* */
 /*  {% block contenido %}*/
-/* <b>TABLA FORMULARIOS HORAS</b><br>*/
-/* <i>to esta web viene heredada de incomingForms.html.twig</i>*/
+/* <b>TABLA FORMULARIOS HORAS</b><br><br>*/
 /* <table border=1>*/
 /* <tr >*/
 /* <th></th>*/
@@ -292,7 +309,8 @@ class __TwigTemplate_9414f3df1f9d58ba73d6f6470a024b035fdbdc6edd7492e77b598646911
 /* {% for forms in myHours %}*/
 /* {% for f in forms %}*/
 /* <tr>*/
-/*   	<td><form action='#' method='post'> <input type="submit" value="VER" ></form></td>*/
+/*   	<td><form action='{{ path('intranet_crudForm') }}' method='post'><input type="hidden" name="typeF" value="hours">*/
+/*     <input type="hidden" name="id" value="{{f.id}}"> <input type="submit" value="VERME" ></form></td>*/
 /*     <td style="padding-left: 10px;padding-right: 10px;">{{ f.id }}</td>*/
 /*     <td style="padding-left: 10px;padding-right: 10px;">{{ f.date1 }}</td>*/
 /*     <td style="padding-left: 10px;padding-right: 10px;">{{ f.date2 }}</td>*/
@@ -316,7 +334,8 @@ class __TwigTemplate_9414f3df1f9d58ba73d6f6470a024b035fdbdc6edd7492e77b598646911
 /* {% for forms in myVacations %}*/
 /* {% for f in forms %}*/
 /* <tr>*/
-/*   	<td><form action='#' method='post'> <input type="submit" value="VER" ></form></td>*/
+/*   	<td><form action='#' method='post'> <input type="hidden" name="typeF" value="hours">*/
+/*     <input type="hidden" name="id" value="{{f.id}}"><input type="submit" value="VER" ></form></td>*/
 /*     <td style="padding-left: 10px;padding-right: 10px;">{{ f.send }}</td>*/
 /*     <td style="padding-left: 10px;padding-right: 10px;">{{ f.date1 }}</td>*/
 /*     <td style="padding-left: 10px;padding-right: 10px;">{{ f.date2 }}</td>*/
@@ -341,7 +360,8 @@ class __TwigTemplate_9414f3df1f9d58ba73d6f6470a024b035fdbdc6edd7492e77b598646911
 /* {% for forms in myExpenses %}*/
 /* {% for f in forms %}*/
 /* <tr>*/
-/*   	<td><form action='#' method='post'> <input type="submit" value="VER" ></form></td>*/
+/*   	<td><form action='#' method='post'><input type="hidden" name="typeF" value="hours">*/
+/*     <input type="hidden" name="id" value="{{f.id}}"> <input type="submit" value="VER" ></form></td>*/
 /*     <td style="padding-left: 10px;padding-right: 10px;">{{ f.send }}</td>*/
 /*     <td style="padding-left: 10px;padding-right: 10px;">{{ f.company }}</td>*/
 /*     <td style="padding-left: 10px;padding-right: 10px;">{{ f.date1 }}</td>*/
@@ -369,7 +389,8 @@ class __TwigTemplate_9414f3df1f9d58ba73d6f6470a024b035fdbdc6edd7492e77b598646911
 /* {% for forms in myTrips %}*/
 /* {% for f in forms %}*/
 /* <tr>*/
-/*   	<td><form action='#' method='post'> <input type="submit" value="VER" ></form></td>*/
+/*   	<td><form action='#' method='post'><input type="hidden" name="typeF" value="hours">*/
+/*     <input type="hidden" name="id" value="{{f.id}}"> <input type="submit" value="VER" ></form></td>*/
 /*     <td style="padding-left: 10px;padding-right: 10px;">{{ f.send }}</td>*/
 /*     <td style="padding-left: 10px;padding-right: 10px;">{{ f.place }}</td>*/
 /*     <td style="padding-left: 10px;padding-right: 10px;">{{ f.nameCongress }}</td>*/

@@ -227,11 +227,6 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_newtask')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::createtaskAction',  '_locale' => 'en',));
         }
 
-        // intranet_f
-        if (preg_match('#^/(?P<_locale>en|fr|es)/historical$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_f')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::insertFormAction',  '_locale' => 'en',));
-        }
-
         // intranet_crudnew
         if (preg_match('#^/(?P<_locale>en|fr|es)/editeNew$#s', $pathinfo, $matches)) {
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_crudnew')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::editeNewAction',  '_locale' => 'en',));
@@ -270,6 +265,31 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         // intranet_editchannel
         if (preg_match('#^/(?P<_locale>en|fr|es)/updateChannel$#s', $pathinfo, $matches)) {
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_editchannel')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::updatechannelAction',  '_locale' => 'en',));
+        }
+
+        // intranet_f
+        if (preg_match('#^/(?P<_locale>en|fr|es)/historical$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_f')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::insertFormAction',  '_locale' => 'en',));
+        }
+
+        // intranet_readForm
+        if (preg_match('#^/(?P<_locale>en|fr|es)/readForm$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_readForm')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::readFormAction',  '_locale' => 'en',));
+        }
+
+        // intranet_statusForm
+        if (preg_match('#^/(?P<_locale>en|fr|es)/statusForm$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_statusForm')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::statusFormAction',  '_locale' => 'en',));
+        }
+
+        // intranet_crudForm
+        if (preg_match('#^/(?P<_locale>en|fr|es)/crudForm$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_crudForm')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::crudFormAction',  '_locale' => 'en',));
+        }
+
+        // intranet_editForm
+        if (preg_match('#^/(?P<_locale>en|fr|es)/editForm$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_editForm')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::editFormAction',  '_locale' => 'en',));
         }
 
         // intranet_translation

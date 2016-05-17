@@ -23,9 +23,6 @@ intranetBundle\Entity\Entity\Users:
         lang:
             type: string
             length: '15'
-        rol:
-            type: string
-            length: '15'
         photo:
             type: string
             length: 255
