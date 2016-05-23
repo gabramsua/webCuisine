@@ -5,6 +5,8 @@ CREATE DATABASE IF NOT EXISTS webCuisine
 USE `webCuisine`;
 show tables;
 
+show create table users;
+
 select * from new_feed;
 select * from channelnew_feed;
 select * from channel;
@@ -14,7 +16,7 @@ select * from userstasks;
 select * from Tasks;
 
 select * from f_hours;				/*STATUS NULL=non read; 1=ACCEPTED; -1=REJECTED*/
-select * from f_vacation;			/*STATUS NULL=non read; 1=ACCEPTED; -1=REJECTED*/
+select * from users_f_vacation;			/*STATUS NULL=non read; 1=ACCEPTED; -1=REJECTED*/
 select * from f_expenses;			/*STATUS NULL=non read; 1=ACCEPTED; -1=REJECTED*/
 select * from f_trip;				/*STATUS NULL=non read; 1=ACCEPTED; -1=REJECTED*/
 
@@ -27,7 +29,7 @@ select name_u, date1 AS 'Cuándo', place, name_congress, reasons from Users join
 
 update f_trip set isread=0 where id=2;
 update Users set login='gram1o' where id=8;
-delete from users_f_vacation where id=7;
+delete from users_f_vacation where id=4;
 select * from new_feed order by date, time DESC;
 
 insert into new_feed (id,date, time, title, content) values (1,"2016-05-11", "10:49", "Titulo1", "Contenido1");

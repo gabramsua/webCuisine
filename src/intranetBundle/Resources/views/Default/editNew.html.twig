@@ -19,13 +19,17 @@
         {% endif %}
   {% endfor %}
       {% if flag==0 %}
-        <input type="checkbox" name="{{ch.name}}" id="{{ch.name}}" value="{{ch.name}}"> {{ch.name}}
+        {% if rol!='developer' %}
+            <input type="checkbox" name="{{ch.name}}" id="{{ch.name}}" value="{{ch.name}}" readonly> {{ch.name}}
+        {% endif %}
         {% endif %}
 {% endfor %}
 <br><br>
-                                   <input type="submit" name="update" value="{% trans %}Modify{% endtrans %}">
-                                   <input type="submit" name="delete" value="{% trans %}DELETE{% endtrans %}">
-                                   <input type="hidden" name="id" value="{{new.id}}">
+        {% if rol!='developer' %}
+             <input type="submit" name="update" value="{% trans %}Modify{% endtrans %}">
+             <input type="submit" name="delete" value="{% trans %}DELETE{% endtrans %}">
+             <input type="hidden" name="id" value="{{new.id}}">
+        {% endif %}
  </form>
 
 {% endblock %}

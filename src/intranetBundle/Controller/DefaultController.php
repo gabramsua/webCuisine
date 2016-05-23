@@ -955,7 +955,7 @@ class DefaultController extends Controller{
                        ->getRepository('intranetBundle:Entity\channelnew_feed')
                        ->findBy(['idNew'=>$i]);
 
-          $params=array('new'=>$new, 'newschannels' => $chan, 'allChannels' => $allChannels);
+          $params=array('new'=>$new, 'newschannels' => $chan, 'allChannels' => $allChannels, 'rol'=>$_SESSION['rol']);
           return $this->render('intranetBundle:Default:editNew.html.twig', $params);
         }
 

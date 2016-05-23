@@ -21,20 +21,20 @@ class __TwigTemplate_abb13cc24babbf6262c845a5d2a57782be2f172cc7fb605f5b36d19d39c
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_d6e28e6c4b135c56b8173a0fe220829c351c80dd9be8a0cadf339b2f44c449df = $this->env->getExtension("native_profiler");
-        $__internal_d6e28e6c4b135c56b8173a0fe220829c351c80dd9be8a0cadf339b2f44c449df->enter($__internal_d6e28e6c4b135c56b8173a0fe220829c351c80dd9be8a0cadf339b2f44c449df_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "intranetBundle:Default:editTask.html.twig"));
+        $__internal_202439c338dc559d85a2453acfba573baedb0ef161523be81d1cf4cd2b9b44e2 = $this->env->getExtension("native_profiler");
+        $__internal_202439c338dc559d85a2453acfba573baedb0ef161523be81d1cf4cd2b9b44e2->enter($__internal_202439c338dc559d85a2453acfba573baedb0ef161523be81d1cf4cd2b9b44e2_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "intranetBundle:Default:editTask.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_d6e28e6c4b135c56b8173a0fe220829c351c80dd9be8a0cadf339b2f44c449df->leave($__internal_d6e28e6c4b135c56b8173a0fe220829c351c80dd9be8a0cadf339b2f44c449df_prof);
+        $__internal_202439c338dc559d85a2453acfba573baedb0ef161523be81d1cf4cd2b9b44e2->leave($__internal_202439c338dc559d85a2453acfba573baedb0ef161523be81d1cf4cd2b9b44e2_prof);
 
     }
 
     // line 3
     public function block_contenido($context, array $blocks = array())
     {
-        $__internal_85b83a251632fcca2808b397795acc2361f26c4309dd0a22f71e6771450c7d3e = $this->env->getExtension("native_profiler");
-        $__internal_85b83a251632fcca2808b397795acc2361f26c4309dd0a22f71e6771450c7d3e->enter($__internal_85b83a251632fcca2808b397795acc2361f26c4309dd0a22f71e6771450c7d3e_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "contenido"));
+        $__internal_b39dee3b3296006336800d7fd0d87c4a908cb14d9e134b826b684b95f8d4b57c = $this->env->getExtension("native_profiler");
+        $__internal_b39dee3b3296006336800d7fd0d87c4a908cb14d9e134b826b684b95f8d4b57c->enter($__internal_b39dee3b3296006336800d7fd0d87c4a908cb14d9e134b826b684b95f8d4b57c_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "contenido"));
 
         // line 4
         echo "
@@ -108,7 +108,7 @@ class __TwigTemplate_abb13cc24babbf6262c845a5d2a57782be2f172cc7fb605f5b36d19d39c
             if (((isset($context["flag"]) ? $context["flag"] : $this->getContext($context, "flag")) == 0)) {
                 // line 20
                 echo "                    ";
-                if (((isset($context["rol"]) ? $context["rol"] : $this->getContext($context, "rol")) == "developer")) {
+                if (((isset($context["rol"]) ? $context["rol"] : $this->getContext($context, "rol")) != "developer")) {
                     // line 21
                     echo "                      <input type='checkbox' name=\"";
                     echo twig_escape_filter($this->env, $this->getAttribute($context["u"], "login", array()), "html", null, true);
@@ -134,7 +134,7 @@ class __TwigTemplate_abb13cc24babbf6262c845a5d2a57782be2f172cc7fb605f5b36d19d39c
         echo "
               ";
         // line 26
-        if (((isset($context["rol"]) ? $context["rol"] : $this->getContext($context, "rol")) == "developer")) {
+        if (((isset($context["rol"]) ? $context["rol"] : $this->getContext($context, "rol")) != "developer")) {
             // line 27
             echo "                                   <input type=\"submit\" name=\"update\" value=\"";
             echo $this->env->getExtension('translator')->getTranslator()->trans("Modify", array(), "messages");
@@ -153,7 +153,7 @@ class __TwigTemplate_abb13cc24babbf6262c845a5d2a57782be2f172cc7fb605f5b36d19d39c
         echo " </form>
 ";
         
-        $__internal_85b83a251632fcca2808b397795acc2361f26c4309dd0a22f71e6771450c7d3e->leave($__internal_85b83a251632fcca2808b397795acc2361f26c4309dd0a22f71e6771450c7d3e_prof);
+        $__internal_b39dee3b3296006336800d7fd0d87c4a908cb14d9e134b826b684b95f8d4b57c->leave($__internal_b39dee3b3296006336800d7fd0d87c4a908cb14d9e134b826b684b95f8d4b57c_prof);
 
     }
 
@@ -191,13 +191,13 @@ class __TwigTemplate_abb13cc24babbf6262c845a5d2a57782be2f172cc7fb605f5b36d19d39c
 /*                     {% endif %}*/
 /*                 {% endfor %}*/
 /*                 {% if flag==0 %}*/
-/*                     {% if rol=='developer' %}*/
+/*                     {% if rol!='developer' %}*/
 /*                       <input type='checkbox' name="{{ u.login }}" id="{{ u.login }}" value="{{ u.login }}" >{{ u.login }}<br>*/
 /*                     {% endif %}*/
 /*                 {% endif %}*/
 /*               {% endfor %}*/
 /* */
-/*               {% if rol=='developer' %}*/
+/*               {% if rol!='developer' %}*/
 /*                                    <input type="submit" name="update" value="{% trans %}Modify{% endtrans %}">*/
 /*                                    <input type="submit" name="delete" value="{% trans %}DELETE{% endtrans %}">*/
 /*                                    <input type="hidden" name="id" value="{{task.id}}">*/
