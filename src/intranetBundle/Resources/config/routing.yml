@@ -125,18 +125,6 @@ intranet_insertnew:
     requirements:
         _locale: en|fr|es
 
-intranet_insertTask:
-  path:     /{_locale}/insertTask
-  defaults: { _controller: intranetBundle:Default:insertTask, _locale:en }
-  requirements:
-    _locale: en|fr|es
-
-intranet_newtask:
-    path:     /{_locale}/createTask
-    defaults: { _controller: intranetBundle:Default:createtask, _locale:en }
-    requirements:
-        _locale: en|fr|es
-
 intranet_crudnew:
     path:     /{_locale}/editeNew
     defaults: { _controller: intranetBundle:Default:editeNew, _locale:en }
@@ -146,6 +134,18 @@ intranet_crudnew:
 intranet_editnew:
     path:     /{_locale}/updateNew
     defaults: { _controller: intranetBundle:Default:updateNew, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
+intranet_insertTask:
+  path:     /{_locale}/insertTask
+  defaults: { _controller: intranetBundle:Default:insertTask, _locale:en }
+  requirements:
+    _locale: en|fr|es
+
+intranet_newtask:
+    path:     /{_locale}/createTask
+    defaults: { _controller: intranetBundle:Default:createtask, _locale:en }
     requirements:
         _locale: en|fr|es
 

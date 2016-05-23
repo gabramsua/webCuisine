@@ -37,7 +37,7 @@
 {% for forms in myVacations %}
 {% for f in forms %}
 <tr>
-  	<td><form action='#' method='post'> <input type="hidden" name="typeF" value="hours">
+  	<td><form action='{{ path('intranet_crudForm') }}' method='post'> <input type="hidden" name="typeF" value="vacations">
     <input type="hidden" name="id" value="{{f.id}}"><input type="submit" value="VER" ></form></td>
     <td style="padding-left: 10px;padding-right: 10px;">{{ f.send }}</td>
     <td style="padding-left: 10px;padding-right: 10px;">{{ f.date1 }}</td>
@@ -63,7 +63,7 @@
 {% for forms in myExpenses %}
 {% for f in forms %}
 <tr>
-  	<td><form action='#' method='post'><input type="hidden" name="typeF" value="hours">
+  	<td><form action='{{ path('intranet_crudForm') }}' method='post'><input type="hidden" name="typeF" value="expenses">
     <input type="hidden" name="id" value="{{f.id}}"> <input type="submit" value="VER" ></form></td>
     <td style="padding-left: 10px;padding-right: 10px;">{{ f.send }}</td>
     <td style="padding-left: 10px;padding-right: 10px;">{{ f.company }}</td>
@@ -92,7 +92,7 @@
 {% for forms in myTrips %}
 {% for f in forms %}
 <tr>
-  	<td><form action='#' method='post'><input type="hidden" name="typeF" value="hours">
+  	<td><form action='{{ path('intranet_crudForm') }}' method='post'><input type="hidden" name="typeF" value="trip">
     <input type="hidden" name="id" value="{{f.id}}"> <input type="submit" value="VER" ></form></td>
     <td style="padding-left: 10px;padding-right: 10px;">{{ f.send }}</td>
     <td style="padding-left: 10px;padding-right: 10px;">{{ f.place }}</td>

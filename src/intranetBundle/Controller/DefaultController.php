@@ -15,7 +15,7 @@ use intranetBundle\Entity\Entity\F_Hours;
 use intranetBundle\Entity\Entity\F_Trip;
 use intranetBundle\Entity\Entity\F_Vacation;
 use intranetBundle\Entity\Entity\Users_F_Hours;
-use intranetBundle\Entity\Entity\Users_F_Vacations;
+use intranetBundle\Entity\Entity\Users_F_Vacation;
 use intranetBundle\Entity\Entity\Users_F_Expenses;
 use intranetBundle\Entity\Entity\Users_F_Trip;
 use Symfony\Component\HttpFoundation\Response;
@@ -79,7 +79,6 @@ class DefaultController extends Controller{
       'surname'=>$_SESSION['surname'],
       'rol'=>$_SESSION['rol']
     );
-
     return $this->render('intranetBundle:Error:error_login.html.twig', $params);
   }
 
@@ -91,7 +90,6 @@ class DefaultController extends Controller{
      $newuser->setNameU($_REQUEST['myName']);
      $newuser->setSurnameU($_REQUEST['mySurname']);
      $newuser->setLang($_REQUEST['myLang']);
-     $newuser->setRol($_SESSION['rol']);
      $newuser->setPhoto($_REQUEST['myPhoto']);
      $newuser->setOnboard(0);
      $newuser->setNotifications($_REQUEST['myNotifications']);
@@ -102,7 +100,7 @@ class DefaultController extends Controller{
 
 
      //If an admin is creating the user ->redirect to the userManagement
-     if($_REQUEST['webCuisine']=="test"){
+     if(isset($_REQUEST['webCuisine']) && $_REQUEST['webCuisine']=="test"){
           return $this->redirect($this->generateUrl('intranet_userManagement'));
      }else{//if not, it means the user is connecting to the intranet
 
@@ -135,7 +133,7 @@ class DefaultController extends Controller{
         return $this->render('intranetBundle:Default:formExpenses.html.twig');
   }
 
-    public function newsAction(){
+      public function newsAction(){
         //Obtains all the news ordered by date DESC
         $allNews = $this->getDoctrine()
                         ->getRepository('intranetBundle:Entity\NewFeed')
@@ -148,176 +146,33 @@ class DefaultController extends Controller{
 
         $params= array('new' => $allNews);
         return $this->render('intranetBundle:Default:news.html.twig',$params);
-    }
-
-    //In this page we can see all the forms send, order by non-read forms, date and type.
-    public function incomingFormsAction(){
-
-      //It is necessary to put all the forms of all tables in a big array and pour it into a table, which is viewed.
-      //Not only all forms, but also the user who sent it.
-
-      //WORST OPTION => DO IT MANUALLY => ON THE VIEW
-      //I can do the join via field by field here in the method. I can use the $id to link one table to another
-      $formH = $this->getDoctrine()
-                    ->getRepository('intranetBundle:Entity\F_Hours')
-                    ->findBy([], ['send' => 'DESC']);
-
-      $userFormH = $this->getDoctrine()
-                    ->getRepository('intranetBundle:Entity\Users_F_Hours')
-                    ->findAll();
-                    /************************************************************************************************************************/
-      $formV = $this->getDoctrine()
-                    ->getRepository('intranetBundle:Entity\F_Vacation')
-                    ->findBy([], ['send' => 'DESC']);
-
-      $userFormV = $this->getDoctrine()
-                    ->getRepository('intranetBundle:Entity\Users_F_Vacations')
-                    ->findAll();
-                    /************************************************************************************************************************/
-      $formE = $this->getDoctrine()
-                    ->getRepository('intranetBundle:Entity\F_Expenses')
-                    ->findBy([], ['send' => 'DESC']);
-
-      $userFormE = $this->getDoctrine()
-                    ->getRepository('intranetBundle:Entity\Users_F_Expenses')
-                    ->findAll();
-                    /************************************************************************************************************************/
-      $formT = $this->getDoctrine()
-                    ->getRepository('intranetBundle:Entity\F_Trip')
-                    ->findBy([], ['send' => 'DESC']);
-
-      $userFormT = $this->getDoctrine()
-                  ->getRepository('intranetBundle:Entity\Users_F_Trip')
-                  ->findAll();
-
-            if (!$formH||!$formV||!$formE||!$formT) {
-              throw $this->createNotFoundException('No news found');
-            }
-
-        $params=array(
-          'relationHours'=>$userFormH, 'listIncomingFormsH'=>$formH,
-          'relationVacations'=>$userFormV, 'listIncomingFormsV'=>$formV,
-          'relationExpenses'=>$userFormE, 'listIncomingFormsE'=>$formE,
-          'relationTrips'=>$userFormT, 'listIncomingFormsT'=>$formT
-        );
-         return $this->render('intranetBundle:Default:incomingForms.html.twig',$params);
-    }
-
-    public function myFormsAction(){
-      //Get the id of the intermediates tables, go to the forms and take only those who has the id got already, passed by parameters
-      $userFormH = $this->getDoctrine()
-                        ->getRepository('intranetBundle:Entity\Users_F_Hours')
-                        ->findBy(['login' => $_SESSION['userLDAP']]);
-
-      //Now I have all forms of MY user, but I have to get their ID
-      $ind=array();
-      foreach ($userFormH as $index => $object) {
-        array_push($ind,$object->getId());
       }
 
-      //Search in the table all forms the user has send
-      $myForms1=array();
-      foreach ($ind as $indice) {
-        $myformH = $this->getDoctrine()
-                        ->getRepository('intranetBundle:Entity\F_Hours')
-                        ->findBy(['id' => $indice]);
-        array_push($myForms1,$myformH);
-      }
-
-                    /************************************************************************************************************************/
-      //Get the id of the intermediates tables, go to the forms and take only those who has the id got already, passed by parameters
-      $userFormV = $this->getDoctrine()
-                        ->getRepository('intranetBundle:Entity\Users_F_Vacations')
-                        ->findBy(['login' => $_SESSION['userLDAP']]);
-
-      //Now I have all forms of MY user, but I have to get their ID
-      $ind=array();
-      foreach ($userFormV as $index => $object) {
-        array_push($ind,$object->getId());
-      }
-
-      //Search in the table all forms the user has send
-      $myForms2=array();
-      foreach ($ind as $indice) {
-        $myformV = $this->getDoctrine()
-                        ->getRepository('intranetBundle:Entity\F_Vacation')
-                        ->findBy(['id' => $indice]);
-        array_push($myForms2,$myformV);
-      }
-
-                    /************************************************************************************************************************/
-      //Get the id of the intermediates tables, go to the forms and take only those who has the id got already, passed by parameters
-      $userFormE = $this->getDoctrine()
-                        ->getRepository('intranetBundle:Entity\Users_F_Expenses')
-                        ->findBy(['login' => $_SESSION['userLDAP']]);
-
-      //Now I have all forms of MY user, but I have to get their ID
-      $ind=array();
-      foreach ($userFormE as $index => $object) {
-        array_push($ind,$object->getId());
-      }
-
-      //Search in the table all forms the user has send
-      $myForms3=array();
-      foreach ($ind as $indice) {
-        $myformE = $this->getDoctrine()
-                        ->getRepository('intranetBundle:Entity\F_Expenses')
-                        ->findBy(['id' => $indice]);
-        array_push($myForms3,$myformE);
-      }
-
-                    /************************************************************************************************************************/
-      //Get the id of the intermediates tables, go to the forms and take only those who has the id got already, passed by parameters
-      $userFormT = $this->getDoctrine()
-                        ->getRepository('intranetBundle:Entity\Users_F_Trip')
-                        ->findBy(['login' => $_SESSION['userLDAP']]);
-
-      //Now I have all forms of MY user, but I have to get their ID
-      $ind=array();
-      foreach ($userFormT as $index => $object) {
-        array_push($ind,$object->getId());
-      }
-
-      //Search in the table all forms the user has send
-      $myForms4=array();
-      foreach ($ind as $indice) {
-        $myformT = $this->getDoctrine()
-                        ->getRepository('intranetBundle:Entity\F_Trip')
-                        ->findBy(['id' => $indice]);
-        array_push($myForms4,$myformT);
-      }
-
-      $params=array('myHours'=>$myForms1, 'myVacations'=>$myForms2, 'myExpenses'=>$myForms3, 'myTrips'=>$myForms4);
-      return $this->render('intranetBundle:Default:myhistoricalforms.html.twig',$params);
-
-    }
-
-
-     public function tasksAction(){
+      public function tasksAction(){
        $tareas = $this->getDoctrine()
                       ->getRepository('intranetBundle:Entity\Tasks')
                       ->findAll();
 
-      //TODO
+       //TODO
        if (!$tareas) {throw $this->createNotFoundException('No product found for id '.$id);}
 
-       $params=array('listTasks'=>$tareas);
+       $params=array('listTasks'=>$tareas, 'rol'=>$_SESSION['rol']);
        return $this->render('intranetBundle:Default:tasks.html.twig',$params);
-     }
+      }
 
-     public function channelsAction(){
-       $channels = $this->getDoctrine()
-                      ->getRepository('intranetBundle:Entity\Channel')
-                      ->findAll();
+      public function channelsAction(){
+         $channels = $this->getDoctrine()
+                        ->getRepository('intranetBundle:Entity\Channel')
+                        ->findAll();
 
-      //TODO
-       if (!$channels) {throw $this->createNotFoundException('No product found for id '.$id);}
+        //TODO
+         if (!$channels) {throw $this->createNotFoundException('No product found for id '.$id);}
 
-       $params=array('listChannels'=>$channels);
-       return $this->render('intranetBundle:Default:channels.html.twig',$params);
-     }
+         $params=array('listChannels'=>$channels);
+         return $this->render('intranetBundle:Default:channels.html.twig',$params);
+      }
 
-    public function userManagementAction(){
+     public function userManagementAction(){
 
         $usuario = $this->getDoctrine()
                         ->getRepository('intranetBundle:Entity\Users')
@@ -326,7 +181,7 @@ class DefaultController extends Controller{
         if (!$usuario) {throw $this->createNotFoundException('No product found for id '.$id);}
         $params=array('listUsers'=>$usuario);
         return $this->render('intranetBundle:Default:userManagement.html.twig',$params);
-    }
+     }
 
       public function settingsAction(){
           //if the user is active or the admin is modifyng another user
@@ -428,6 +283,149 @@ class DefaultController extends Controller{
 
 
 #FORMS
+
+        //In this page we can see all the forms send, order by non-read forms, date and type.
+        public function incomingFormsAction(){
+
+          //It is necessary to put all the forms of all tables in a big array and pour it into a table, which is viewed.
+          //Not only all forms, but also the user who sent it.
+
+          //WORST OPTION => DO IT MANUALLY => ON THE VIEW
+          //I can do the join via field by field here in the method. I can use the $id to link one table to another
+          $formH = $this->getDoctrine()
+                        ->getRepository('intranetBundle:Entity\F_Hours')
+                        ->findBy([], ['send' => 'DESC']);
+
+          $userFormH = $this->getDoctrine()
+                        ->getRepository('intranetBundle:Entity\Users_F_Hours')
+                        ->findAll();
+                        /************************************************************************************************************************/
+          $formV = $this->getDoctrine()
+                        ->getRepository('intranetBundle:Entity\F_Vacation')
+                        ->findBy([], ['send' => 'DESC']);
+
+          $userFormV = $this->getDoctrine()
+                        ->getRepository('intranetBundle:Entity\Users_F_Vacation')
+                        ->findAll();
+                        /************************************************************************************************************************/
+          $formE = $this->getDoctrine()
+                        ->getRepository('intranetBundle:Entity\F_Expenses')
+                        ->findBy([], ['send' => 'DESC']);
+
+          $userFormE = $this->getDoctrine()
+                        ->getRepository('intranetBundle:Entity\Users_F_Expenses')
+                        ->findAll();
+                        /************************************************************************************************************************/
+          $formT = $this->getDoctrine()
+                        ->getRepository('intranetBundle:Entity\F_Trip')
+                        ->findBy([], ['send' => 'DESC']);
+
+          $userFormT = $this->getDoctrine()
+                      ->getRepository('intranetBundle:Entity\Users_F_Trip')
+                      ->findAll();
+
+                if (!$formH||!$formV||!$formE||!$formT) {
+                  throw $this->createNotFoundException('No news found');
+                }
+
+            $params=array(
+              'relationHours'=>$userFormH, 'listIncomingFormsH'=>$formH,
+              'relationVacations'=>$userFormV, 'listIncomingFormsV'=>$formV,
+              'relationExpenses'=>$userFormE, 'listIncomingFormsE'=>$formE,
+              'relationTrips'=>$userFormT, 'listIncomingFormsT'=>$formT
+            );
+             return $this->render('intranetBundle:Default:incomingForms.html.twig',$params);
+        }
+
+        public function myFormsAction(){
+          //Get the id of the intermediates tables, go to the forms and take only those who has the id got already, passed by parameters
+          $userFormH = $this->getDoctrine()
+                            ->getRepository('intranetBundle:Entity\Users_F_Hours')
+                            ->findBy(['login' => $_SESSION['userLDAP']]);
+
+          //Now I have all forms of MY user, but I have to get their ID
+          $ind=array();
+          foreach ($userFormH as $index => $object) {
+            array_push($ind,$object->getId());
+          }
+
+          //Search in the table all forms the user has send
+          $myForms1=array();
+          foreach ($ind as $indice) {
+            $myformH = $this->getDoctrine()
+                            ->getRepository('intranetBundle:Entity\F_Hours')
+                            ->findBy(['id' => $indice]);
+            array_push($myForms1,$myformH);
+          }
+
+                        /************************************************************************************************************************/
+          //Get the id of the intermediates tables, go to the forms and take only those who has the id got already, passed by parameters
+          $userFormV = $this->getDoctrine()
+                            ->getRepository('intranetBundle:Entity\Users_F_Vacation')
+                            ->findBy(['login' => $_SESSION['userLDAP']]);
+
+          //Now I have all forms of MY user, but I have to get their ID
+          $ind=array();
+          foreach ($userFormV as $index => $object) {
+            array_push($ind,$object->getId());
+          }
+
+          //Search in the table all forms the user has send
+          $myForms2=array();
+          foreach ($ind as $indice) {
+            $myformV = $this->getDoctrine()
+                            ->getRepository('intranetBundle:Entity\F_Vacation')
+                            ->findBy(['id' => $indice+5]);
+            array_push($myForms2,$myformV);
+          }
+
+                        /************************************************************************************************************************/
+          //Get the id of the intermediates tables, go to the forms and take only those who has the id got already, passed by parameters
+          $userFormE = $this->getDoctrine()
+                            ->getRepository('intranetBundle:Entity\Users_F_Expenses')
+                            ->findBy(['login' => $_SESSION['userLDAP']]);
+
+          //Now I have all forms of MY user, but I have to get their ID
+          $ind=array();
+          foreach ($userFormE as $index => $object) {
+            array_push($ind,$object->getId());
+          }
+
+          //Search in the table all forms the user has send
+          $myForms3=array();
+          foreach ($ind as $indice) {
+            $myformE = $this->getDoctrine()
+                            ->getRepository('intranetBundle:Entity\F_Expenses')
+                            ->findBy(['id' => $indice]);
+            array_push($myForms3,$myformE);
+          }
+
+                        /************************************************************************************************************************/
+          //Get the id of the intermediates tables, go to the forms and take only those who has the id got already, passed by parameters
+          $userFormT = $this->getDoctrine()
+                            ->getRepository('intranetBundle:Entity\Users_F_Trip')
+                            ->findBy(['login' => $_SESSION['userLDAP']]);
+
+          //Now I have all forms of MY user, but I have to get their ID
+          $ind=array();
+          foreach ($userFormT as $index => $object) {
+            array_push($ind,$object->getId());
+          }
+
+          //Search in the table all forms the user has send
+          $myForms4=array();
+          foreach ($ind as $indice) {
+            $myformT = $this->getDoctrine()
+                            ->getRepository('intranetBundle:Entity\F_Trip')
+                            ->findBy(['id' => $indice]);
+            array_push($myForms4,$myformT);
+          }
+
+          $params=array('myHours'=>$myForms1, 'myVacations'=>$myForms2, 'myExpenses'=>$myForms3, 'myTrips'=>$myForms4);
+          return $this->render('intranetBundle:Default:myhistoricalforms.html.twig',$params);
+
+        }
+
         public function insertFormAction(){
 
           //The first thing is to know what type of form is and persist it into the correct tables
@@ -515,7 +513,7 @@ class DefaultController extends Controller{
          $lastForm = $this->getDoctrine()->getRepository('intranetBundle:Entity\F_Vacation')->findBy([], ['id' => 'DESC'], 1);
          if (!$lastForm) {throw $this->createNotFoundException('No news found');}
 
-         $usform = new Users_F_Vacations();
+         $usform = new Users_F_Vacation();
          $usform->setLogin($_SESSION['userLDAP']);
          $usform->setIdForm($lastForm[0]->getId());
 
@@ -612,7 +610,7 @@ class DefaultController extends Controller{
                   return self::readFormExpensesAction($id);
                   break;
             case 'trip':
-                  return self::readFormBusinessAction($id);
+                  return self::readFormTripsAction($id);
                   break;
             default:
                   return new Response("A problem occurred during the submit of your ".$formtype." form");
@@ -816,7 +814,7 @@ class DefaultController extends Controller{
           switch ($formtype) {
             case 'hours':
 
-                  //The user only can update those forms who hasn't been read
+                  //The user only can delete those forms who hasn't been read
                   $f = $this->getDoctrine()
                                ->getRepository('intranetBundle:Entity\F_Hours')
                                ->findOneById($id);
@@ -825,13 +823,31 @@ class DefaultController extends Controller{
                   return $this->render('intranetBundle:Default:editHours.html.twig', $params);
                   break;
             case 'vacations':
-                  return self::readFormVacationAction($id);
+                  //The user only can delete those forms who hasn't been read
+                  $f = $this->getDoctrine()
+                               ->getRepository('intranetBundle:Entity\F_Vacation')
+                               ->findOneById($id);
+
+                  $params=array('f'=>$f);
+                  return $this->render('intranetBundle:Default:editVacations.html.twig', $params);
                   break;
             case 'expenses':
-                  return self::readFormExpensesAction($id);
+                  //The user only can delete those forms who hasn't been read
+                  $f = $this->getDoctrine()
+                               ->getRepository('intranetBundle:Entity\F_Expenses')
+                               ->findOneById($id);
+
+                  $params=array('f'=>$f);
+                  return $this->render('intranetBundle:Default:editExpenses.html.twig', $params);
                   break;
             case 'trip':
-                  return self::readFormBusinessAction($id);
+                  //The user only can delete those forms who hasn't been read
+                  $f = $this->getDoctrine()
+                               ->getRepository('intranetBundle:Entity\F_Trip')
+                               ->findOneById($id);
+
+                  $params=array('f'=>$f);
+                  return $this->render('intranetBundle:Default:editTrip.html.twig', $params);
                   break;
             default:
                   return new Response("A problem occurred during the submit of your ".$formtype." form");
@@ -1052,7 +1068,7 @@ class DefaultController extends Controller{
         }
 
         public function editeTaskAction(){
-          //get the values from the form, search the object in the database and send it to the view
+          //get the values (id) from the form, search the object in the database and send it to the view
           //Need to get the ID and search in the intermediate table, just to get the Users assigned.
           $id=$_REQUEST['id'];
 
@@ -1067,7 +1083,7 @@ class DefaultController extends Controller{
            $allUsers = $this->getDoctrine()
                                  ->getRepository('intranetBundle:Entity\Users')
                                  ->findAll();
-           $params=array('task'=>$task,'usersWithTask'=>$usersWithTask, 'allUsers'=>$allUsers);
+           $params=array('task'=>$task,'usersWithTask'=>$usersWithTask, 'allUsers'=>$allUsers, 'rol'=>$_SESSION['rol']);
            return $this->render('intranetBundle:Default:editTask.html.twig', $params);
         }
 
@@ -1268,7 +1284,7 @@ class DefaultController extends Controller{
     //TODELETE
     public function usarDoctrineAction(){
       $usuario = $this->getDoctrine()->getRepository('intranetBundle:Entity\Users')->findOneByLogin($_SESSION['userLDAP']); #findAll
-      $params=array('user'=>$usuario);
+      $params=array('user'=>$usuario, 'role'=>$_SESSION['rol']);
 
       return $this->render('intranetBundle:Default:bd.html.twig', $params);
     }

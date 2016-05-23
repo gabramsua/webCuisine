@@ -6,7 +6,7 @@
         <label>Number of hours: </label><input type='number' name="numhours" id="numhours" value="{{ f.numhours }}"><BR>
         <label>Between: </label><input type='date' id="betw" name="betw" value="{{f.date1}}"><BR>
         <label>and: </label><input type='date' id="and" name="and" value="{{f.date2}}"><BR>
-        {% if f.isread!=0 %}
+        {% if f.isread==0 %}
                                      <input type="submit" value="Delete" name="delete">
                                      <input type="hidden" name="typeF" value="hours">
                                      <input type="hidden" name="id" value="{{ f.id }}">

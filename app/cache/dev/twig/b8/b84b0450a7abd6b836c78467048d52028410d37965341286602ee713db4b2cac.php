@@ -21,26 +21,26 @@ class __TwigTemplate_7337c8e60edc634db457eebc990f28e48d625ed485a316e1a98d83ed928
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_e945398c66a1e367f714421b996d9e365b5a3cdcf11dbf891488e883796926ca = $this->env->getExtension("native_profiler");
-        $__internal_e945398c66a1e367f714421b996d9e365b5a3cdcf11dbf891488e883796926ca->enter($__internal_e945398c66a1e367f714421b996d9e365b5a3cdcf11dbf891488e883796926ca_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "intranetBundle:Default:tasks.html.twig"));
+        $__internal_a0db68f08d0ca4c246845894669a24eaea0b6921a82c524c7dbd4299107943f8 = $this->env->getExtension("native_profiler");
+        $__internal_a0db68f08d0ca4c246845894669a24eaea0b6921a82c524c7dbd4299107943f8->enter($__internal_a0db68f08d0ca4c246845894669a24eaea0b6921a82c524c7dbd4299107943f8_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "intranetBundle:Default:tasks.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_e945398c66a1e367f714421b996d9e365b5a3cdcf11dbf891488e883796926ca->leave($__internal_e945398c66a1e367f714421b996d9e365b5a3cdcf11dbf891488e883796926ca_prof);
+        $__internal_a0db68f08d0ca4c246845894669a24eaea0b6921a82c524c7dbd4299107943f8->leave($__internal_a0db68f08d0ca4c246845894669a24eaea0b6921a82c524c7dbd4299107943f8_prof);
 
     }
 
     // line 3
     public function block_contenido($context, array $blocks = array())
     {
-        $__internal_66d59d8978b3e6ac84e07beb98568057616622c2a97386f88e6734a48ed5f903 = $this->env->getExtension("native_profiler");
-        $__internal_66d59d8978b3e6ac84e07beb98568057616622c2a97386f88e6734a48ed5f903->enter($__internal_66d59d8978b3e6ac84e07beb98568057616622c2a97386f88e6734a48ed5f903_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "contenido"));
+        $__internal_c593ddf45aab73f042999e27e8be2e20de7734e8a948676256f743a91802fdb1 = $this->env->getExtension("native_profiler");
+        $__internal_c593ddf45aab73f042999e27e8be2e20de7734e8a948676256f743a91802fdb1->enter($__internal_c593ddf45aab73f042999e27e8be2e20de7734e8a948676256f743a91802fdb1_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "contenido"));
 
         // line 4
         echo "
 
 <table border=1>
-<tr >
+<tr>
     <th>id</th>
     <th style=\"padding-left: 10px;padding-right: 10px;\">TITLE</th>
     <th style=\"padding-left: 10px;padding-right: 10px;\">DESCRIPTION</th>
@@ -87,17 +87,19 @@ class __TwigTemplate_7337c8e60edc634db457eebc990f28e48d625ed485a316e1a98d83ed928
         echo "</table>
 <br><br>
 
-<form action=\"";
+";
         // line 29
-        echo $this->env->getExtension('routing')->getPath("intranet_newtask");
-        echo "\" method=\"post\" style=\"border: 1px solid;width: 500px;\">
+        if (((isset($context["rol"]) ? $context["rol"] : $this->getContext($context, "rol")) != "developer")) {
+            // line 30
+            echo "<form action=\"";
+            echo $this->env->getExtension('routing')->getPath("intranet_newtask");
+            echo "\" method=\"post\" style=\"border: 1px solid;width: 500px;\">
     <input type=\"submit\" name=\"newTask\" value=\"NEW TASK\">
   </form>
-
-
 ";
+        }
         
-        $__internal_66d59d8978b3e6ac84e07beb98568057616622c2a97386f88e6734a48ed5f903->leave($__internal_66d59d8978b3e6ac84e07beb98568057616622c2a97386f88e6734a48ed5f903_prof);
+        $__internal_c593ddf45aab73f042999e27e8be2e20de7734e8a948676256f743a91802fdb1->leave($__internal_c593ddf45aab73f042999e27e8be2e20de7734e8a948676256f743a91802fdb1_prof);
 
     }
 
@@ -113,7 +115,7 @@ class __TwigTemplate_7337c8e60edc634db457eebc990f28e48d625ed485a316e1a98d83ed928
 
     public function getDebugInfo()
     {
-        return array (  92 => 29,  87 => 26,  78 => 23,  74 => 22,  70 => 21,  64 => 18,  59 => 16,  55 => 14,  51 => 13,  40 => 4,  34 => 3,  11 => 1,);
+        return array (  94 => 30,  92 => 29,  87 => 26,  78 => 23,  74 => 22,  70 => 21,  64 => 18,  59 => 16,  55 => 14,  51 => 13,  40 => 4,  34 => 3,  11 => 1,);
     }
 }
 /* {% extends 'intranetBundle::layout.html.twig' %}*/
@@ -122,7 +124,7 @@ class __TwigTemplate_7337c8e60edc634db457eebc990f28e48d625ed485a316e1a98d83ed928
 /* */
 /* */
 /* <table border=1>*/
-/* <tr >*/
+/* <tr>*/
 /*     <th>id</th>*/
 /*     <th style="padding-left: 10px;padding-right: 10px;">TITLE</th>*/
 /*     <th style="padding-left: 10px;padding-right: 10px;">DESCRIPTION</th>*/
@@ -138,16 +140,16 @@ class __TwigTemplate_7337c8e60edc634db457eebc990f28e48d625ed485a316e1a98d83ed928
 /*     </td>*/
 /*     <td style="padding-left: 10px;padding-right: 10px;">{{ new.title }}</td>*/
 /*     <td style="padding-left: 10px;padding-right: 10px;">{{ new.content }}</td>*/
-/*     <td style="padding-left: 10px;padding-right: 10px;">{{new.whocreate}}</td>*/
+/*     <td style="padding-left: 10px;padding-right: 10px;">{{ new.whocreate }}</td>*/
 /* </tr>*/
 /* {% endfor %}*/
 /* </table>*/
 /* <br><br>*/
 /* */
-/* <form action="{{ path('intranet_newtask')}}" method="post" style="border: 1px solid;width: 500px;">*/
+/* {% if rol!='developer' %}*/
+/* <form action="{{ path('intranet_newtask') }}" method="post" style="border: 1px solid;width: 500px;">*/
 /*     <input type="submit" name="newTask" value="NEW TASK">*/
 /*   </form>*/
-/* */
-/* */
+/* {% endif %}*/
 /* {% endblock %}*/
 /* */

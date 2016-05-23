@@ -133,6 +133,10 @@ $catalogue = new MessageCatalogue('es', array (
     'Notifications' => 'Activar Notificaciones',
     'Photo' => 'Foto de Perfil',
     'Modify' => 'Modificar',
+    'new_channel' => 'Crear un nuevo Canal',
+    'message_1' => 'Debido al gran número de elementos en las Noticias, se decide no relacionarlas con los canales a la hora de crearlos.<br>Sin embargo, es posible hacerlo editando las noticias.<br><br><u>Pero SÍ ES POSIBLE relacionar los usuarios con los canales.</u>',
+    'create_channel' => 'Crear el Canal',
+    'message_2' => 'No estaría mal poder hacer un filtro por canal <br> o mostrar también los canales en los que se haya y hacer click en el nombre de la columna',
     'This is Landing Page' => 'Esta es la pagina de aterrizaje',
   ),
 ));
@@ -248,6 +252,8 @@ $catalogueEn = new MessageCatalogue('en', array (
     'Welcome' => 'Welcome to the intranet',
     'lang' => 'ENGLISH',
     'Hello' => 'Hi!',
+    'you dont exist' => 'If you are here it\'s because you dont exist yet on the databse',
+    'creating on database' => 'We are going to create you on the database',
     'Settings' => 'Settings',
     'Forms' => 'Forms',
     'Overtime Hours' => 'Overtime Hours',
@@ -268,6 +274,10 @@ $catalogueEn = new MessageCatalogue('en', array (
     'Notifications' => 'Activate Notifications',
     'Photo' => 'Profile Picture',
     'Modify' => 'Update',
+    'new_channel' => 'Create a New Channel',
+    'message_1' => 'Due to the big number of elements in the News Feed, it is decided not to link them at the hour of create a channel.<br>Otherwise, it is possible to do it editing the news. <br><br><u>But IT IS POSSIBLE to link the channels to the users.</u>',
+    'create_channel' => 'Create the Channel',
+    'message_2' => 'Not a bad idea to build a filter by channel<br> or showing also the channels which it belongs and clicking in the name of the td',
   ),
 ));
 $catalogue->addFallbackCatalogue($catalogueEn);

@@ -3,11 +3,12 @@
  {% block contenido %}
 <h3>CREATE A NEW New</h3><br>
  <form action="{{path('intranet_insertChannel')}}" method="post" style="border: 1px solid;width: 500px;">
-        <label>NAME:</label><input type="text" name="name" style="margin-left: 40px;"><br>
-        <i>Due to the big number of elements in the News Feed, it is decided not to link them at the hour of create a channel.<br>
-           Otherwise, it is possible to do it editing the news. <br><br>
+        <label>{% trans %}Name
+        {% endtrans %}:</label><input type="text" name="name" style="margin-left: 40px;"><br>
 
-           <u>But IT IS POSSIBLE to link the channels to the users.</u>
+        <i>
+        {% trans %}message_1
+        {% endtrans %}
         </i>
         <hr>
 
@@ -15,7 +16,7 @@
             <input type="checkbox" value="{{u.login}}" name="{{u.login}}"> {{u.login}}<br>
         {% endfor %}
 
-                                    <input type="submit" value="CREATE CHANNEL">
+                                    <input type="submit" value="{% trans %}create_channel{% endtrans %}">
    </form>
 
 {% endblock %}

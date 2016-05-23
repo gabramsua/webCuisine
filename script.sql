@@ -25,8 +25,9 @@ select login, num_hours, date1, date2 from users_f_hours join f_hours on users_f
 
 select name_u, date1 AS 'Cuándo', place, name_congress, reasons from Users join users_f_trip on Users.login=users_f_trip.login join f_trip on users_f_trip.id_form=f_trip.id;
 
-update f_trip set type='trip' where id=2;
-delete from users_f_hours where id=2;
+update f_trip set isread=0 where id=2;
+update Users set login='gram1o' where id=8;
+delete from users_f_vacation where id=7;
 select * from new_feed order by date, time DESC;
 
 insert into new_feed (id,date, time, title, content) values (1,"2016-05-11", "10:49", "Titulo1", "Contenido1");

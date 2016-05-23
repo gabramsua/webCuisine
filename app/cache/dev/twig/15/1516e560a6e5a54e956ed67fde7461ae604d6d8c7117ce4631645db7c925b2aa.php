@@ -21,20 +21,20 @@ class __TwigTemplate_abb13cc24babbf6262c845a5d2a57782be2f172cc7fb605f5b36d19d39c
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_ddedb4528d70c603510e24b26b6149b68145a09859574a357988f2ed69baa1ea = $this->env->getExtension("native_profiler");
-        $__internal_ddedb4528d70c603510e24b26b6149b68145a09859574a357988f2ed69baa1ea->enter($__internal_ddedb4528d70c603510e24b26b6149b68145a09859574a357988f2ed69baa1ea_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "intranetBundle:Default:editTask.html.twig"));
+        $__internal_d6e28e6c4b135c56b8173a0fe220829c351c80dd9be8a0cadf339b2f44c449df = $this->env->getExtension("native_profiler");
+        $__internal_d6e28e6c4b135c56b8173a0fe220829c351c80dd9be8a0cadf339b2f44c449df->enter($__internal_d6e28e6c4b135c56b8173a0fe220829c351c80dd9be8a0cadf339b2f44c449df_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "intranetBundle:Default:editTask.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_ddedb4528d70c603510e24b26b6149b68145a09859574a357988f2ed69baa1ea->leave($__internal_ddedb4528d70c603510e24b26b6149b68145a09859574a357988f2ed69baa1ea_prof);
+        $__internal_d6e28e6c4b135c56b8173a0fe220829c351c80dd9be8a0cadf339b2f44c449df->leave($__internal_d6e28e6c4b135c56b8173a0fe220829c351c80dd9be8a0cadf339b2f44c449df_prof);
 
     }
 
     // line 3
     public function block_contenido($context, array $blocks = array())
     {
-        $__internal_ad3821758d7db038fc5b4e23dc15b8c3140f887f6b9baf50c58d95c8e04c3c52 = $this->env->getExtension("native_profiler");
-        $__internal_ad3821758d7db038fc5b4e23dc15b8c3140f887f6b9baf50c58d95c8e04c3c52->enter($__internal_ad3821758d7db038fc5b4e23dc15b8c3140f887f6b9baf50c58d95c8e04c3c52_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "contenido"));
+        $__internal_85b83a251632fcca2808b397795acc2361f26c4309dd0a22f71e6771450c7d3e = $this->env->getExtension("native_profiler");
+        $__internal_85b83a251632fcca2808b397795acc2361f26c4309dd0a22f71e6771450c7d3e->enter($__internal_85b83a251632fcca2808b397795acc2361f26c4309dd0a22f71e6771450c7d3e_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "contenido"));
 
         // line 4
         echo "
@@ -107,39 +107,53 @@ class __TwigTemplate_abb13cc24babbf6262c845a5d2a57782be2f172cc7fb605f5b36d19d39c
             echo "                ";
             if (((isset($context["flag"]) ? $context["flag"] : $this->getContext($context, "flag")) == 0)) {
                 // line 20
-                echo "                    <input type='checkbox' name=\"";
-                echo twig_escape_filter($this->env, $this->getAttribute($context["u"], "login", array()), "html", null, true);
-                echo "\" id=\"";
-                echo twig_escape_filter($this->env, $this->getAttribute($context["u"], "login", array()), "html", null, true);
-                echo "\" value=\"";
-                echo twig_escape_filter($this->env, $this->getAttribute($context["u"], "login", array()), "html", null, true);
-                echo "\" >";
-                echo twig_escape_filter($this->env, $this->getAttribute($context["u"], "login", array()), "html", null, true);
-                echo "<br>
-                ";
+                echo "                    ";
+                if (((isset($context["rol"]) ? $context["rol"] : $this->getContext($context, "rol")) == "developer")) {
+                    // line 21
+                    echo "                      <input type='checkbox' name=\"";
+                    echo twig_escape_filter($this->env, $this->getAttribute($context["u"], "login", array()), "html", null, true);
+                    echo "\" id=\"";
+                    echo twig_escape_filter($this->env, $this->getAttribute($context["u"], "login", array()), "html", null, true);
+                    echo "\" value=\"";
+                    echo twig_escape_filter($this->env, $this->getAttribute($context["u"], "login", array()), "html", null, true);
+                    echo "\" >";
+                    echo twig_escape_filter($this->env, $this->getAttribute($context["u"], "login", array()), "html", null, true);
+                    echo "<br>
+                    ";
+                }
+                // line 23
+                echo "                ";
             }
-            // line 22
+            // line 24
             echo "              ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['u'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 23
-        echo "                                   <input type=\"submit\" name=\"update\" value=\"";
-        echo $this->env->getExtension('translator')->getTranslator()->trans("Modify", array(), "messages");
-        echo "\">
-                                   <input type=\"submit\" name=\"delete\" value=\"";
-        // line 24
-        echo $this->env->getExtension('translator')->getTranslator()->trans("DELETE", array(), "messages");
-        echo "\">
-                                   <input type=\"hidden\" name=\"id\" value=\"";
         // line 25
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["task"]) ? $context["task"] : $this->getContext($context, "task")), "id", array()), "html", null, true);
-        echo "\">
- </form>
+        echo "
+              ";
+        // line 26
+        if (((isset($context["rol"]) ? $context["rol"] : $this->getContext($context, "rol")) == "developer")) {
+            // line 27
+            echo "                                   <input type=\"submit\" name=\"update\" value=\"";
+            echo $this->env->getExtension('translator')->getTranslator()->trans("Modify", array(), "messages");
+            echo "\">
+                                   <input type=\"submit\" name=\"delete\" value=\"";
+            // line 28
+            echo $this->env->getExtension('translator')->getTranslator()->trans("DELETE", array(), "messages");
+            echo "\">
+                                   <input type=\"hidden\" name=\"id\" value=\"";
+            // line 29
+            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["task"]) ? $context["task"] : $this->getContext($context, "task")), "id", array()), "html", null, true);
+            echo "\">
+              ";
+        }
+        // line 31
+        echo " </form>
 ";
         
-        $__internal_ad3821758d7db038fc5b4e23dc15b8c3140f887f6b9baf50c58d95c8e04c3c52->leave($__internal_ad3821758d7db038fc5b4e23dc15b8c3140f887f6b9baf50c58d95c8e04c3c52_prof);
+        $__internal_85b83a251632fcca2808b397795acc2361f26c4309dd0a22f71e6771450c7d3e->leave($__internal_85b83a251632fcca2808b397795acc2361f26c4309dd0a22f71e6771450c7d3e_prof);
 
     }
 
@@ -155,7 +169,7 @@ class __TwigTemplate_abb13cc24babbf6262c845a5d2a57782be2f172cc7fb605f5b36d19d39c
 
     public function getDebugInfo()
     {
-        return array (  137 => 25,  133 => 24,  128 => 23,  122 => 22,  110 => 20,  107 => 19,  101 => 18,  98 => 17,  96 => 16,  85 => 15,  82 => 14,  77 => 13,  74 => 12,  70 => 11,  66 => 10,  60 => 9,  54 => 8,  48 => 7,  43 => 5,  40 => 4,  34 => 3,  11 => 1,);
+        return array (  153 => 31,  148 => 29,  144 => 28,  139 => 27,  137 => 26,  134 => 25,  128 => 24,  125 => 23,  113 => 21,  110 => 20,  107 => 19,  101 => 18,  98 => 17,  96 => 16,  85 => 15,  82 => 14,  77 => 13,  74 => 12,  70 => 11,  66 => 10,  60 => 9,  54 => 8,  48 => 7,  43 => 5,  40 => 4,  34 => 3,  11 => 1,);
     }
 }
 /* {% extends 'intranetBundle::layout.html.twig' %}*/
@@ -177,12 +191,17 @@ class __TwigTemplate_abb13cc24babbf6262c845a5d2a57782be2f172cc7fb605f5b36d19d39c
 /*                     {% endif %}*/
 /*                 {% endfor %}*/
 /*                 {% if flag==0 %}*/
-/*                     <input type='checkbox' name="{{ u.login }}" id="{{ u.login }}" value="{{ u.login }}" >{{ u.login }}<br>*/
+/*                     {% if rol=='developer' %}*/
+/*                       <input type='checkbox' name="{{ u.login }}" id="{{ u.login }}" value="{{ u.login }}" >{{ u.login }}<br>*/
+/*                     {% endif %}*/
 /*                 {% endif %}*/
 /*               {% endfor %}*/
+/* */
+/*               {% if rol=='developer' %}*/
 /*                                    <input type="submit" name="update" value="{% trans %}Modify{% endtrans %}">*/
 /*                                    <input type="submit" name="delete" value="{% trans %}DELETE{% endtrans %}">*/
 /*                                    <input type="hidden" name="id" value="{{task.id}}">*/
+/*               {% endif %}*/
 /*  </form>*/
 /* {% endblock %}*/
 /* */

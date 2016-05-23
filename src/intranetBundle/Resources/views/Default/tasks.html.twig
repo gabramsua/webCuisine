@@ -4,7 +4,7 @@
 
 
 <table border=1>
-<tr >
+<tr>
     <th>id</th>
     <th style="padding-left: 10px;padding-right: 10px;">TITLE</th>
     <th style="padding-left: 10px;padding-right: 10px;">DESCRIPTION</th>
@@ -20,15 +20,15 @@
     </td>
     <td style="padding-left: 10px;padding-right: 10px;">{{ new.title }}</td>
     <td style="padding-left: 10px;padding-right: 10px;">{{ new.content }}</td>
-    <td style="padding-left: 10px;padding-right: 10px;">{{new.whocreate}}</td>
+    <td style="padding-left: 10px;padding-right: 10px;">{{ new.whocreate }}</td>
 </tr>
 {% endfor %}
 </table>
 <br><br>
 
-<form action="{{ path('intranet_newtask')}}" method="post" style="border: 1px solid;width: 500px;">
+{% if rol!='developer' %}
+<form action="{{ path('intranet_newtask') }}" method="post" style="border: 1px solid;width: 500px;">
     <input type="submit" name="newTask" value="NEW TASK">
   </form>
-
-
+{% endif %}
 {% endblock %}

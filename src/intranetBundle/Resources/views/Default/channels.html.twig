@@ -5,7 +5,7 @@
 
 <table border=1>
 <tr>
-    <th style="padding-left: 10px;padding-right: 10px;">NAME</th>
+    <th style="padding-left: 10px;padding-right: 10px;">{% trans %}Name{% endtrans %}</th>
 </tr>
 {% for c in listChannels %}
 <tr>
@@ -21,7 +21,7 @@
 <br><br>
 
 <form action="{{ path('intranet_newchannel')}}" method="post" style="border: 1px solid;width: 500px;">
-    <input type="submit" name="newChannel" value="NEW CHANNEL">
+    <input type="submit" name="newChannel" value="{% trans %}new_channel{% endtrans %}">
   </form>
 
 

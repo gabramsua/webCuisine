@@ -217,16 +217,6 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_insertnew')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::insertNewAction',  '_locale' => 'en',));
         }
 
-        // intranet_insertTask
-        if (preg_match('#^/(?P<_locale>en|fr|es)/insertTask$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_insertTask')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::insertTaskAction',  '_locale' => 'en',));
-        }
-
-        // intranet_newtask
-        if (preg_match('#^/(?P<_locale>en|fr|es)/createTask$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_newtask')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::createtaskAction',  '_locale' => 'en',));
-        }
-
         // intranet_crudnew
         if (preg_match('#^/(?P<_locale>en|fr|es)/editeNew$#s', $pathinfo, $matches)) {
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_crudnew')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::editeNewAction',  '_locale' => 'en',));
@@ -235,6 +225,16 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         // intranet_editnew
         if (preg_match('#^/(?P<_locale>en|fr|es)/updateNew$#s', $pathinfo, $matches)) {
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_editnew')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::updateNewAction',  '_locale' => 'en',));
+        }
+
+        // intranet_insertTask
+        if (preg_match('#^/(?P<_locale>en|fr|es)/insertTask$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_insertTask')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::insertTaskAction',  '_locale' => 'en',));
+        }
+
+        // intranet_newtask
+        if (preg_match('#^/(?P<_locale>en|fr|es)/createTask$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_newtask')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::createtaskAction',  '_locale' => 'en',));
         }
 
         // intranet_crudtask
