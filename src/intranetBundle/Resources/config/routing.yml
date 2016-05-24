@@ -231,6 +231,9 @@ intranet_testBD:
     requirements:
         _locale: en|fr|es
 
+test_email:
+    path:     /enviarMail
+    defaults: { _controller: intranetBundle:Default:testEmail}
 #*********************************************THE BOOK ROOM PART, NOT AVAILABLE *********************************************
 intranet_bookRoom:
     path:     /{_locale}/bookRoom

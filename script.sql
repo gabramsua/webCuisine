@@ -4,7 +4,9 @@ CREATE DATABASE IF NOT EXISTS webCuisine
 
 USE `webCuisine`;
 show tables;
-
+select user, host from mysql.user;
+update mysql.user set host="192.168.30.113" where user="nacho";
+delete from mysql.user where host="192.168.30.106";
 show create table users;
 
 select * from new_feed;

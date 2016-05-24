@@ -302,6 +302,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_testBD')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::usarDoctrineAction',  '_locale' => 'en',));
         }
 
+        // test_email
+        if ($pathinfo === '/enviarMail') {
+            return array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::testEmailAction',  '_route' => 'test_email',);
+        }
+
         // intranet_bookRoom
         if (preg_match('#^/(?P<_locale>en|fr|es)/bookRoom$#s', $pathinfo, $matches)) {
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_bookRoom')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::bookRoomAction',  '_locale' => 'en',));

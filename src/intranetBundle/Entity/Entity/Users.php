@@ -223,6 +223,6 @@ class Users
     }
 
     public function getNombreCompleto(){
-      return $this->nameU.$this->surnameU;
+      return $this->nameU." ".$this->surnameU;
     }
 }

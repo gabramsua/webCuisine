@@ -21,20 +21,20 @@ class __TwigTemplate_f4bd9b9596746641ef3344a3b399c235e7cfd526aae2509351bd42eb3ce
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_ff8a697369126738bbc43727df5fec430de3e551c02731af0494bae53396b87e = $this->env->getExtension("native_profiler");
-        $__internal_ff8a697369126738bbc43727df5fec430de3e551c02731af0494bae53396b87e->enter($__internal_ff8a697369126738bbc43727df5fec430de3e551c02731af0494bae53396b87e_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "intranetBundle:Default:editHours.html.twig"));
+        $__internal_1d3e04decb82a8e0268a7c3932c88f36a42e5c0803b7092757908f8747aeb5ca = $this->env->getExtension("native_profiler");
+        $__internal_1d3e04decb82a8e0268a7c3932c88f36a42e5c0803b7092757908f8747aeb5ca->enter($__internal_1d3e04decb82a8e0268a7c3932c88f36a42e5c0803b7092757908f8747aeb5ca_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "intranetBundle:Default:editHours.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_ff8a697369126738bbc43727df5fec430de3e551c02731af0494bae53396b87e->leave($__internal_ff8a697369126738bbc43727df5fec430de3e551c02731af0494bae53396b87e_prof);
+        $__internal_1d3e04decb82a8e0268a7c3932c88f36a42e5c0803b7092757908f8747aeb5ca->leave($__internal_1d3e04decb82a8e0268a7c3932c88f36a42e5c0803b7092757908f8747aeb5ca_prof);
 
     }
 
     // line 3
     public function block_contenido($context, array $blocks = array())
     {
-        $__internal_b4d2693ac9f2f74d5d1727f91ca5fa76f46e9ed13a3d7cab5a2ffd58f9941713 = $this->env->getExtension("native_profiler");
-        $__internal_b4d2693ac9f2f74d5d1727f91ca5fa76f46e9ed13a3d7cab5a2ffd58f9941713->enter($__internal_b4d2693ac9f2f74d5d1727f91ca5fa76f46e9ed13a3d7cab5a2ffd58f9941713_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "contenido"));
+        $__internal_3bb82bf5f2a072bb77d44aa191d5183e8351ac1dc64bb8b8e79d82272af15137 = $this->env->getExtension("native_profiler");
+        $__internal_3bb82bf5f2a072bb77d44aa191d5183e8351ac1dc64bb8b8e79d82272af15137->enter($__internal_3bb82bf5f2a072bb77d44aa191d5183e8351ac1dc64bb8b8e79d82272af15137_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "contenido"));
 
         // line 4
         echo "<h3>HOURS</h3><br>
@@ -56,7 +56,7 @@ class __TwigTemplate_f4bd9b9596746641ef3344a3b399c235e7cfd526aae2509351bd42eb3ce
         echo "\"><BR>
         ";
         // line 9
-        if (($this->getAttribute((isset($context["f"]) ? $context["f"] : $this->getContext($context, "f")), "isread", array()) != 0)) {
+        if (($this->getAttribute((isset($context["f"]) ? $context["f"] : $this->getContext($context, "f")), "isread", array()) == 0)) {
             // line 10
             echo "                                     <input type=\"submit\" value=\"Delete\" name=\"delete\">
                                      <input type=\"hidden\" name=\"typeF\" value=\"hours\">
@@ -72,7 +72,7 @@ class __TwigTemplate_f4bd9b9596746641ef3344a3b399c235e7cfd526aae2509351bd42eb3ce
 
 ";
         
-        $__internal_b4d2693ac9f2f74d5d1727f91ca5fa76f46e9ed13a3d7cab5a2ffd58f9941713->leave($__internal_b4d2693ac9f2f74d5d1727f91ca5fa76f46e9ed13a3d7cab5a2ffd58f9941713_prof);
+        $__internal_3bb82bf5f2a072bb77d44aa191d5183e8351ac1dc64bb8b8e79d82272af15137->leave($__internal_3bb82bf5f2a072bb77d44aa191d5183e8351ac1dc64bb8b8e79d82272af15137_prof);
 
     }
 
@@ -99,7 +99,7 @@ class __TwigTemplate_f4bd9b9596746641ef3344a3b399c235e7cfd526aae2509351bd42eb3ce
 /*         <label>Number of hours: </label><input type='number' name="numhours" id="numhours" value="{{ f.numhours }}"><BR>*/
 /*         <label>Between: </label><input type='date' id="betw" name="betw" value="{{f.date1}}"><BR>*/
 /*         <label>and: </label><input type='date' id="and" name="and" value="{{f.date2}}"><BR>*/
-/*         {% if f.isread!=0 %}*/
+/*         {% if f.isread==0 %}*/
 /*                                      <input type="submit" value="Delete" name="delete">*/
 /*                                      <input type="hidden" name="typeF" value="hours">*/
 /*                                      <input type="hidden" name="id" value="{{ f.id }}">*/

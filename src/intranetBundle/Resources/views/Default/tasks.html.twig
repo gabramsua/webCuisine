@@ -2,7 +2,7 @@
 
  {% block contenido %}
 
- {% if rol=='developer' %}
+ {% if rol!='developer' %}
  <form action="{{ path('intranet_newtask') }}" method="post" style="border: 1px solid;width: 500px;">
      <input type="submit" name="newTask" value="NEW TASK">
    </form>
