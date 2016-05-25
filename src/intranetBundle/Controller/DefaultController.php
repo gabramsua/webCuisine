@@ -20,6 +20,8 @@ use intranetBundle\Entity\Entity\Users_F_Expenses;
 use intranetBundle\Entity\Entity\Users_F_Trip;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\Query\Expr\Join;
+use phpmailer;
+use SMTP;
 
 class DefaultController extends Controller{
 
@@ -39,6 +41,7 @@ class DefaultController extends Controller{
     $rol=$userLDAP['user'][0]['memberof'][0];
     $name=$userLDAP['user'][0]['givenname'][0];
     $surname=$userLDAP['user'][0]['sn'][0];
+    $email=$userLDAP['user'][0]['mail'][0];
 
     //Method which split the whole role returned from LDAP used to know if the user is admin or not
     $m = new Model();
@@ -48,6 +51,7 @@ class DefaultController extends Controller{
     $_SESSION['surname']=$surname;   //SURNAME
     $_SESSION['userLDAP']=$logged;   //LOGIN
     $_SESSION['rol']=$r[1];          //Admin, Buo, User
+    $_SESSION['email']=$email;
 
     //Search the user in the local database with the credentials introduced before
     $user = $this->getDoctrine()
@@ -702,6 +706,7 @@ class DefaultController extends Controller{
       $choice=$_REQUEST['status'];
       $formtype=$_REQUEST['typeF'];
       $id=$_REQUEST['id'];
+      $status=-1;
 
       switch ($formtype) {
         case 'hours':
@@ -710,7 +715,7 @@ class DefaultController extends Controller{
                       $em = $this->getDoctrine()->getManager();
                       $product = $em->getRepository('intranetBundle:Entity\F_Hours')->find($id);
 
-                      $product->setStatus(1);
+                      $product->setStatus(1); $status=1;
                       $em->persist($product);
                       $em->flush();
                       return self::incomingFormsAction();
@@ -735,7 +740,7 @@ class DefaultController extends Controller{
                       $em = $this->getDoctrine()->getManager();
                       $product = $em->getRepository('intranetBundle:Entity\F_Vacation')->find($id);
 
-                      $product->setStatus(1);
+                      $product->setStatus(1); $status=1;
                       $em->persist($product);
                       $em->flush();
                       return self::incomingFormsAction();
@@ -747,6 +752,7 @@ class DefaultController extends Controller{
                       $product->setStatus(-1);
                       $em->persist($product);
                       $em->flush();
+                      self::sendEmailAction("gram1i",$formtype,$id,$status);
                       return self::incomingFormsAction();
                       break;
                 default:
@@ -760,7 +766,7 @@ class DefaultController extends Controller{
                       $em = $this->getDoctrine()->getManager();
                       $product = $em->getRepository('intranetBundle:Entity\F_Expenses')->find($id);
 
-                      $product->setStatus(1);
+                      $product->setStatus(1); $status=1;
                       $em->persist($product);
                       $em->flush();
                       return self::incomingFormsAction();
@@ -785,7 +791,7 @@ class DefaultController extends Controller{
                       $em = $this->getDoctrine()->getManager();
                       $product = $em->getRepository('intranetBundle:Entity\F_Trip')->find($id);
 
-                      $product->setStatus(1);
+                      $product->setStatus(1); $status=1;
                       $em->persist($product);
                       $em->flush();
                       return self::incomingFormsAction();
@@ -808,7 +814,8 @@ class DefaultController extends Controller{
               return new Response("A problem occurred during the submit of your ".$formtype." form");
               break;
       }
-
+      //TODO Definir EMAIL o LOGIN
+      self::sendEmailAction("gram1i",$formtype,$id,$status);
     }
 
     public function crudFormAction(){
@@ -1286,6 +1293,90 @@ class DefaultController extends Controller{
     }
 
 
+
+
+    public function sendEmailAction($login,$formtype,$id,$status){
+
+      $usuario = $this->getDoctrine()->getRepository('intranetBundle:Entity\Users')->findOneByLogin($login);
+
+      require("class.phpmailer.php");
+      require("class.smtp.php");
+
+      $mail = new PHPMailer();
+      $mail->PluginDir = "includes/";
+
+      //Con la propiedad Mailer le indicamos que vamos a usar un servidor smtp
+      $mail->Mailer = "smtp";
+
+      //Asignamos a Host el nombre de nuestro servidor smtp
+      $mail->Host = "webcity10.code-labs.net";
+
+      //Le indicamos que el servidor smtp requiere autenticación
+      $mail->SMTPAuth = true;
+      $mail->Username = "relay@appcuisine.de";
+      $mail->Password = "U41jLVpuROD0";
+
+      $mail->From = "intranet@appcuisine.de";
+      $mail->FromName = "webCuisine";
+
+      $mail->Timeout=40;
+
+      //Indicamos cual es la dirección de destino del correo
+      $mail->AddAddress($_SESSION['email']);
+
+      //Asignamos asunto y cuerpo del mensaje
+      //El cuerpo del mensaje lo ponemos en formato html, haciendo
+      //que se vea en negrita
+      switch ($usuario->getLang()) {
+        case 'es':
+          echo "LO ENVIASTE MOSTRO";
+          if ($status==1){
+            $mail->Subject = "Su formulario ha sido aceptado.";
+          }else{
+            $mail->Subject = "Su formulario ha sido rechazado.";
+          }
+          $mail->Body = "El formulario que mandaste del tipo ". $formtype.", por favor chequea que es correcto aquí.";
+          break;
+        case 'en':
+          $mail->Subject = "";
+          $mail->Body = "";
+          break;
+        case 'fr':
+          $mail->Subject = "";
+          $mail->Body = "";
+          break;
+
+        default:
+          # code...
+          break;
+      }
+      $mail->Subject = "";
+      $mail->Body = "";
+
+      //Definimos AltBody por si el destinatario del correo no admite email con formato html
+      $mail->AltBody = "Mensaje de prueba mandado con phpmailer en formato solo texto";
+
+      $exito = $mail->Send();
+echo $exito;
+      //Si el mensaje no ha podido ser enviado se realizaran 4 intentos más como mucho
+      //para intentar enviar el mensaje, cada intento se hará 5 segundos después
+      //del anterior, para ello se usa la funcion sleep
+      $intentos=1;
+      while ((!$exito) && ($intentos < 5)) {
+    	sleep(5);
+         	$exito = $mail->Send();
+         	$intentos=$intentos+1;
+       }
+
+       if(!$exito){
+    	    echo "<br>Problemas enviando correo electrónico.";
+    	    echo "<br/>".$mail->ErrorInfo;
+       }else{
+    	    echo "Mensaje enviado correctamente";
+       }
+     return $this->render('intranetBundle:Default:landing.html.twig');
+    }
+
     //TODELETE
     public function usarDoctrineAction(){
       $usuario = $this->getDoctrine()->getRepository('intranetBundle:Entity\Users')->findOneByLogin($_SESSION['userLDAP']); #findAll
@@ -1334,4 +1425,3 @@ class DefaultController extends Controller{
         }
 
 }
-//1366

@@ -1,7 +1,7 @@
 {% extends 'intranetBundle::layout.html.twig' %}
 
  {% block contenido %}
-CONTENIDO DEL USUARIO line.4
+ 
 <form action="{{ path('intranet_cruduser') }}" method="post" style="border: 1px solid;width: 500px;">
       <label>{% trans %}Name{% endtrans %}</label><input type='text' name="myName" id="myName" value="{{ me.nameU }}"><BR>
       <label>{% trans %}Surname{% endtrans %}</label><input type='text' id="mySurname" name="mySurname" value="{{ me.surnameU }}"><BR>
