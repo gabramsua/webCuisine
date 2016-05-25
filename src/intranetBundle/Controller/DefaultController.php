@@ -139,10 +139,10 @@ class DefaultController extends Controller{
       $allNews = $this->getDoctrine()
                       ->getRepository('intranetBundle:Entity\NewFeed')
                       ->findBy([], ['date' => 'DESC', 'time' => 'DESC']); #findAll
+      $params= array('new' => $allNews);
 
-      //TODO
       if (!$allNews) {
-        throw $this->createNotFoundException('No news found');
+        return $this->render('intranetBundle:Error:error_news.html.twig', $params);
       }
 
       $params= array('new' => $allNews);
@@ -156,10 +156,13 @@ class DefaultController extends Controller{
                       ->getRepository('intranetBundle:Entity\Tasks')
                       ->findAll();
 
-       //TODO
-       if (!$tareas) {throw $this->createNotFoundException('No product found for id '.$id);}
+        $myTasks = $this->getDoctrine()
+                       ->getRepository('intranetBundle:Entity\userstasks')
+                       ->findBy(['login' => $_SESSION['userLDAP']]);
 
-       $params=array('listTasks'=>$tareas, 'rol'=>$_SESSION['rol']);
+       if (!$tareas) {return $this->render('intranetBundle:Error:error_tasks.html.twig', $params);}
+
+       $params=array('listTasks'=>$tareas,'myTasks'=>$myTasks, 'rol'=>$_SESSION['rol']);
        return $this->render('intranetBundle:Default:tasks.html.twig',$params);
 
   }
@@ -170,8 +173,8 @@ class DefaultController extends Controller{
                     ->getRepository('intranetBundle:Entity\Channel')
                     ->findAll();
 
-    //TODO
-     if (!$channels) {throw $this->createNotFoundException('No product found for id '.$id);}
+
+     if (!$channels) {return $this->render('intranetBundle:Error:error_channels.html.twig', $params);}
 
      $params=array('listChannels'=>$channels);
      return $this->render('intranetBundle:Default:channels.html.twig',$params);
@@ -183,8 +186,9 @@ class DefaultController extends Controller{
       $usuario = $this->getDoctrine()
                       ->getRepository('intranetBundle:Entity\Users')
                       ->findAll(); #findAll
-      //TODO
-      if (!$usuario) {throw $this->createNotFoundException('No product found for id '.$id);}
+
+      //it makes no sense to do an !usuario error...
+
       $params=array('listUsers'=>$usuario);
       return $this->render('intranetBundle:Default:userManagement.html.twig',$params);
     }else return $this->redirect($this->generateUrl('intranet_homepage'));
@@ -202,10 +206,6 @@ class DefaultController extends Controller{
           return $this->render('intranetBundle:Default:settings.html.twig',$params);
       }
 
-      //TODO
-      if (!$usuario) {throw $this->createNotFoundException('No product found for id '.$id);}
-
-      //return $this->render('intranetBundle:Default:settings.html.twig',$params);
   }
 
   public function logoutAction(){
@@ -257,6 +257,7 @@ class DefaultController extends Controller{
         #           $intermediate = $em->getRepository('intranetBundle:Entity\userschannel')->findOneByIdNew($_REQUEST['myLogin']);
         #           $intermediate->setName($_REQUEST['channel']);
         #           $em->flush();
+        //TODO CHANELSSSSSSSS
 
        //if ADMIN, USERMANAGEMENT
        if($_SESSION['rol']=="Admin")
@@ -293,7 +294,7 @@ class DefaultController extends Controller{
 
     //In this page we can see all the forms send, order by non-read forms, date and type.
     public function incomingFormsAction(){
-      if($_SESSION['rol']!='developer'){
+      if($_SESSION['rol']=='developer'){
 
         //It is necessary to put all the forms of all tables in a big array and pour it into a table, which is viewed.
         //Not only all forms, but also the user who sent it.
@@ -332,8 +333,8 @@ class DefaultController extends Controller{
                     ->getRepository('intranetBundle:Entity\Users_F_Trip')
                     ->findAll();
 
-              if (!$formH||!$formV||!$formE||!$formT) {
-                throw $this->createNotFoundException('No news found');
+              if (!$formH && !$formV && !$formE && !$formT) {
+                return $this->render('intranetBundle:Error:error_forms.html.twig');
               }
 
           $params=array(
@@ -490,8 +491,7 @@ class DefaultController extends Controller{
      //But it is also needed to insert in the intermediate table
      //login, id_form => I need to take the ID of the last form inserted
      $lastForm = $this->getDoctrine()->getRepository('intranetBundle:Entity\F_Hours')->findBy([], ['id' => 'DESC'], 1);
-     if (!$lastForm) {throw $this->createNotFoundException('No news found');}
-     //echo $lastForm[0]->getId();
+
      $usform = new Users_F_Hours();
      $usform->setLogin($_SESSION['userLDAP']);
      $usform->setIdForm($lastForm[0]->getId());
@@ -520,7 +520,6 @@ class DefaultController extends Controller{
      //But it is also needed to insert in the intermediate table
      //login, id_form => I need to take the ID of the last form inserted
      $lastForm = $this->getDoctrine()->getRepository('intranetBundle:Entity\F_Vacation')->findBy([], ['id' => 'DESC'], 1);
-     if (!$lastForm) {throw $this->createNotFoundException('No news found');}
 
      $usform = new Users_F_Vacation();
      $usform->setLogin($_SESSION['userLDAP']);
@@ -553,7 +552,6 @@ class DefaultController extends Controller{
        //But it is also needed to insert in the intermediate table
        //login, id_form => I need to take the ID of the last form inserted
        $lastForm = $this->getDoctrine()->getRepository('intranetBundle:Entity\F_Expenses')->findBy([], ['id' => 'DESC'], 1);
-       if (!$lastForm) {throw $this->createNotFoundException('No news found');}
 
        $usform = new Users_F_Expenses();
        $usform->setLogin($_SESSION['userLDAP']);
@@ -587,8 +585,6 @@ class DefaultController extends Controller{
        //But it is also needed to insert in the intermediate table
        //login, id_form => I need to take the ID of the last form inserted
        $lastForm = $this->getDoctrine()->getRepository('intranetBundle:Entity\F_Trip')->findBy([], ['id' => 'DESC'], 1);
-       if (!$lastForm) {throw $this->createNotFoundException('No news found');}
-
        $usform = new Users_F_Trip();
        $usform->setLogin($_SESSION['userLDAP']);
        $usform->setIdForm($lastForm[0]->getId());
