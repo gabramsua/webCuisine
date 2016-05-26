@@ -21,20 +21,20 @@ class __TwigTemplate_f4bd9b9596746641ef3344a3b399c235e7cfd526aae2509351bd42eb3ce
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_1d3e04decb82a8e0268a7c3932c88f36a42e5c0803b7092757908f8747aeb5ca = $this->env->getExtension("native_profiler");
-        $__internal_1d3e04decb82a8e0268a7c3932c88f36a42e5c0803b7092757908f8747aeb5ca->enter($__internal_1d3e04decb82a8e0268a7c3932c88f36a42e5c0803b7092757908f8747aeb5ca_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "intranetBundle:Default:editHours.html.twig"));
+        $__internal_1353ccbb00615016b5efe7ca9ab7c71a11794de6e39fcb02290cac292f68aa5c = $this->env->getExtension("native_profiler");
+        $__internal_1353ccbb00615016b5efe7ca9ab7c71a11794de6e39fcb02290cac292f68aa5c->enter($__internal_1353ccbb00615016b5efe7ca9ab7c71a11794de6e39fcb02290cac292f68aa5c_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "intranetBundle:Default:editHours.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_1d3e04decb82a8e0268a7c3932c88f36a42e5c0803b7092757908f8747aeb5ca->leave($__internal_1d3e04decb82a8e0268a7c3932c88f36a42e5c0803b7092757908f8747aeb5ca_prof);
+        $__internal_1353ccbb00615016b5efe7ca9ab7c71a11794de6e39fcb02290cac292f68aa5c->leave($__internal_1353ccbb00615016b5efe7ca9ab7c71a11794de6e39fcb02290cac292f68aa5c_prof);
 
     }
 
     // line 3
     public function block_contenido($context, array $blocks = array())
     {
-        $__internal_3bb82bf5f2a072bb77d44aa191d5183e8351ac1dc64bb8b8e79d82272af15137 = $this->env->getExtension("native_profiler");
-        $__internal_3bb82bf5f2a072bb77d44aa191d5183e8351ac1dc64bb8b8e79d82272af15137->enter($__internal_3bb82bf5f2a072bb77d44aa191d5183e8351ac1dc64bb8b8e79d82272af15137_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "contenido"));
+        $__internal_1797eb91dc7cfa55004e2b2a2bffa9c4e403d0b2718df919e8d48f0659809708 = $this->env->getExtension("native_profiler");
+        $__internal_1797eb91dc7cfa55004e2b2a2bffa9c4e403d0b2718df919e8d48f0659809708->enter($__internal_1797eb91dc7cfa55004e2b2a2bffa9c4e403d0b2718df919e8d48f0659809708_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "contenido"));
 
         // line 4
         echo "<h3>HOURS</h3><br>
@@ -46,14 +46,14 @@ class __TwigTemplate_f4bd9b9596746641ef3344a3b399c235e7cfd526aae2509351bd42eb3ce
         // line 6
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["f"]) ? $context["f"] : $this->getContext($context, "f")), "numhours", array()), "html", null, true);
         echo "\"><BR>
-        <label>Between: </label><input type='date' id=\"betw\" name=\"betw\" value=\"";
+        <label>Reasons</label><input type=\"textarea\" name=\"reasons\" id=\"reasons\" value=";
         // line 7
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["f"]) ? $context["f"] : $this->getContext($context, "f")), "date1", array()), "html", null, true);
-        echo "\"><BR>
-        <label>and: </label><input type='date' id=\"and\" name=\"and\" value=\"";
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["f"]) ? $context["f"] : $this->getContext($context, "f")), "reasons", array()), "html", null, true);
+        echo "><br>
+        <label>Ticket</label><input type=\"text\" name=\"ticket\" id=\"ticket\" value=";
         // line 8
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["f"]) ? $context["f"] : $this->getContext($context, "f")), "date2", array()), "html", null, true);
-        echo "\"><BR>
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["f"]) ? $context["f"] : $this->getContext($context, "f")), "ticket", array()), "html", null, true);
+        echo "><br>
         ";
         // line 9
         if (($this->getAttribute((isset($context["f"]) ? $context["f"] : $this->getContext($context, "f")), "isread", array()) == 0)) {
@@ -72,7 +72,7 @@ class __TwigTemplate_f4bd9b9596746641ef3344a3b399c235e7cfd526aae2509351bd42eb3ce
 
 ";
         
-        $__internal_3bb82bf5f2a072bb77d44aa191d5183e8351ac1dc64bb8b8e79d82272af15137->leave($__internal_3bb82bf5f2a072bb77d44aa191d5183e8351ac1dc64bb8b8e79d82272af15137_prof);
+        $__internal_1797eb91dc7cfa55004e2b2a2bffa9c4e403d0b2718df919e8d48f0659809708->leave($__internal_1797eb91dc7cfa55004e2b2a2bffa9c4e403d0b2718df919e8d48f0659809708_prof);
 
     }
 
@@ -97,8 +97,8 @@ class __TwigTemplate_f4bd9b9596746641ef3344a3b399c235e7cfd526aae2509351bd42eb3ce
 /* <h3>HOURS</h3><br>*/
 /*  <form action="{{ path('intranet_editForm') }}" method="post" style="border: 1px solid;width: 500px;">*/
 /*         <label>Number of hours: </label><input type='number' name="numhours" id="numhours" value="{{ f.numhours }}"><BR>*/
-/*         <label>Between: </label><input type='date' id="betw" name="betw" value="{{f.date1}}"><BR>*/
-/*         <label>and: </label><input type='date' id="and" name="and" value="{{f.date2}}"><BR>*/
+/*         <label>Reasons</label><input type="textarea" name="reasons" id="reasons" value={{ f.reasons }}><br>*/
+/*         <label>Ticket</label><input type="text" name="ticket" id="ticket" value={{ f.ticket }}><br>*/
 /*         {% if f.isread==0 %}*/
 /*                                      <input type="submit" value="Delete" name="delete">*/
 /*                                      <input type="hidden" name="typeF" value="hours">*/

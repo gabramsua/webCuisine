@@ -16,8 +16,8 @@ class __TwigTemplate_d6d713f26b57dff2b511328a8cd9c45a1314eee6e8267bc884aa0fac247
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_f06777530794aeaa90345ede66276bf1ebaebd7b16b3fd8afef390bb650f1b6d = $this->env->getExtension("native_profiler");
-        $__internal_f06777530794aeaa90345ede66276bf1ebaebd7b16b3fd8afef390bb650f1b6d->enter($__internal_f06777530794aeaa90345ede66276bf1ebaebd7b16b3fd8afef390bb650f1b6d_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "::menu.html.twig"));
+        $__internal_590add5fcee51e7013e2f318b8ae9229e4202bcfa84c8a62d1061771e0735cdc = $this->env->getExtension("native_profiler");
+        $__internal_590add5fcee51e7013e2f318b8ae9229e4202bcfa84c8a62d1061771e0735cdc->enter($__internal_590add5fcee51e7013e2f318b8ae9229e4202bcfa84c8a62d1061771e0735cdc_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "::menu.html.twig"));
 
         // line 2
         echo "
@@ -25,14 +25,14 @@ class __TwigTemplate_d6d713f26b57dff2b511328a8cd9c45a1314eee6e8267bc884aa0fac247
         // line 3
         $this->displayBlock('menu', $context, $blocks);
         
-        $__internal_f06777530794aeaa90345ede66276bf1ebaebd7b16b3fd8afef390bb650f1b6d->leave($__internal_f06777530794aeaa90345ede66276bf1ebaebd7b16b3fd8afef390bb650f1b6d_prof);
+        $__internal_590add5fcee51e7013e2f318b8ae9229e4202bcfa84c8a62d1061771e0735cdc->leave($__internal_590add5fcee51e7013e2f318b8ae9229e4202bcfa84c8a62d1061771e0735cdc_prof);
 
     }
 
     public function block_menu($context, array $blocks = array())
     {
-        $__internal_60508053f720342f2d703e5f7838606263981aebbbf70bbefcc48571f31ca4f8 = $this->env->getExtension("native_profiler");
-        $__internal_60508053f720342f2d703e5f7838606263981aebbbf70bbefcc48571f31ca4f8->enter($__internal_60508053f720342f2d703e5f7838606263981aebbbf70bbefcc48571f31ca4f8_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "menu"));
+        $__internal_b2c0d91bd364bf98ce2f144395f5a8440674354e941a098725b8f905516bbbde = $this->env->getExtension("native_profiler");
+        $__internal_b2c0d91bd364bf98ce2f144395f5a8440674354e941a098725b8f905516bbbde->enter($__internal_b2c0d91bd364bf98ce2f144395f5a8440674354e941a098725b8f905516bbbde_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "menu"));
 
         // line 4
         echo "
@@ -87,19 +87,25 @@ class __TwigTemplate_d6d713f26b57dff2b511328a8cd9c45a1314eee6e8267bc884aa0fac247
         echo "\">";
         echo $this->env->getExtension('translator')->getTranslator()->trans("Request Business Trip", array(), "messages");
         echo "</a></li>
+            <li><a href=\"";
+        // line 25
+        echo $this->env->getExtension('routing')->getPath("intranet_formHome");
+        echo "\">";
+        echo $this->env->getExtension('translator')->getTranslator()->trans("Work at Home", array(), "messages");
+        echo "</a></li>
           </ul>
         </li>
         <!-- BOOKING ROOM PART
             <li><a href=\"";
-        // line 28
+        // line 29
         echo "\">";
         echo $this->env->getExtension('translator')->getTranslator()->trans("Book a room", array(), "messages");
         echo "</a></li>
         -->
       ";
-        // line 30
+        // line 31
         if (($this->getAttribute((isset($context["user"]) ? $context["user"] : $this->getContext($context, "user")), "onboard", array()) == 1)) {
-            // line 31
+            // line 32
             echo "              <li><a href='";
             echo $this->env->getExtension('routing')->getPath("intranet_tasks");
             echo "'>";
@@ -107,10 +113,10 @@ class __TwigTemplate_d6d713f26b57dff2b511328a8cd9c45a1314eee6e8267bc884aa0fac247
             echo "-<i> internships</i></a></li>\"
       ";
         }
-        // line 33
+        // line 34
         echo "      ";
         if (((isset($context["role"]) ? $context["role"] : $this->getContext($context, "role")) == "administrator")) {
-            // line 34
+            // line 35
             echo "              <li><a href='";
             echo $this->env->getExtension('routing')->getPath("intranet_userManagement");
             echo "'>";
@@ -118,41 +124,41 @@ class __TwigTemplate_d6d713f26b57dff2b511328a8cd9c45a1314eee6e8267bc884aa0fac247
             echo "-<i> admins</i></a></li>
       ";
         }
-        // line 36
+        // line 37
         echo "      ";
         if (((isset($context["role"]) ? $context["role"] : $this->getContext($context, "role")) == "buo")) {
-            // line 37
+            // line 38
             echo "              <li><a href='";
             echo $this->env->getExtension('routing')->getPath("intranet_news");
             echo "'";
             echo $this->env->getExtension('translator')->getTranslator()->trans(">News Feed", array(), "messages");
             echo "-<i> BÜOs</i></a></li>
               <li><a href='";
-            // line 38
+            // line 39
             echo $this->env->getExtension('routing')->getPath("intranet_channels");
             echo "'";
             echo $this->env->getExtension('translator')->getTranslator()->trans(">Channels", array(), "messages");
             echo "-<i> BÜOs</i></a></li>
       ";
         }
-        // line 40
+        // line 41
         echo "      ";
         if (((isset($context["role"]) ? $context["role"] : $this->getContext($context, "role")) == "buo")) {
-            // line 41
+            // line 42
             echo "          <li class=\"dropdown\">
             <a class=\"dropdown-toggle\" data-toggle=\"dropdown\">";
-            // line 42
+            // line 43
             echo $this->env->getExtension('translator')->getTranslator()->trans("Form Management", array(), "messages");
             echo "-<i> BÜOs</i><span class=\"caret\"></span></a>
             <ul class=\"dropdown-menu\">
               <li><a href='";
-            // line 44
+            // line 45
             echo $this->env->getExtension('routing')->getPath("intranet_incomingForms");
             echo "'>";
             echo $this->env->getExtension('translator')->getTranslator()->trans("Incoming Forms", array(), "messages");
             echo "</a></li>
               <li><a href=\"";
-            // line 45
+            // line 46
             echo $this->env->getExtension('routing')->getPath("intranet_oldForms");
             echo "\">";
             echo $this->env->getExtension('translator')->getTranslator()->trans("Old Forms", array(), "messages");
@@ -160,33 +166,33 @@ class __TwigTemplate_d6d713f26b57dff2b511328a8cd9c45a1314eee6e8267bc884aa0fac247
             </ul>
           </li>";
         }
-        // line 48
+        // line 49
         echo "      </ul>
       <ul class=\"nav navbar-nav navbar-right\">
       <li><a href=\"";
-        // line 50
+        // line 51
         echo $this->env->getExtension('routing')->getPath("intranet_testBD");
         echo "\"><b>";
         echo $this->env->getExtension('translator')->getTranslator()->trans("TEST PAGE", array(), "messages");
         echo "</b></a></li>
         <li><a href=\"";
-        // line 51
+        // line 52
         echo $this->env->getExtension('routing')->getPath("intranet_translation");
         echo "\"><b>";
         echo $this->env->getExtension('translator')->getTranslator()->trans("Lang", array(), "messages");
         echo "</b></a></li>
         <li><a href=\"#\"><b>";
-        // line 52
+        // line 53
         echo $this->env->getExtension('translator')->getTranslator()->trans("Hello", array(), "messages");
         echo " <?php echo \$_SESSION[\"usuario\"]; ?></b></a></li>
         <li><a href=\"";
-        // line 53
+        // line 54
         echo $this->env->getExtension('routing')->getPath("intranet_settings");
         echo "\"><span class=\"glyphicon glyphicon-user\"></span> ";
         echo $this->env->getExtension('translator')->getTranslator()->trans("Settings", array(), "messages");
         echo "</a></li>
         <li><a href=\"";
-        // line 54
+        // line 55
         echo $this->env->getExtension('routing')->getPath("intranet_logout");
         echo "\"><span class=\"glyphicon glyphicon-log-in\"></span> Log out</a></li>
       </ul>
@@ -195,7 +201,7 @@ class __TwigTemplate_d6d713f26b57dff2b511328a8cd9c45a1314eee6e8267bc884aa0fac247
   </nav>
   ";
         
-        $__internal_60508053f720342f2d703e5f7838606263981aebbbf70bbefcc48571f31ca4f8->leave($__internal_60508053f720342f2d703e5f7838606263981aebbbf70bbefcc48571f31ca4f8_prof);
+        $__internal_b2c0d91bd364bf98ce2f144395f5a8440674354e941a098725b8f905516bbbde->leave($__internal_b2c0d91bd364bf98ce2f144395f5a8440674354e941a098725b8f905516bbbde_prof);
 
     }
 
@@ -206,7 +212,7 @@ class __TwigTemplate_d6d713f26b57dff2b511328a8cd9c45a1314eee6e8267bc884aa0fac247
 
     public function getDebugInfo()
     {
-        return array (  190 => 54,  184 => 53,  180 => 52,  174 => 51,  168 => 50,  164 => 48,  156 => 45,  150 => 44,  145 => 42,  142 => 41,  139 => 40,  132 => 38,  125 => 37,  122 => 36,  114 => 34,  111 => 33,  103 => 31,  101 => 30,  95 => 28,  86 => 24,  80 => 23,  74 => 22,  68 => 21,  62 => 20,  57 => 18,  49 => 13,  38 => 4,  26 => 3,  23 => 2,);
+        return array (  196 => 55,  190 => 54,  186 => 53,  180 => 52,  174 => 51,  170 => 49,  162 => 46,  156 => 45,  151 => 43,  148 => 42,  145 => 41,  138 => 39,  131 => 38,  128 => 37,  120 => 35,  117 => 34,  109 => 32,  107 => 31,  101 => 29,  92 => 25,  86 => 24,  80 => 23,  74 => 22,  68 => 21,  62 => 20,  57 => 18,  49 => 13,  38 => 4,  26 => 3,  23 => 2,);
     }
 }
 /* {# {% extends '::base.html.twig' %} #}*/
@@ -233,6 +239,7 @@ class __TwigTemplate_d6d713f26b57dff2b511328a8cd9c45a1314eee6e8267bc884aa0fac247
 /*             <li><a href="{{ path('intranet_formVacations')}}">{% trans %}Vacation{% endtrans %}</a></li>*/
 /*             <li><a href="{{ path('intranet_formExpenses')}}">{% trans %}Expenses{% endtrans %}</a></li>*/
 /*             <li><a href="{{ path('intranet_formRequest')}}">{% trans %}Request Business Trip{% endtrans %}</a></li>*/
+/*             <li><a href="{{ path('intranet_formHome')}}">{% trans %}Work at Home{% endtrans %}</a></li>*/
 /*           </ul>*/
 /*         </li>*/
 /*         <!-- BOOKING ROOM PART*/

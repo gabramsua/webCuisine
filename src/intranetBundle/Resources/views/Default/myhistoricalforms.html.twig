@@ -5,18 +5,17 @@
 <table border=1>
 <tr >
 <th></th>
-    <th>ID</th>
-    <th>FROM</th>
+    <th>numHours</th>
+    <th>Ticket</th>
     <th>TO</th>
 </tr>
 {% for forms in myHours %}
 {% for f in forms %}
 <tr>
   	<td><form action='{{ path('intranet_crudForm') }}' method='post'><input type="hidden" name="typeF" value="hours">
-    <input type="hidden" name="id" value="{{f.id}}"> <input type="submit" value="VERME" ></form></td>
-    <td style="padding-left: 10px;padding-right: 10px;">{{ f.id }}</td>
-    <td style="padding-left: 10px;padding-right: 10px;">{{ f.date1 }}</td>
-    <td style="padding-left: 10px;padding-right: 10px;">{{ f.date2 }}</td>
+    <input type="hidden" name="id" value="{{f.id}}"> <input type="submit" value="VER" ></form></td>
+    <td style="padding-left: 10px;padding-right: 10px;">{{ f.numhours }}</td>
+    <td style="padding-left: 10px;padding-right: 10px;">{{ f.ticket }}</td>
 </tr>
 {% endfor %}
 {% endfor %}

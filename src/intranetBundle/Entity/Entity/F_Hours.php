@@ -22,12 +22,12 @@ class F_Hours
     /**
      * @var string
      */
-    private $date1;
+    private $reasons;
 
     /**
      * @var string
      */
-    private $date2;
+    private $ticket;
 
     /**
      * @var int
@@ -86,49 +86,49 @@ class F_Hours
     }
 
     /**
-     * Set date1
+     * Set reasons
      *
-     * @param string $date1
+     * @param string $reasons
      * @return F_Hours
      */
-    public function setDate1($date1)
+    public function setReasons($reasons)
     {
-        $this->date1 = $date1;
+        $this->reasons = $reasons;
 
         return $this;
     }
 
     /**
-     * Get date1
+     * Get reasons
      *
      * @return string
      */
-    public function getDate1()
+    public function getReasons()
     {
-        return $this->date1;
+        return $this->reasons;
     }
 
     /**
-     * Set date2
+     * Set ticket
      *
-     * @param string $date2
+     * @param string $ticket
      * @return F_Hours
      */
-    public function setDate2($date2)
+    public function setTicket($ticket)
     {
-        $this->date2 = $date2;
+        $this->ticket = $ticket;
 
         return $this;
     }
 
     /**
-     * Get date2
+     * Get ticket
      *
      * @return string
      */
-    public function getDate2()
+    public function getTicket()
     {
-        return $this->date2;
+        return $this->ticket;
     }
 
     /**

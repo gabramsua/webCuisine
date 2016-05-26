@@ -138,6 +138,10 @@ class DefaultController extends Controller{
         return $this->render('intranetBundle:Default:formExpenses.html.twig');
   }
 
+  public function formHomeAction(){
+        return $this->render('intranetBundle:Default:formHome.html.twig');
+  }
+
   public function newsAction(){
     if($_SESSION['rol']!='developer'){
       //Obtains all the news ordered by date DESC
@@ -1410,9 +1414,9 @@ class DefaultController extends Controller{
     }
 
     //TODELETE
-           public function translationAction(){
-               return $this->render( 'intranetBundle:Default:translate.html.twig'  );
-           }
+     public function translationAction(){
+         return $this->render( 'intranetBundle:Default:translate.html.twig'  );
+     }
 
     #*********************************************THE BOOK ROOM PART, NOT AVAILABLE *********************************************#
       public function bookRoomAction(){

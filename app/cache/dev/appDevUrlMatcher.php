@@ -157,6 +157,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_formExpenses')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::formExpensesAction',  '_locale' => 'en',));
         }
 
+        // intranet_formHome
+        if (preg_match('#^/(?P<_locale>en|fr|es)/formWork_At_Home$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_formHome')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::formHomeAction',  '_locale' => 'en',));
+        }
+
         // intranet_formRequest
         if (preg_match('#^/(?P<_locale>en|fr|es)/formRequest$#s', $pathinfo, $matches)) {
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'intranet_formRequest')), array (  '_controller' => 'intranetBundle\\Controller\\DefaultController::formRequestAction',  '_locale' => 'en',));

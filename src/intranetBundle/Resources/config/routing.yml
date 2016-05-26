@@ -52,6 +52,12 @@ intranet_formExpenses:
     requirements:
         _locale: en|fr|es
 
+intranet_formHome:
+    path:     /{_locale}/formWork_At_Home
+    defaults: { _controller: intranetBundle:Default:formHome, _locale:en }
+    requirements:
+        _locale: en|fr|es
+
 intranet_formRequest:
     path:     /{_locale}/formRequest
     defaults: { _controller: intranetBundle:Default:formRequest, _locale:en }

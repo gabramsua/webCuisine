@@ -11,12 +11,12 @@ intranetBundle\Entity\Entity\F_Hours:
     fields:
         numHours:
             type: integer
-        date1:
+        reasons:
             type: string
-            length: '10'
-        date2:
+            length: '255'
+        ticket:
             type: string
-            length: '10'
+            length: '20'
         status:
             type: integer
             nullable: true
