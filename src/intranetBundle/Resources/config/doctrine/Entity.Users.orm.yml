@@ -20,6 +20,10 @@ intranetBundle\Entity\Entity\Users:
             type: string
             length: '30'
             column: surname_u
+        email:
+            type: string
+            length: '50'
+            column: email
         lang:
             type: string
             length: '15'

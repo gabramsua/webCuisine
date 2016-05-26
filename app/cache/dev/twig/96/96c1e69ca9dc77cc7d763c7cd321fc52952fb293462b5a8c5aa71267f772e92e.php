@@ -21,20 +21,20 @@ class __TwigTemplate_7e3dc4726dfc096b7a40a3f7792d43ea3ad84fbe88e03721c97ccd1b50a
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_03245991e21da93adfcb74dc363631c34aac9ad23f5861fd4470e334fdd43ca4 = $this->env->getExtension("native_profiler");
-        $__internal_03245991e21da93adfcb74dc363631c34aac9ad23f5861fd4470e334fdd43ca4->enter($__internal_03245991e21da93adfcb74dc363631c34aac9ad23f5861fd4470e334fdd43ca4_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "intranetBundle:Error:error_login.html.twig"));
+        $__internal_5597350fc59ff226e636250311603bc6bd4fe7afb29929d10d03bb2f58f5c4a4 = $this->env->getExtension("native_profiler");
+        $__internal_5597350fc59ff226e636250311603bc6bd4fe7afb29929d10d03bb2f58f5c4a4->enter($__internal_5597350fc59ff226e636250311603bc6bd4fe7afb29929d10d03bb2f58f5c4a4_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "intranetBundle:Error:error_login.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_03245991e21da93adfcb74dc363631c34aac9ad23f5861fd4470e334fdd43ca4->leave($__internal_03245991e21da93adfcb74dc363631c34aac9ad23f5861fd4470e334fdd43ca4_prof);
+        $__internal_5597350fc59ff226e636250311603bc6bd4fe7afb29929d10d03bb2f58f5c4a4->leave($__internal_5597350fc59ff226e636250311603bc6bd4fe7afb29929d10d03bb2f58f5c4a4_prof);
 
     }
 
     // line 3
     public function block_contenido($context, array $blocks = array())
     {
-        $__internal_b4eb07e6b43667d6c1aae4861c0f7209268a8a7d659d0a5995acca1025aadcca = $this->env->getExtension("native_profiler");
-        $__internal_b4eb07e6b43667d6c1aae4861c0f7209268a8a7d659d0a5995acca1025aadcca->enter($__internal_b4eb07e6b43667d6c1aae4861c0f7209268a8a7d659d0a5995acca1025aadcca_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "contenido"));
+        $__internal_170fd125ef561396250ce84fd716ac325d695263511042580b27a3b8c445fcd9 = $this->env->getExtension("native_profiler");
+        $__internal_170fd125ef561396250ce84fd716ac325d695263511042580b27a3b8c445fcd9->enter($__internal_170fd125ef561396250ce84fd716ac325d695263511042580b27a3b8c445fcd9_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "contenido"));
 
         // line 4
         echo $this->env->getExtension('translator')->getTranslator()->trans("you dont exist", array(), "messages");
@@ -76,8 +76,14 @@ class __TwigTemplate_7e3dc4726dfc096b7a40a3f7792d43ea3ad84fbe88e03721c97ccd1b50a
         echo " <input type='text' id=\"mySurname\"name=\"mySurname\" value=\"";
         echo twig_escape_filter($this->env, (isset($context["surname"]) ? $context["surname"] : $this->getContext($context, "surname")), "html", null, true);
         echo "\" class=\"form-control\" readonly><BR>
-      <label>";
+      ";
         // line 20
+        echo $this->env->getExtension('translator')->getTranslator()->trans("Email", array(), "messages");
+        echo " <input type='text' id=\"myEmail\"name=\"myEmail\" value=\"";
+        echo twig_escape_filter($this->env, (isset($context["email"]) ? $context["email"] : $this->getContext($context, "email")), "html", null, true);
+        echo "\" class=\"form-control\" readonly><BR>
+      <label>";
+        // line 21
         echo $this->env->getExtension('translator')->getTranslator()->trans("Language", array(), "messages");
         echo "</label>
             <select class=\"form-control\" name=\"myLang\">
@@ -89,24 +95,24 @@ class __TwigTemplate_7e3dc4726dfc096b7a40a3f7792d43ea3ad84fbe88e03721c97ccd1b50a
       <BR>
 
       <label>";
-        // line 29
+        // line 30
         echo $this->env->getExtension('translator')->getTranslator()->trans("Photo", array(), "messages");
         echo "</label><input type='file' id=\"myPhoto\"name=\"myPhoto\"><img src=\"\"><BR>
       <label class=\"radio\">";
-        // line 30
+        // line 31
         echo $this->env->getExtension('translator')->getTranslator()->trans("Notifications", array(), "messages");
         echo "</label>
                                   <input type='radio' id=\"myNotification\" name=\"myNotifications\" value=\"1\"><label for=\"myNotification\">ON</label>
                                   <input type='radio' id=\"myNotifications\" name=\"myNotifications\" value=\"0\"   checked ><label for=\"myNotifications\">OFF</label><br>
                                   <input type=\"submit\" value=\"";
-        // line 33
+        // line 34
         echo $this->env->getExtension('translator')->getTranslator()->trans("OK", array(), "messages");
         echo "\">
  </form>
 
 ";
         
-        $__internal_b4eb07e6b43667d6c1aae4861c0f7209268a8a7d659d0a5995acca1025aadcca->leave($__internal_b4eb07e6b43667d6c1aae4861c0f7209268a8a7d659d0a5995acca1025aadcca_prof);
+        $__internal_170fd125ef561396250ce84fd716ac325d695263511042580b27a3b8c445fcd9->leave($__internal_170fd125ef561396250ce84fd716ac325d695263511042580b27a3b8c445fcd9_prof);
 
     }
 
@@ -122,7 +128,7 @@ class __TwigTemplate_7e3dc4726dfc096b7a40a3f7792d43ea3ad84fbe88e03721c97ccd1b50a
 
     public function getDebugInfo()
     {
-        return array (  103 => 33,  97 => 30,  93 => 29,  81 => 20,  75 => 19,  69 => 18,  65 => 17,  56 => 15,  52 => 14,  47 => 11,  45 => 8,  42 => 7,  40 => 4,  34 => 3,  11 => 1,);
+        return array (  109 => 34,  103 => 31,  99 => 30,  87 => 21,  81 => 20,  75 => 19,  69 => 18,  65 => 17,  56 => 15,  52 => 14,  47 => 11,  45 => 8,  42 => 7,  40 => 4,  34 => 3,  11 => 1,);
     }
 }
 /* {% extends 'intranetBundle::layout2.html.twig' %}*/
@@ -144,6 +150,7 @@ class __TwigTemplate_7e3dc4726dfc096b7a40a3f7792d43ea3ad84fbe88e03721c97ccd1b50a
 /*       Login: <input type='text' name="myLogin" id="myLogin" value="{{login}}" class="form-control" readonly>*/
 /*       {% trans %}Name{% endtrans %} <input type='text' name="myName" id="myName" value="{{name}}" class="form-control" readonly>*/
 /*       {% trans %}Surname{% endtrans %} <input type='text' id="mySurname"name="mySurname" value="{{surname}}" class="form-control" readonly><BR>*/
+/*       {% trans %}Email{% endtrans %} <input type='text' id="myEmail"name="myEmail" value="{{email}}" class="form-control" readonly><BR>*/
 /*       <label>{% trans %}Language{% endtrans %}</label>*/
 /*             <select class="form-control" name="myLang">*/
 /*               <option value="es">ES</option>*/

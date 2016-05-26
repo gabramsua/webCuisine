@@ -8,8 +8,12 @@
  class Model extends Controller{
 
    protected $conexion;
+   protected $n;
+   protected $p;
 
    public function login($ldaprdn,$ldappass){
+      $GLOBALS['n']=$ldaprdn;
+      $GLOBALS['p']=$ldappass;
       $ldapDomainName = 'cuisine.lan';
       // conexión al servidor LDAP
       $ldapconn = ldap_connect($ldapDomainName, 3268) or die("Could not connect to LDAP server.");
@@ -39,14 +43,5 @@
       //In this way I am always taking the rol after the first CN, So I suppose it is the same for developers, or admins, or buos or whatever
       return explode("=",explode(",",$rol)[0]);
    }
-
-
-   //NOT USED
-   //Just to test Doctrine here in the model
-   public function dimeRol(){
-      $usuario = $this->getDoctrine()->getRepository('intranetBundle:Entity\Users')->findOneByLogin('gram1i');
-      return $usuario;
-   }
-
 
 }

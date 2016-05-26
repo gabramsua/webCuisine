@@ -14,8 +14,21 @@ class NewsController extends Controller{
                       ->getRepository('intranetBundle:Entity\NewFeed')
                       ->findAll();
 
-      //if (!$user) {throw $this->createNotFoundException('No product found for id '.$id);}
-      $params=array('new'=>$news);
+      $newschannel=array();
+
+      foreach ($news as $index => $object) {
+          $n = $this->getDoctrine()
+                    ->getRepository('intranetBundle:Entity\channelnew_feed')
+                    ->findBy(['idNew' => $object->getId()]);
+          
+          foreach ($n as $index => $object2) {
+              if($object->getId()==$object2->getIdNew()){
+                array_push($newschannel,$object);
+              }
+          }
+      }
+
+      $params=array('new'=>$newschannel);
       return $this->render('::news.html.twig', $params);
    }
 

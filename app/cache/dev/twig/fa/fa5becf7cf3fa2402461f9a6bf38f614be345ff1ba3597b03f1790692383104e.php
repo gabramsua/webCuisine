@@ -21,23 +21,23 @@ class __TwigTemplate_4cfb2aa281f3ab8391dc5b95722da8188e422dbbb1d05c6d942d9ded466
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_7a6b1b45041bdf73e3d346ba553d50cbfd30e6fd2e40f1f31f3d7399ce5a3936 = $this->env->getExtension("native_profiler");
-        $__internal_7a6b1b45041bdf73e3d346ba553d50cbfd30e6fd2e40f1f31f3d7399ce5a3936->enter($__internal_7a6b1b45041bdf73e3d346ba553d50cbfd30e6fd2e40f1f31f3d7399ce5a3936_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "intranetBundle:Default:settings.html.twig"));
+        $__internal_e6f4eaeba838f456278d3be42b75a1b05ab80fd7f461bae1fd1317750832a57b = $this->env->getExtension("native_profiler");
+        $__internal_e6f4eaeba838f456278d3be42b75a1b05ab80fd7f461bae1fd1317750832a57b->enter($__internal_e6f4eaeba838f456278d3be42b75a1b05ab80fd7f461bae1fd1317750832a57b_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "intranetBundle:Default:settings.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_7a6b1b45041bdf73e3d346ba553d50cbfd30e6fd2e40f1f31f3d7399ce5a3936->leave($__internal_7a6b1b45041bdf73e3d346ba553d50cbfd30e6fd2e40f1f31f3d7399ce5a3936_prof);
+        $__internal_e6f4eaeba838f456278d3be42b75a1b05ab80fd7f461bae1fd1317750832a57b->leave($__internal_e6f4eaeba838f456278d3be42b75a1b05ab80fd7f461bae1fd1317750832a57b_prof);
 
     }
 
     // line 3
     public function block_contenido($context, array $blocks = array())
     {
-        $__internal_8897130f6a5203dbba054785e6e2c39e31efbd4b99d8265e413c071f30b5dc55 = $this->env->getExtension("native_profiler");
-        $__internal_8897130f6a5203dbba054785e6e2c39e31efbd4b99d8265e413c071f30b5dc55->enter($__internal_8897130f6a5203dbba054785e6e2c39e31efbd4b99d8265e413c071f30b5dc55_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "contenido"));
+        $__internal_e740d6a4c68a63291dc8d3544f97f36518035e541b28b61cf309fa6c71da31be = $this->env->getExtension("native_profiler");
+        $__internal_e740d6a4c68a63291dc8d3544f97f36518035e541b28b61cf309fa6c71da31be->enter($__internal_e740d6a4c68a63291dc8d3544f97f36518035e541b28b61cf309fa6c71da31be_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "contenido"));
 
         // line 4
-        echo "CONTENIDO DEL USUARIO line.4
+        echo " 
 <form action=\"";
         // line 5
         echo $this->env->getExtension('routing')->getPath("intranet_cruduser");
@@ -133,7 +133,7 @@ class __TwigTemplate_4cfb2aa281f3ab8391dc5b95722da8188e422dbbb1d05c6d942d9ded466
 
 ";
         
-        $__internal_8897130f6a5203dbba054785e6e2c39e31efbd4b99d8265e413c071f30b5dc55->leave($__internal_8897130f6a5203dbba054785e6e2c39e31efbd4b99d8265e413c071f30b5dc55_prof);
+        $__internal_e740d6a4c68a63291dc8d3544f97f36518035e541b28b61cf309fa6c71da31be->leave($__internal_e740d6a4c68a63291dc8d3544f97f36518035e541b28b61cf309fa6c71da31be_prof);
 
     }
 
@@ -155,7 +155,7 @@ class __TwigTemplate_4cfb2aa281f3ab8391dc5b95722da8188e422dbbb1d05c6d942d9ded466
 /* {% extends 'intranetBundle::layout.html.twig' %}*/
 /* */
 /*  {% block contenido %}*/
-/* CONTENIDO DEL USUARIO line.4*/
+/*  */
 /* <form action="{{ path('intranet_cruduser') }}" method="post" style="border: 1px solid;width: 500px;">*/
 /*       <label>{% trans %}Name{% endtrans %}</label><input type='text' name="myName" id="myName" value="{{ me.nameU }}"><BR>*/
 /*       <label>{% trans %}Surname{% endtrans %}</label><input type='text' id="mySurname" name="mySurname" value="{{ me.surnameU }}"><BR>*/

@@ -25,12 +25,11 @@ use SMTP;
 
 class DefaultController extends Controller{
 
-
   //Verify LDAP credentials
   //link LDAP with the database if not, creates a new user in DB
   public function loginAction(){
     $ldaprdn  = $_POST['login'];     // ldap rdn or dn
-    $ldappass =$_POST['pass'];
+    $ldappass = $_POST['pass'];
 
     $m = new Model();
     $params = array('user' => $m->login($ldaprdn,$ldappass),);
@@ -81,7 +80,8 @@ class DefaultController extends Controller{
       'login'=>$_SESSION['userLDAP'],
       'name'=>$_SESSION['name'],
       'surname'=>$_SESSION['surname'],
-      'rol'=>$_SESSION['rol']
+      'rol'=>$_SESSION['rol'],
+      'email'=>$_SESSION['email']
     );
     return $this->render('intranetBundle:Error:error_login.html.twig', $params);
   }
@@ -93,6 +93,7 @@ class DefaultController extends Controller{
      $newuser->setLogin($_REQUEST['myLogin']);
      $newuser->setNameU($_REQUEST['myName']);
      $newuser->setSurnameU($_REQUEST['mySurname']);
+     $newuser->setEmail($_REQUEST['myEmail']);
      $newuser->setLang($_REQUEST['myLang']);
      $newuser->setPhoto($_REQUEST['myPhoto']);
      $newuser->setOnboard(0);
@@ -242,10 +243,7 @@ class DefaultController extends Controller{
        $em = $this->getDoctrine()->getManager();
        $product = $em->getRepository('intranetBundle:Entity\Users')->findOneByLogin($_REQUEST['myLogin']);
 
-       #UPSERT => Si no existe, tengo que hacer insert, pero si existe previamente, hay que ver si se borra(actualiza)
-       #       => Ya existe un usuario con ese Login
-
-       $product->setLogin($_REQUEST['myLogin']);
+      //  $product->setLogin($_REQUEST['myLogin']);
        $product->setNameU($_REQUEST['myName']);
        $product->setSurnameU($_REQUEST['mySurname']);
        $product->setLang($_REQUEST['myLanguage']);
@@ -255,13 +253,6 @@ class DefaultController extends Controller{
         }
        $product->setNotifications($_REQUEST['myNotifications']);
        $em->flush();
-       //TODO
-        #UPSERT => Si no existe, tengo que hacer insert, pero si existe previamente, hay que ver si se borra(actualiza)
-        #       => Ya existe un usuario con ese Login
-        #           $intermediate = $em->getRepository('intranetBundle:Entity\userschannel')->findOneByIdNew($_REQUEST['myLogin']);
-        #           $intermediate->setName($_REQUEST['channel']);
-        #           $em->flush();
-        //TODO CHANELSSSSSSSS
 
        //if ADMIN, USERMANAGEMENT
        if($_SESSION['rol']=="Admin")
@@ -707,77 +698,49 @@ class DefaultController extends Controller{
       $formtype=$_REQUEST['typeF'];
       $id=$_REQUEST['id'];
       $status=-1;
-
-      switch ($formtype) {
+      //Define login of the user
+      switch ($_REQUEST['typeF']) {
         case 'hours':
-              switch ($choice) {
-                case 'accept':
-                      $em = $this->getDoctrine()->getManager();
-                      $product = $em->getRepository('intranetBundle:Entity\F_Hours')->find($id);
-
-                      $product->setStatus(1); $status=1;
-                      $em->persist($product);
-                      $em->flush();
-                      return self::incomingFormsAction();
-                      break;
-                case 'reject':
-                      $em = $this->getDoctrine()->getManager();
-                      $product = $em->getRepository('intranetBundle:Entity\F_Hours')->find($id);
-
-                      $product->setStatus(-1);
-                      $em->persist($product);
-                      $em->flush();
-                      return self::incomingFormsAction();
-                      break;
-                default:
-                      return new Response("A problem occurred during the submit of your choice");
-                      break;
-              }
+              $formtype='Hours';
               break;
         case 'vacation':
-              switch ($choice) {
-                case 'accept':
-                      $em = $this->getDoctrine()->getManager();
-                      $product = $em->getRepository('intranetBundle:Entity\F_Vacation')->find($id);
-
-                      $product->setStatus(1); $status=1;
-                      $em->persist($product);
-                      $em->flush();
-                      return self::incomingFormsAction();
-                      break;
-                case 'reject':
-                      $em = $this->getDoctrine()->getManager();
-                      $product = $em->getRepository('intranetBundle:Entity\F_Vacation')->find($id);
-
-                      $product->setStatus(-1);
-                      $em->persist($product);
-                      $em->flush();
-                      self::sendEmailAction("gram1i",$formtype,$id,$status);
-                      return self::incomingFormsAction();
-                      break;
-                default:
-                      return new Response("A problem occurred during the submit of your choice");
-                      break;
-              }
+              $formtype='Vacation';
               break;
         case 'expenses':
+              $formtype='Expenses';
+              break;
+        case 'trip':
+              $formtype='Trip';
+              break;
+        default:
+              return new Response("A problem occurred during the submit of your ".$formtype." form");
+              break;
+      }
+      $em = $this->getDoctrine()->getManager();
+      $intermediate = $em->getRepository('intranetBundle:Entity\Users_F_'.$formtype)->findOneByIdForm($id);
+      $login = $intermediate->getLogin();
+
+      switch ($formtype) {
+        case 'Hours':
               switch ($choice) {
                 case 'accept':
                       $em = $this->getDoctrine()->getManager();
-                      $product = $em->getRepository('intranetBundle:Entity\F_Expenses')->find($id);
+                      $product = $em->getRepository('intranetBundle:Entity\F_Hours')->find($id);
 
                       $product->setStatus(1); $status=1;
                       $em->persist($product);
                       $em->flush();
+                      self::sendEmailAction($login,$formtype,$id,$status);
                       return self::incomingFormsAction();
                       break;
                 case 'reject':
                       $em = $this->getDoctrine()->getManager();
-                      $product = $em->getRepository('intranetBundle:Entity\F_Expenses')->find($id);
+                      $product = $em->getRepository('intranetBundle:Entity\F_Hours')->find($id);
 
                       $product->setStatus(-1);
                       $em->persist($product);
                       $em->flush();
+                      self::sendEmailAction($login,$formtype,$id,$status);
                       return self::incomingFormsAction();
                       break;
                 default:
@@ -785,7 +748,61 @@ class DefaultController extends Controller{
                       break;
               }
               break;
-        case 'trip':
+        case 'Vacation':
+              switch ($choice) {
+                case 'accept':
+                      $em = $this->getDoctrine()->getManager();
+                      $product = $em->getRepository('intranetBundle:Entity\F_Vacation')->find($id);
+
+                      $product->setStatus(1); $status=1;
+                      $em->persist($product);
+                      $em->flush();
+                      self::sendEmailAction($login,$formtype,$id,$status);
+                      return self::incomingFormsAction();
+                      break;
+                case 'reject':
+                      $em = $this->getDoctrine()->getManager();
+                      $product = $em->getRepository('intranetBundle:Entity\F_Vacation')->find($id);
+
+                      $product->setStatus(-1);
+                      $em->persist($product);
+                      $em->flush();
+                      self::sendEmailAction($login,$formtype,$id,$status);
+                      return self::incomingFormsAction();
+                      break;
+                default:
+                      return new Response("A problem occurred during the submit of your choice");
+                      break;
+              }
+              break;
+        case 'Expenses':
+              switch ($choice) {
+                case 'accept':
+                      $em = $this->getDoctrine()->getManager();
+                      $product = $em->getRepository('intranetBundle:Entity\F_Expenses')->find($id);
+
+                      $product->setStatus(1); $status=1;
+                      $em->persist($product);
+                      $em->flush();
+                      self::sendEmailAction($login,$formtype,$id,$status);
+                      return self::incomingFormsAction();
+                      break;
+                case 'reject':
+                      $em = $this->getDoctrine()->getManager();
+                      $product = $em->getRepository('intranetBundle:Entity\F_Expenses')->find($id);
+
+                      $product->setStatus(-1);
+                      $em->persist($product);
+                      $em->flush();
+                      self::sendEmailAction($login,$formtype,$id,$status);
+                      return self::incomingFormsAction();
+                      break;
+                default:
+                      return new Response("A problem occurred during the submit of your choice");
+                      break;
+              }
+              break;
+        case 'Trip':
               switch ($choice) {
                 case 'accept':
                       $em = $this->getDoctrine()->getManager();
@@ -794,6 +811,7 @@ class DefaultController extends Controller{
                       $product->setStatus(1); $status=1;
                       $em->persist($product);
                       $em->flush();
+                      self::sendEmailAction($login,$formtype,$id,$status);
                       return self::incomingFormsAction();
                       break;
                 case 'reject':
@@ -803,6 +821,7 @@ class DefaultController extends Controller{
                       $product->setStatus(-1);
                       $em->persist($product);
                       $em->flush();
+                      self::sendEmailAction($login,$formtype,$id,$status);
                       return self::incomingFormsAction();
                       break;
                 default:
@@ -814,8 +833,6 @@ class DefaultController extends Controller{
               return new Response("A problem occurred during the submit of your ".$formtype." form");
               break;
       }
-      //TODO Definir EMAIL o LOGIN
-      self::sendEmailAction("gram1i",$formtype,$id,$status);
     }
 
     public function crudFormAction(){
@@ -1222,8 +1239,6 @@ class DefaultController extends Controller{
                              ->getRepository('intranetBundle:Entity\Users')
                              ->findAll();
 
-        #TODO Not showing yet all the news related to this channel
-
        $params=array('channel'=>$channel,'usersWithChannel'=>$usersWithChannel, 'allUsers'=>$allUsers);
        return $this->render('intranetBundle:Default:editChannel.html.twig', $params);
     }
@@ -1287,8 +1302,12 @@ class DefaultController extends Controller{
                       $em->flush();
         }
 
-        //TODO channelnew_feed
-
+        //channelnew_feed
+        $intermediate2 = $em->getRepository('intranetBundle:Entity\channelnew_feed')->findBy(['name' => $_REQUEST['nameChannel']]);
+        for ($i=0; $i < sizeof($intermediate2); $i++) {
+                      $em->remove($intermediate2[$i]);
+                      $em->flush();
+        }
         return self::channelsAction();
     }
 
@@ -1322,42 +1341,47 @@ class DefaultController extends Controller{
       $mail->Timeout=40;
 
       //Indicamos cual es la dirección de destino del correo
-      $mail->AddAddress($_SESSION['email']);
+      $mail->AddAddress($usuario->getEmail());
 
       //Asignamos asunto y cuerpo del mensaje
       //El cuerpo del mensaje lo ponemos en formato html, haciendo
       //que se vea en negrita
+
       switch ($usuario->getLang()) {
         case 'es':
-          echo "LO ENVIASTE MOSTRO";
-          if ($status==1){
-            $mail->Subject = "Su formulario ha sido aceptado.";
-          }else{
-            $mail->Subject = "Su formulario ha sido rechazado.";
-          }
-          $mail->Body = "El formulario que mandaste del tipo ". $formtype.", por favor chequea que es correcto aquí.";
-          break;
+            if ($status==1){
+                $mail->Subject = "Su formulario ha sido aceptado.";
+            }else{
+                $mail->Subject = "Su formulario ha sido rechazado.";
+            }
+              $mail->Body = "El formulario que mandaste del tipo ". $formtype.", por favor chequea que es correcto <a href='http://intranet.stage.unitedcuisines.net/webCuisine/web/app_dev.php/es/intranet_logout'>aqui</a>.";
+            break;
         case 'en':
-          $mail->Subject = "";
-          $mail->Body = "";
-          break;
+            if ($status==1){
+              $mail->Subject = "Your form has been accepted.";
+            }else{
+              $mail->Subject = "Your form has been rejected.";
+            }
+            $mail->Body = "You send a ". $formtype." form, please check it <a href='http://intranet.stage.unitedcuisines.net/webCuisine/web/app_dev.php/es/intranet_logout'>here</a>.";
+            break;
         case 'fr':
-          $mail->Subject = "";
-          $mail->Body = "";
-          break;
+            if ($status==1){
+                $mail->Subject = "Sa forme a été acceptée.";
+            }else{
+                $mail->Subject = "Sa forme a été rejetée.";
+            }
+              $mail->Body = "La forme que vous avez envoyé le gars ". $formtype.", S'il vous plaît vérifier qu'il est <a href='http://intranet.stage.unitedcuisines.net/webCuisine/web/app_dev.php/es/intranet_logout'>ici</a>.";
+            break;
 
         default:
           # code...
           break;
       }
-      $mail->Subject = "";
-      $mail->Body = "";
 
       //Definimos AltBody por si el destinatario del correo no admite email con formato html
-      $mail->AltBody = "Mensaje de prueba mandado con phpmailer en formato solo texto";
+       $mail->AltBody = "Only text format.";
 
       $exito = $mail->Send();
-echo $exito;
       //Si el mensaje no ha podido ser enviado se realizaran 4 intentos más como mucho
       //para intentar enviar el mensaje, cada intento se hará 5 segundos después
       //del anterior, para ello se usa la funcion sleep
@@ -1369,11 +1393,11 @@ echo $exito;
        }
 
        if(!$exito){
-    	    echo "<br>Problemas enviando correo electrónico.";
+          echo "<br>A problem was found while sending the email notification.";
     	    echo "<br/>".$mail->ErrorInfo;
-       }else{
+       }/*else{
     	    echo "Mensaje enviado correctamente";
-       }
+       }*/
      return $this->render('intranetBundle:Default:landing.html.twig');
     }
 
